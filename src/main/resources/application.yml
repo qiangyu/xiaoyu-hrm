@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: xiaoyu
+    url: jdbc:mysql://localhost/hrm_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+server:
+  port: 8081
+# 配置 开启驼峰命名的方法
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+#  mapper-locations: classpath:mybatis/mapper/*.xml
+#  configuration:
+#    map-underscore-to-camel-case: true
