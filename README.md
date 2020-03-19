@@ -6,7 +6,7 @@
     &ensp;&ensp;&ensp;&ensp;2. MyBatis<br/>
     &ensp;&ensp;&ensp;&ensp;3. MySQL<br/>
 <br/>
-&ensp;前端技术栈<br/>
+&ensp;前端技术栈（引用微人事的页面）<br/>
     &ensp;&ensp;&ensp;&ensp;1. Vue<br/>
     &ensp;&ensp;&ensp;&ensp;2. ElementUI<br/>
     &ensp;&ensp;&ensp;&ensp;3. axios<br/>
