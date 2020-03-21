@@ -4,8 +4,50 @@
 
     <resultMap id="user" type="com.xiaoyu.hrm.pojo.User" />
 
+    <!--根据账号查询用户信息-->
     <select id="findUserByName" parameterType="string" resultMap="user">
         select * from user_inf where loginname = #{loginname}
     </select>
+
+    <!--根据页数以及条件查询用户信息-->
+    <select id="findUserByPage" parameterType="com.xiaoyu.hrm.pojo.User"
+            resultType="com.xiaoyu.hrm.pojo.User">
+
+        SELECT * FROM `user_inf` u
+        <where>
+            <if test="user != null">
+                <if test="user.username != null">
+                     AND u.username like concat('%', #{user.username}, '%')
+                </if>
+                <if test="user.status != null">
+                     AND u.status = #{user.status}
+                </if>
+            </if>
+        </where>
+        <if test="page != null and size != null">
+            limit #{page}, #{size}
+        </if>
+    </select>
+
+    <!--根据条件 user 查询符合条件的数目-->
+    <select id="getTotal" parameterType="com.xiaoyu.hrm.pojo.User" resultType="long">
+        select count(*) from  user_inf u
+        <where>
+            <if test="user != null">
+                <if test="user.username != null">
+                    AND u.username like concat('%', #{user.username}, '%')
+                </if>
+                <if test="user.status != null">
+                    AND u.status = #{user.status}
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <update id="updateUser" parameterType="com.xiaoyu.hrm.pojo.User">
+        UPDATE user_inf u
+         SET u.loginname = #{user.loginname}, u.password = #{user.password}, u.status = #{user.status}, u.createdate = #{user.createdate}, u.username = #{user.username}
+         where u.id = #{user.id}
+    </update>
 
 </mapper>

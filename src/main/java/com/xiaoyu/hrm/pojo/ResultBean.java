@@ -16,6 +16,10 @@ public class ResultBean {
         return new ResultBean();
     }
 
+    public static ResultBean ok() {
+        return new ResultBean(200, null, null);
+    }
+
     public static ResultBean ok(String msg) {
         return new ResultBean(200, msg, null);
     }
@@ -25,11 +29,19 @@ public class ResultBean {
     }
 
     public static ResultBean error(String msg) {
-        return new ResultBean(500, msg, null);
+        return new ResultBean(400, msg, null);
     }
 
     public static ResultBean error(String msg, Object obj) {
-        return new ResultBean(500, msg, obj);
+        return new ResultBean(400, msg, obj);
+    }
+
+    public static ResultBean loginError(String msg) {
+        return new ResultBean(20000402, msg, null);
+    }
+
+    public static ResultBean loginError(String msg, Object obj) {
+        return new ResultBean(20000402, msg, obj);
     }
 
     private ResultBean() {

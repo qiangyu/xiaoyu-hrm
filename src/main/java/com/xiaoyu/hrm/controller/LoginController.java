@@ -3,13 +3,13 @@ package com.xiaoyu.hrm.controller;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.service.LoginService;
+import com.xiaoyu.hrm.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -19,6 +19,7 @@ import java.io.IOException;
  * @date 2020/3/17 23:17
  */
 @RestController
+@RequestMapping("/user")
 public class LoginController {
 
     /**
@@ -26,6 +27,12 @@ public class LoginController {
      */
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private JedisUtil jedisUtil;
+
+    @Value("${XIAOYU_USER}")
+    private String XIAOYU_USER;
 
     @GetMapping("/login")
     public ResultBean login() {
@@ -39,15 +46,41 @@ public class LoginController {
      * @return 返回账号信息
      * @throws IOException
      */
-    @PostMapping("/doLogin")
-    public ResultBean login(@RequestParam("username") String loginname, String password,
-                            HttpSession session) {
+    @PostMapping(value = "/doLogin")
+    public ResultBean login(String loginname, String password, HttpServletRequest request) {
+        User user = (User) request.getAttribute("user");
+        if (user == null) {
+            // 调用服务层，获取到用户信息
+            return loginService.findUserByName(loginname, password, null);
+        }
+        String token = request.getHeader("token");
         // 调用服务层，获取到用户信息
-        ResultBean result = loginService.findUserByName(loginname, password);
-        User user = (User) result.getObj();
-        // 把用户信息存入到session域，用于身份认证
-        session.setAttribute("isUser", user);
-        return loginService.findUserByName(loginname, password);
+        return loginService.findUserByName(loginname, password, token);
+    }
+
+    /**
+     * 用户注销
+     * @return
+     */
+    @GetMapping("/logout")
+    public ResultBean logout(String token) {
+        try {
+            if (!StringUtils.isEmpty(token)) {
+                jedisUtil.del(token);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResultBean.ok("注销成功！");
+    }
+
+    /**
+     * 验证用户身份失败，跳转至此请求
+     * @return
+     */
+    @RequestMapping("/error")
+    public ResultBean error() {
+        return ResultBean.loginError("登录失效，请重新登录！");
     }
 
 }

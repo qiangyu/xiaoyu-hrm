@@ -1,6 +1,8 @@
 package com.xiaoyu.hrm.config;
 
 import com.xiaoyu.hrm.component.LoginHandlerInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author xiaoyu
  * @date 2020/3/18 22:50
  */
+@Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
     /**
@@ -27,13 +30,23 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     /**
+     * 实例化拦截器
+     * 拦截器加载的时间点在SpringContext之前
+     * @return
+     */
+    @Bean
+    public LoginHandlerInterceptor loginHandlerInterceptor(){
+        return new LoginHandlerInterceptor();
+    }
+
+    /**
      * 添加拦截器
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/", "/index.html");
+        registry.addInterceptor(loginHandlerInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/", "/index.html", "/user/doLogin", "/user/checkLogin", "/user/error");
     }
 
     /**

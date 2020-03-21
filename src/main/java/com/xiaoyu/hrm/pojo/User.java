@@ -18,6 +18,16 @@ public class User implements Serializable {
     private Integer status;
     private Date createdate;
 
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -75,6 +85,7 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", createdate=" + createdate +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

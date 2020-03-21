@@ -2,8 +2,8 @@ package com.xiaoyu.hrm.service;
 
 import com.xiaoyu.hrm.mapper.IMenuMapper;
 import com.xiaoyu.hrm.pojo.Menu;
+import com.xiaoyu.hrm.pojo.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +24,9 @@ public class MenuService {
      * 获取菜单栏所有信息
      * @return
      */
-    public List<Menu> getAllMenus() {
-        return menuMapper.getAllMenus();
+    public ResultBean getAllMenus() {
+        List<Menu> list = menuMapper.getAllMenus();
+        return ResultBean.ok(null, list);
     }
 
 }

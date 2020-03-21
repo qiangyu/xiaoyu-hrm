@@ -5,6 +5,11 @@ spring:
     username: root
     password: xiaoyu
     url: jdbc:mysql://localhost/hrm_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+  redis:
+    host: 192.168.25.25
+    port: 6379
+    password: xiaoyu
+    timeout: 10
 server:
   port: 8081
 # 配置 开启驼峰命名的方法
@@ -13,3 +18,6 @@ mybatis:
 #  mapper-locations: classpath:mybatis/mapper/*.xml
 #  configuration:
 #    map-underscore-to-camel-case: true
+
+# 存储在redis中的用户信息 key 前缀
+XIAOYU_USER: user_inf
