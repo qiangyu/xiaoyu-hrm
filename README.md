@@ -4,6 +4,7 @@
 &ensp;&ensp;后端技术栈<br/>
     &ensp;&ensp;&ensp;&ensp;1. Spring Boot<br/>
     &ensp;&ensp;&ensp;&ensp;2. MyBatis<br/>
+    &ensp;&ensp;&ensp;&ensp;3. redis<br/>
     &ensp;&ensp;&ensp;&ensp;3. MySQL<br/>
 <br/>
 &ensp;前端技术栈（引用微人事的页面）<br/>
