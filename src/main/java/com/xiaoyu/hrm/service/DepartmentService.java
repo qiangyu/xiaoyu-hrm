@@ -39,6 +39,9 @@ public class DepartmentService {
      */
     @Transactional
     public ResultBean insertDepartment(Department department) {
+        if (!StringUtils.isEmpty(department.getId())) {
+            return ResultBean.error("添加部门异常！");
+        }
         if (StringUtils.isEmpty(department.getParentId())) {
             return ResultBean.error("非法添加部门！");
         }
@@ -56,14 +59,12 @@ public class DepartmentService {
         departmentMapper.insertDepartment(department);
         Integer newDepartmentId = department.getId();
         if (newDepartmentId == null) {
-//            return ResultBean.error("添加部门错误，请重试！");
             throw new RuntimeException("添加部门错误");
         }
         department.setId(newDepartmentId);
         department.setDepPath(depPath.getDepPath());
         int i = departmentMapper.updateDepPathById(department);
         if (i != 1) {
-//            return ResultBean.error("添加部门错误，请重试！");
             throw new RuntimeException("添加部门错误");
         }
         // 将新增节点的父节点的 isParent 字段设置为true

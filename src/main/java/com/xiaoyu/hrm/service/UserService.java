@@ -42,7 +42,7 @@ public class UserService {
             return ResultBean.error("查询不到用户信息！");
         }
         Long total = userMapper.getTotal(user);
-        return ResultBean.ok("查询成功！", new ResultPageBean(list, null));
+        return ResultBean.ok("查询用户成功！", new ResultPageBean(list, null));
     }
 
     /**
@@ -52,7 +52,9 @@ public class UserService {
      * @return 返回注册结果
      */
     public ResultBean addUser(User user) {
-
+        if (!StringUtils.isEmpty(user.getId())) {
+            return ResultBean.error("添加用户异常！");
+        }
         if (StringUtils.isEmpty(user.getLoginname()) || StringUtils.isEmpty(user.getPassword())) {
             return ResultBean.error("用户名或密码为空！");
         }

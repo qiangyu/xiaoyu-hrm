@@ -43,7 +43,7 @@ public interface IUserMapper {
      * @param user 用户信息
      * @return 返回数据库对应的 id 主键
      */
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id ")
     @Insert("insert into user_inf(loginname, password, status, createdate, username) values(#{loginname}, #{password}, #{status}, #{createdate}, #{username}) ")
     int insertUser(User user);
 
@@ -52,7 +52,7 @@ public interface IUserMapper {
      * @param id 用户id
      * @return 返回影响的行数
      */
-    @Delete("delete from user_inf where id = #{id}")
+    @Delete("delete from user_inf where id = #{id} ")
     int deleteUserById(Integer id);
 
     /**
@@ -60,7 +60,7 @@ public interface IUserMapper {
      * @param user 用户信息
      * @return 返回影响的行数
      */
-    int updateUser(@Param("user") User user);
+    int updateUser(User user);
     /**
      * UPDATE user_inf u
      *          SET u.loginname = #{user.loginname}, u.password = #{user.password}, u.status = #{user.status}, u.createdate = #{user.createdate}, u.username = #{user.username}

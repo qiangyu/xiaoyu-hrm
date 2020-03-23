@@ -13,14 +13,14 @@
     <select id="findUserByPage" parameterType="com.xiaoyu.hrm.pojo.User"
             resultType="com.xiaoyu.hrm.pojo.User">
 
-        SELECT * FROM `user_inf` u
+        SELECT * FROM user_inf
         <where>
             <if test="user != null">
                 <if test="user.username != null">
-                     AND u.username like concat('%', #{user.username}, '%')
+                     AND username like concat('%', #{user.username}, '%')
                 </if>
                 <if test="user.status != null">
-                     AND u.status = #{user.status}
+                     AND status = #{user.status}
                 </if>
             </if>
         </where>
@@ -31,23 +31,23 @@
 
     <!--根据条件 user 查询符合条件的数目-->
     <select id="getTotal" parameterType="com.xiaoyu.hrm.pojo.User" resultType="long">
-        select count(*) from  user_inf u
+        select count(*) from  user_inf
         <where>
             <if test="user != null">
                 <if test="user.username != null">
-                    AND u.username like concat('%', #{user.username}, '%')
+                    AND username like concat('%', #{user.username}, '%')
                 </if>
                 <if test="user.status != null">
-                    AND u.status = #{user.status}
+                    AND status = #{user.status}
                 </if>
             </if>
         </where>
     </select>
 
     <update id="updateUser" parameterType="com.xiaoyu.hrm.pojo.User">
-        UPDATE user_inf u
-         SET u.loginname = #{user.loginname}, u.password = #{user.password}, u.status = #{user.status}, u.createdate = #{user.createdate}, u.username = #{user.username}
-         where u.id = #{user.id}
+        UPDATE user_inf
+         SET loginname = #{loginname}, password = #{password}, status = #{status}, createdate = #{createdate}, username = #{username}
+         where id = #{user.id}
     </update>
 
 </mapper>

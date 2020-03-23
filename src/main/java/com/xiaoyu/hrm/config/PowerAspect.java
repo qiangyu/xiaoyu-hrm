@@ -57,7 +57,7 @@ public class PowerAspect {
             // 有权限，放行
             return pjp.proceed();
         } catch (Throwable e) {
-            logger.error(pjp.getSignature() + " 出现异常： ", e);
+            logger.error(pjp.getSignature() + " 出现异常.", e);
             throw new RuntimeException();
         }
     }

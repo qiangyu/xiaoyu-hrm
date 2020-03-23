@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoyu.hrm.mapper.IPositionMapper" >
+
+    <!--查询职位-->
+    <select id="findAllPosition" parameterType="com.xiaoyu.hrm.pojo.Position" resultType="com.xiaoyu.hrm.pojo.Position">
+        select * from job_inf
+        <where>
+            <if test="name != null">
+                AND name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <!--更新职位信息-->
+    <update id="updatePosition" parameterType="com.xiaoyu.hrm.pojo.Position">
+        UPDATE job_inf
+         SET name = #{name}, remark = #{remark}, enabled = #{enabled}
+         WHERE id = #{id}
+    </update>
+
+</mapper>
