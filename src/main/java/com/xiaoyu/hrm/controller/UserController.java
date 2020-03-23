@@ -6,6 +6,7 @@ import com.xiaoyu.hrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 /**
  * 处理关于用户的请求
  * 
@@ -40,8 +41,7 @@ public class UserController {
      * @return 返回注册结果
      */
     @PostMapping("/")
-    public ResultBean addUser(@RequestBody User user) {
-        System.out.println(user + "<--------------------");
+    public ResultBean powerAddUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
@@ -51,7 +51,7 @@ public class UserController {
      * @return 返回删除用户结果
      */
     @DeleteMapping("/{id}")
-    public ResultBean deleteUser(@PathVariable("id") Integer id) {
+    public ResultBean powerDeleteUser(@PathVariable("id") Integer id) {
         return userService.deleteUser(id);
     }
 
@@ -61,8 +61,7 @@ public class UserController {
      * @return 返回修改结果
      */
     @PutMapping("/")
-    public ResultBean updateUser(@RequestBody User user) {
-        System.out.println(user);
+    public ResultBean powerUpdateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
 }

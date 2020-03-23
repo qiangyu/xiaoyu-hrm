@@ -3,6 +3,8 @@ package com.xiaoyu.hrm.component;
 import com.alibaba.fastjson.JSON;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.utils.JedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
@@ -27,6 +29,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
      */
     @Autowired
     private JedisUtil jedisUtil;
+
+    private final static Logger logger = LoggerFactory.getLogger(LoginHandlerInterceptor.class);
 
     /**
      * 存储用户信息key的前缀
@@ -65,9 +69,15 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
             User user = JSON.parseObject(jsonUSer, User.class);
             request.setAttribute("user", user);
             // 重新设置过期时间 半小时
-            jedisUtil.set(token, jsonUSer, 3600);
+            String set = jedisUtil.set(token, jsonUSer, 3600);
+            if (StringUtils.isEmpty(set)) {
+                // 将请求转发到 /user/error
+                request.getRequestDispatcher("/user/error").forward(request, response);
+                return false;
+            }
             return true;
         } catch (ServletException | IOException e) {
+            logger.error("验证用户登录查询token时异常：", e);
             e.printStackTrace();
         }
         return false;

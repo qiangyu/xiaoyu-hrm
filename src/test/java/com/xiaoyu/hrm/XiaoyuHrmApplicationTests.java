@@ -1,8 +1,8 @@
 package com.xiaoyu.hrm;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.xiaoyu.hrm.mapper.IDepartmentMapper;
+import com.xiaoyu.hrm.pojo.Department;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.utils.JedisUtil;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,9 @@ class XiaoyuHrmApplicationTests {
 
     @Autowired
     private JedisUtil jedisUtil;
+
+    @Autowired
+    private IDepartmentMapper departmentMapper;
 
     @Test
     void contextLoads() {
@@ -43,4 +46,20 @@ class XiaoyuHrmApplicationTests {
         jedisUtil.set("xiaoyu:" +uuid, s);
     }
 
+    /**
+     * 测试部门更新，测试影响的行数
+     */
+    @Test
+    void testAddDepartment() {
+        Department department = new Department();
+        department.setId(127);
+//        department.setName("4");
+//        department.setRemark("1");
+//        department.setParentId(6);
+//        department.setDepPath(".1.4");
+//        department.setEnabled(true);
+//        department.setParent(false);
+        int i = departmentMapper.updateDepPathById(department);
+        System.out.println(i);
+    }
 }

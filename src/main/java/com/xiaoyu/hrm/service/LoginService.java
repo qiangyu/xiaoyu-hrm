@@ -5,6 +5,8 @@ import com.xiaoyu.hrm.mapper.IUserMapper;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.utils.JedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,8 @@ public class LoginService {
     @Autowired
     private JedisUtil jedisUtil;
 
+    private final static Logger logger = LoggerFactory.getLogger(LoginService.class);
+
     /**
      * 存储用户信息key的前缀
      */
@@ -47,7 +51,7 @@ public class LoginService {
      * @param loginname
      * @return
      */
-    public ResultBean findUserByName(String loginname, String password, String token) {
+    public ResultBean findUserByName(String loginname, String password) {
         if (loginname == null || password == null) {
             return ResultBean.error("用户名或者账号不能为空！");
         }
@@ -63,17 +67,18 @@ public class LoginService {
         user.setPassword(null);
         // 把用户信息存入到redis，用于身份认证
         try {
-            if (StringUtils.isEmpty(token)) {
-                UUID uuid = UUID.randomUUID();
-                // 生成token
-                token = XIAOYU_USER + ":" + uuid;
-                String jsonUSer = JSON.toJSONString(user);
-                // 设置过期时间 半小时
-                jedisUtil.set(token, jsonUSer, 3600);
+            UUID uuid = UUID.randomUUID();
+            // 生成token
+            String token = XIAOYU_USER + ":" + uuid;
+            String jsonUSer = JSON.toJSONString(user);
+            // 设置过期时间 半小时
+            String set = jedisUtil.set(token, jsonUSer, 3600);
+            if (!StringUtils.isEmpty(set)) {
                 user.setToken(token);
+                return ResultBean.ok("登录成功！", user);
             }
-            return ResultBean.ok("登录成功！", user);
         } catch (Exception e) {
+            logger.error("用户登录时存储token异常：user{}", user, e);
             e.printStackTrace();
         }
         return ResultBean.error("登录错误，请重试！");

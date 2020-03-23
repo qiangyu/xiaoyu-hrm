@@ -4,7 +4,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: xiaoyu
-    url: jdbc:mysql://localhost/hrm_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    # useAffectedRows=true ：参数设为 true，表示操作数据库时返回的为影响的行数，否则mybatis返回的是匹配的行数
+    url: jdbc:mysql://localhost/hrm_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useAffectedRows=true
   redis:
     host: 192.168.25.25
     port: 6379
@@ -21,3 +22,7 @@ mybatis:
 
 # 存储在redis中的用户信息 key 前缀
 XIAOYU_USER: user_inf
+# 指定日志的路径
+logging:
+  file:
+    path: logs

@@ -1,7 +1,6 @@
 package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.ResultBean;
-import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.service.LoginService;
 import com.xiaoyu.hrm.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +46,8 @@ public class LoginController {
      * @throws IOException
      */
     @PostMapping(value = "/doLogin")
-    public ResultBean login(String loginname, String password, HttpServletRequest request) {
-        User user = (User) request.getAttribute("user");
-        if (user == null) {
-            // 调用服务层，获取到用户信息
-            return loginService.findUserByName(loginname, password, null);
-        }
-        String token = request.getHeader("token");
-        // 调用服务层，获取到用户信息
-        return loginService.findUserByName(loginname, password, token);
+    public ResultBean login(String loginname, String password) {
+        return loginService.findUserByName(loginname, password);
     }
 
     /**
@@ -63,7 +55,8 @@ public class LoginController {
      * @return
      */
     @GetMapping("/logout")
-    public ResultBean logout(String token) {
+    public ResultBean logout(HttpServletRequest request) {
+        String token = request.getHeader("token");
         try {
             if (!StringUtils.isEmpty(token)) {
                 jedisUtil.del(token);

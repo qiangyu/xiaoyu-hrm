@@ -1,5 +1,8 @@
 package com.xiaoyu.hrm.utils;
 
+import com.xiaoyu.hrm.config.PowerAspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
@@ -18,6 +21,11 @@ public class JedisUtil {
     @Autowired
     private JedisPool jedisPool;
 
+    /**
+     * slf4j
+     */
+    private final static Logger logger = LoggerFactory.getLogger(PowerAspect.class);
+
     private Jedis getJedis() {
         return jedisPool.getResource();
     }
@@ -35,7 +43,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.set(key, value);
         } catch (Exception e) {
-//            log.error("set key:{} value:{} error", key, value, e);
+            logger.error("set key:{} value:{} error", key, value, e);
             return null;
         } finally {
             close(jedis);
@@ -57,7 +65,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.setex(key, expireTime, value);
         } catch (Exception e) {
-//            log.error("set key:{} value:{} expireTime:{} error", key, value, expireTime, e);
+            logger.error("set key:{} value:{} expireTime:{} error", key, value, expireTime, e);
             return null;
         } finally {
             close(jedis);
@@ -77,7 +85,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.get(key);
         } catch (Exception e) {
-//            log.error("get key:{} error", key, e);
+            logger.error("get key:{} error", key, e);
             return null;
         } finally {
             close(jedis);
@@ -96,7 +104,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.del(key.getBytes());
         } catch (Exception e) {
-//            log.error("del key:{} error", key, e);
+            logger.error("del key:{} error", key, e);
             return null;
         } finally {
             close(jedis);
@@ -115,7 +123,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.exists(key.getBytes());
         } catch (Exception e) {
-//            log.error("exists key:{} error", key, e);
+            logger.error("exists key:{} error", key, e);
             return null;
         } finally {
             close(jedis);
@@ -135,7 +143,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.expire(key.getBytes(), expireTime);
         } catch (Exception e) {
-//            log.error("expire key:{} error", key, e);
+            logger.error("expire key:{} error", key, e);
             return null;
         } finally {
             close(jedis);
@@ -153,7 +161,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.ttl(key);
         } catch (Exception e) {
-//            log.error("ttl key:{} error", key, e);
+            logger.error("ttl key:{} error", key, e);
             return null;
         } finally {
             close(jedis);

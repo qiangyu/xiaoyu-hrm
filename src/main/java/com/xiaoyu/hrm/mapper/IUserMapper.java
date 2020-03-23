@@ -50,7 +50,7 @@ public interface IUserMapper {
     /**
      * 根据用户 id 删除用户
      * @param id 用户id
-     * @return
+     * @return 返回影响的行数
      */
     @Delete("delete from user_inf where id = #{id}")
     int deleteUserById(Integer id);
@@ -58,7 +58,7 @@ public interface IUserMapper {
     /**
      * 修改用户信息
      * @param user 用户信息
-     * @return
+     * @return 返回影响的行数
      */
     int updateUser(@Param("user") User user);
     /**
