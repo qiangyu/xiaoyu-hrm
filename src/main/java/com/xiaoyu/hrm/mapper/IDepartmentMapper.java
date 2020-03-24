@@ -21,6 +21,14 @@ public interface IDepartmentMapper {
     List<Department> findAllDepartmentByParentId(Integer parentId);
 
     /**
+     * 根据id查询部门信息
+     * @param id id
+     * @return 返回部门信息
+     */
+    @Select("select * from dept_inf where id = #{id} ")
+    Department findDepartmentById(Integer id);
+
+    /**
      * 新增部门
      * @param department 部门信息
      * @return 返回影响行数

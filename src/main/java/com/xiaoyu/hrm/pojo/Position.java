@@ -1,5 +1,7 @@
 package com.xiaoyu.hrm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +16,8 @@ public class Position implements Serializable {
     private Integer id;
     private String name;
     private String remark;
+
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date createDate;
     private Boolean enabled;
 

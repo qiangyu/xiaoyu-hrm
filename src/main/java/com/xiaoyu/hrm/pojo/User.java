@@ -1,5 +1,7 @@
 package com.xiaoyu.hrm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,6 +18,8 @@ public class User implements Serializable {
     private String loginname;
     private String password;
     private Integer status;
+
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date createdate;
 
     private String token;

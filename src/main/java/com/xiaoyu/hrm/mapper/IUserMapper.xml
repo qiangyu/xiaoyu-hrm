@@ -12,12 +12,14 @@
     <!--根据页数以及条件查询用户信息-->
     <select id="findUserByPage" parameterType="com.xiaoyu.hrm.pojo.User"
             resultType="com.xiaoyu.hrm.pojo.User">
-
         SELECT * FROM user_inf
         <where>
             <if test="user != null">
                 <if test="user.username != null">
-                     AND username like concat('%', #{user.username}, '%')
+                    AND username like concat('%', #{user.username}, '%')
+                </if>
+                <if test="user.loginname != null">
+                     AND loginname like concat('%', #{user.loginname}, '%')
                 </if>
                 <if test="user.status != null">
                      AND status = #{user.status}

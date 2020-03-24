@@ -4,6 +4,7 @@ import com.xiaoyu.hrm.pojo.Position;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -21,6 +22,14 @@ public interface IPositionMapper {
      * @return 返回查询到的信息
      */
     List<Position> findAllPosition(Position position);
+
+    /**
+     * 根据id查询职位信息
+     * @param id id
+     * @return 返回查询到的职位信息
+     */
+    @Select("select * from job_inf where id = #{id }")
+    Position findPositionById(Integer id);
 
     /**
      * 更新职位信息

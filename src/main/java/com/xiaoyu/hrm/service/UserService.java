@@ -42,7 +42,7 @@ public class UserService {
             return ResultBean.error("查询不到用户信息！");
         }
         Long total = userMapper.getTotal(user);
-        return ResultBean.ok("查询用户成功！", new ResultPageBean(list, null));
+        return ResultBean.ok("查询用户成功！", new ResultPageBean(list, total));
     }
 
     /**
