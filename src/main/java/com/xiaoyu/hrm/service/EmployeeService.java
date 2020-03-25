@@ -78,21 +78,19 @@ public class EmployeeService {
     /**
      * 添加员工
      * @param employee 信息
-     * @param positionId 职位id
-     * @param departmentId 部门id
      * @return 返回操作结果
      */
-    public ResultBean insertEmployee(Employee employee, Integer positionId, Integer departmentId) {
+    public ResultBean insertEmployee(Employee employee) {
         if (employee.getId() != null) {
             return ResultBean.error("添加操作异常！");
         }
-        ResultBean resultBean = checkData(employee, positionId, departmentId);
+        ResultBean resultBean = checkData(employee);
         if (resultBean != null) {
             return resultBean;
         }
         // 补全属性
         employee.setCreateDate(new Date());
-        int i = employeeMapper.insertEmployee(employee, positionId, departmentId);
+        int i = employeeMapper.insertEmployee(employee);
         if (i != 1) {
             return ResultBean.error("添加员工错误！");
         }
@@ -102,19 +100,17 @@ public class EmployeeService {
     /**
      * 更新员工信息
      * @param employee 信息
-     * @param positionId 职位id
-     * @param departmentId 部门id
      * @return 返回操作结果
      */
-    public ResultBean updateEmployee(Employee employee, Integer positionId, Integer departmentId) {
+    public ResultBean updateEmployee(Employee employee) {
         if (employee.getId() == null) {
             return ResultBean.error("修改操作异常！");
         }
-        ResultBean resultBean = checkData(employee, positionId, departmentId);
+        ResultBean resultBean = checkData(employee);
         if (resultBean != null) {
             return resultBean;
         }
-        int i = employeeMapper.updateEmployee(employee, positionId, departmentId);
+        int i = employeeMapper.updateEmployee(employee);
         if (i != 1) {
             return ResultBean.error("修改员工错误！");
         }
@@ -137,22 +133,22 @@ public class EmployeeService {
         return ResultBean.ok("删除员工成功！");
     }
 
-    private ResultBean checkData(Employee employee, Integer positionId, Integer departmentId) {
-        if (positionId == null || departmentId == null) {
+    private ResultBean checkData(Employee employee) {
+        if (employee == null || employee.getDepartment().getId() == null || employee.getPosition().getId() == null) {
             return ResultBean.error("添加异常，部门及职位为空！");
         }
-        Department department = departmentMapper.findDepartmentById(departmentId);
+        Department department = departmentMapper.findDepartmentById(employee.getDepartment().getId());
         if (department == null) {
             return ResultBean.error("添加异常，部门不存在！");
         }
-        Position position = positionMapper.findPositionById(positionId);
+        Position position = positionMapper.findPositionById(employee.getPosition().getId());
         if (position == null) {
             return ResultBean.error("添加异常，职位不存在！");
         }
         if (StringUtils.isEmpty(employee.getName()) || StringUtils.isEmpty(employee.getCardId())) {
             return ResultBean.error("请填写您的员工名称或身份证！");
         }
-        if (employee.getSex() != 0 || employee.getSex() != 1) {
+        if (employee.getSex() != 0 && employee.getSex() != 1) {
             return ResultBean.error("性别填写有误！");
         }
         if (StringUtils.isEmpty(employee.getBirthday())) {
@@ -182,5 +178,26 @@ public class EmployeeService {
         return null;
     }
 
+    /**
+     * 根据id批量删除职位
+     * @param ids id
+     * @return 返回操作结果
+     */
+    public ResultBean deletesEmployee(List<Integer> ids) {
+        if (ids == null || ids.size() == 0) {
+            return ResultBean.ok("删除操作异常！");
+        }
+        int num = 0, i = 0;
+        for (Integer id : ids) {
+            i = employeeMapper.deleteEmployee(id);
+            if (i == 1) {
+                ++num;
+            }
+        }
+        if (num != ids.size()) {
+            return ResultBean.error("未能删除全部选中的员工！");
+        }
+        return ResultBean.ok("删除员工成功！");
+    }
 
 }

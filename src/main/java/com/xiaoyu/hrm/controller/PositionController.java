@@ -63,7 +63,7 @@ public class PositionController {
 
     /**
      * 根据id批量删除职位
-     * @param ids is数组
+     * @param ids id数组
      * @return 返回操作结果
      */
     @DeleteMapping("/")

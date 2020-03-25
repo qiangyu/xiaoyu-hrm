@@ -6,6 +6,8 @@ import com.xiaoyu.hrm.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * 处理员工请求
@@ -57,25 +59,22 @@ public class EmployeeController {
     /**
      * 添加员工
      * @param employee 信息
-     * @param positionId 职位id
-     * @param departmentId 部门id
      * @return 返回操作结果
      */
     @PostMapping("/")
-    public ResultBean powerInsertEmployee(Employee employee, Integer positionId, Integer departmentId) {
-        return employeeService.insertEmployee(employee, positionId, departmentId);
+    public ResultBean powerInsertEmployee(@RequestBody Employee employee) {
+        System.out.println(employee);
+        return employeeService.insertEmployee(employee);
     }
 
     /**
      * 更新员工信息
      * @param employee 信息
-     * @param positionId 职位id
-     * @param departmentId 部门id
      * @return 返回操作结果
      */
     @PutMapping("/")
-    public ResultBean powerUpdateEmployee(Employee employee, Integer positionId, Integer departmentId) {
-        return employeeService.updateEmployee(employee, positionId, departmentId);
+    public ResultBean powerUpdateEmployee(@RequestBody Employee employee) {
+        return employeeService.updateEmployee(employee);
     }
 
     /**
@@ -86,6 +85,16 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public ResultBean powerDeleteEmployee(@PathVariable("id") Integer id) {
         return employeeService.deleteEmployee(id);
+    }
+
+    /**
+     * 根据id批量删除职位
+     * @param ids id数组
+     * @return 返回操作结果
+     */
+    @DeleteMapping("/")
+    public ResultBean powerDeletesEmployee(@RequestBody List<Integer> ids) {
+        return employeeService.deletesEmployee(ids);
     }
 
 }

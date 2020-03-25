@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xiaoyu.hrm.mapper.IEmployeeMapper" >
+<mapper namespace="com.xiaoyu.hrm.mapper.IEmployeeMapper">
 
     <resultMap id="EmployeeMap" type="com.xiaoyu.hrm.pojo.Employee">
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="sex" property="sex" jdbcType="INTEGER" />
-        <result column="card_id" property="cardId" jdbcType="VARCHAR" />
-        <result column="birthday" property="birthday" jdbcType="DATE" />
-        <result column="tel" property="tel" jdbcType="VARCHAR" />
-        <result column="phone" property="phone" jdbcType="VARCHAR" />
-        <result column="email" property="email" jdbcType="VARCHAR" />
-        <result column="qq_num" property="qqNum" jdbcType="VARCHAR" />
-        <result column="address" property="address" jdbcType="VARCHAR" />
-        <result column="post_code" property="postCode" jdbcType="VARCHAR" />
-        <result column="party" property="party" jdbcType="VARCHAR" />
-        <result column="race" property="race" jdbcType="VARCHAR" />
-        <result column="education" property="education" jdbcType="VARCHAR" />
-        <result column="speciality" property="speciality" jdbcType="VARCHAR" />
-        <result column="hobby" property="hobby" jdbcType="VARCHAR" />
-        <result column="remark" property="remark" jdbcType="VARCHAR" />
-        <result column="create_date" property="createDate" jdbcType="DATE" />
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="card_id" property="cardId" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="qq_num" property="qqNum" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="post_code" property="postCode" jdbcType="VARCHAR"/>
+        <result column="party" property="party" jdbcType="VARCHAR"/>
+        <result column="race" property="race" jdbcType="VARCHAR"/>
+        <result column="education" property="education" jdbcType="VARCHAR"/>
+        <result column="speciality" property="speciality" jdbcType="VARCHAR"/>
+        <result column="hobby" property="hobby" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="DATE"/>
         <association property="department" javaType="com.xiaoyu.hrm.pojo.Department">
-            <id column="did" property="id" />
-            <result column="dname" property="name" />
+            <id column="did" property="id"/>
+            <result column="dname" property="name"/>
         </association>
         <association property="position" javaType="com.xiaoyu.hrm.pojo.Position">
-            <id column="jid" property="id" />
-            <result column="jname" property="name" />
+            <id column="jid" property="id"/>
+            <result column="jname" property="name"/>
         </association>
     </resultMap>
 
     <!--根据页数以及条件查询员工信息-->
     <select id="findAllEmployee" resultMap="EmployeeMap">
         SELECT
-            e.*,
-            d.id as did,
-            d.`name` as dname,
-            j.id as jid,
-            j.`name` as jname
+        e.*,
+        d.id as did,
+        d.`name` as dname,
+        j.id as jid,
+        j.`name` as jname
         FROM
-            `employee_inf` e,
-            `dept_inf` d,
-            `job_inf` j
+        `employee_inf` e,
+        `dept_inf` d,
+        `job_inf` j
         WHERE
-            e.dept_id = d.id
-            AND e.job_id = j.id
-            <if test="emp.name != null">
-                AND e.name like concat('%', #{emp.name}, '%')
-            </if>
-            <if test="emp.cardId != null">
-                AND e.card_id = #{emp.cardId}
-            </if>
-            <if test="emp.phone != null">
-                AND e.phone = #{emp.phone}
-            </if>
-            <if test="emp.sex != null">
-                AND e.sex = #{emp.sex}
-            </if>
-            <if test="departmentId != null ">
-                AND e.dept_id = #{departmentId}
-            </if>
-            <if test="positionId != null ">
-                AND e.job_id = #{positionId}
-            </if>
-            <if test="page !=null and size!=null">
-                limit #{page},#{size}
-            </if>
+        e.dept_id = d.id
+        AND e.job_id = j.id
+        <if test="emp.name != null">
+            AND e.name like concat('%', #{emp.name}, '%')
+        </if>
+        <if test="emp.cardId != null">
+            AND e.card_id = #{emp.cardId}
+        </if>
+        <if test="emp.phone != null">
+            AND e.phone = #{emp.phone}
+        </if>
+        <if test="emp.sex != null">
+            AND e.sex = #{emp.sex}
+        </if>
+        <if test="departmentId != null ">
+            AND e.dept_id = #{departmentId}
+        </if>
+        <if test="positionId != null ">
+            AND e.job_id = #{positionId}
+        </if>
+        <if test="page !=null and size!=null">
+            limit #{page},#{size}
+        </if>
     </select>
 
     <!--根据条件 employee 查询符合条件的数目-->
     <select id="getTotal" parameterType="com.xiaoyu.hrm.pojo.Employee" resultType="long">
-        select count(*) from  `employee_inf` e
+        select count(*) from `employee_inf` e
         <where>
             <if test="emp.name != null">
                 AND e.name like concat('%', #{emp.name}, '%')
@@ -97,25 +97,25 @@
     <!--添加员工-->
     <insert id="insertEmployee" parameterType="com.xiaoyu.hrm.pojo.Employee" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO employee_inf (
-            'name',
-            'sex',
-            'card_id',
-            'birthday',
-            'tel',
-            'phone',
-            'email',
-            'qq_num',
-            'address',
-            'post_code',
-            'party',
-            'race',
-            'education',
-            'speciality',
-            'hobby',
-            'remark',
-            'create_date',
-            'dept_id',
-            'job_id'
+            name,
+            sex,
+            card_id,
+            birthday,
+            tel,
+            phone,
+            email,
+            qq_num,
+            address,
+            post_code,
+            party,
+            race,
+            education,
+            speciality,
+            hobby,
+            remark,
+            create_date,
+            dept_id,
+            job_id
         )
         VALUES (
             #{emp.name},
@@ -134,36 +134,35 @@
             #{emp.speciality},
             #{emp.hobby},
             #{emp.remark},
-            #{emp.create_date}
-            #{departmentId}
-            #{positionId}
+            #{emp.createDate},
+            #{emp.department.id},
+            #{emp.position.id}
         )
     </insert>
 
     <!--更新员工信息-->
     <update id="updateEmployee" parameterType="com.xiaoyu.hrm.pojo.Employee">
-        UPDATE
-        FROM
-            employee_inf
-            SET 'name' = #{emp.name} ,
-            'sex' = #{emp.sex} ,
-            'card_id' = #{cardId} ,
-            'birthday' = #{emp.birthday} ,
-            'tel' = #{emp.tel},
-            'phone' = #{emp.phone},
-            'email' = #{emp.email},
-            'qqNum' = #{emp.qqNum},
-            'post_code' = #{emp.postCode},
-            'party' = #{emp.party},
-            'race' = #{emp.race},
-            'education' = #{emp.education},
-            'speciality' = #{emp.speciality},
-            'hobby' = #{emp.hobby},
-            'remark' = #{emp.remark},
-            'create_date' = #{emp.create_date},
-            'dept_id' = #{departmentId},
-            'job_id' = #{positionId}
-        WHERE
+        UPDATE employee_inf
+         SET
+            name = #{emp.name},
+            sex = #{emp.sex} ,
+            card_id = #{emp.cardId} ,
+            birthday = #{emp.birthday},
+            tel = #{emp.tel},
+            phone = #{emp.phone},
+            email = #{emp.email},
+            qq_num = #{emp.qqNum},
+            post_code = #{emp.postCode},
+            party = #{emp.party},
+            race = #{emp.race},
+            education = #{emp.education},
+            speciality = #{emp.speciality},
+            hobby = #{emp.hobby},
+            remark = #{emp.remark},
+            create_date = #{emp.createDate},
+            dept_id = #{emp.department.id},
+            job_id = #{emp.position.id}
+         WHERE
             id = #{emp.id}
     </update>
 

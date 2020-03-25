@@ -61,24 +61,16 @@ public interface IEmployeeMapper {
     /**
      * 添加员工
      * @param employee 信息
-     * @param positionId 职位id
-     * @param departmentId 部门id
      * @return 返回影响行数
      */
-    int insertEmployee(@Param("emp") Employee employee,
-                       @Param("positionId") Integer positionId,
-                       @Param("departmentId") Integer departmentId);
+    int insertEmployee(@Param("emp") Employee employee);
 
     /**
      * 更新员工信息
      * @param employee 信息
-     * @param positionId 职位id
-     * @param departmentId 部门id
      * @return 返回影响行数
      */
-    int updateEmployee(@Param("emp") Employee employee,
-                       @Param("positionId") Integer positionId,
-                       @Param("departmentId") Integer departmentId);
+    int updateEmployee(@Param("emp") Employee employee);
 
     /**
      * 根据员工 id 删除用户

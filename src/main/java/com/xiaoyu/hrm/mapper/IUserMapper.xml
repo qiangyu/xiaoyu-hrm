@@ -12,7 +12,7 @@
     <!--根据页数以及条件查询用户信息-->
     <select id="findUserByPage" parameterType="com.xiaoyu.hrm.pojo.User"
             resultType="com.xiaoyu.hrm.pojo.User">
-        SELECT * FROM user_inf
+        SELECT * FROM `user_inf`
         <where>
             <if test="user != null">
                 <if test="user.username != null">

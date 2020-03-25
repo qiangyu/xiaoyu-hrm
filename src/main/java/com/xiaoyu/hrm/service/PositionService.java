@@ -93,8 +93,8 @@ public class PositionService {
      }
 
     /**
-     * 根据id删除职位
-     * @param id id
+     * 根据id批量删除职位
+     * @param ids id
      * @return 返回操作结果
      */
     public ResultBean deletesPosition(List<Integer> ids) {
