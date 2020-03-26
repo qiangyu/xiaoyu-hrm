@@ -22,6 +22,10 @@ mybatis:
 
 # 存储在redis中的用户信息 key 前缀
 XIAOYU_USER: user_inf
+
+# 文件上传路径
+FILE_PATH: C:/Users/Yuqiang/IdeaProjects/xiaoyu-hrm/uploads/
+
 # 指定日志的路径
 logging:
   file:

@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * 员工的pojo
- * 
+ *
  * @author xiaoyu
  * @date 2020/3/24 12:23
  */
@@ -23,7 +23,7 @@ public class Employee implements Serializable {
      * 身份证号码
      */
     private String cardId;
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date birthday;
     /**
      * 电话号码
@@ -73,7 +73,7 @@ public class Employee implements Serializable {
     /**
      * 创建该员工的时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date createDate;
 
 

@@ -1,9 +1,10 @@
-package com.xiaoyu.hrm.service;
+package com.xiaoyu.hrm.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.xiaoyu.hrm.mapper.IUserMapper;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.User;
+import com.xiaoyu.hrm.service.ILoginService;
 import com.xiaoyu.hrm.utils.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ import java.util.UUID;
  * @date 2020/3/18 17:12
  */
 @Service
-public class LoginService {
+public class LoginServiceImpl implements ILoginService {
 
     /**
      * 调用登录的mapper层
@@ -36,7 +37,7 @@ public class LoginService {
     @Autowired
     private JedisUtil jedisUtil;
 
-    private final static Logger logger = LoggerFactory.getLogger(LoginService.class);
+    private final static Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     /**
      * 存储用户信息key的前缀
@@ -51,6 +52,7 @@ public class LoginService {
      * @param loginname
      * @return
      */
+    @Override
     public ResultBean findUserByName(String loginname, String password) {
         if (loginname == null || password == null) {
             return ResultBean.error("用户名或者账号不能为空！");

@@ -1,8 +1,9 @@
-package com.xiaoyu.hrm.service;
+package com.xiaoyu.hrm.service.impl;
 
 import com.xiaoyu.hrm.mapper.IDepartmentMapper;
 import com.xiaoyu.hrm.pojo.Department;
 import com.xiaoyu.hrm.pojo.ResultBean;
+import com.xiaoyu.hrm.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,16 +18,16 @@ import java.util.List;
  * @date 2020/3/22 11:18
  */
 @Service
-public class DepartmentService {
+public class DepartmentServiceImpl implements IDepartmentService {
 
     @Autowired
     private IDepartmentMapper departmentMapper;
 
     /**
      * 根据父id查询所有部门
-     * @param parentId 父id
      * @return 查询到的所有部门
      */
+    @Override
     public ResultBean findAllDepartment() {
         List<Department> list = departmentMapper.findAllDepartmentByParentId(-1);
         return ResultBean.ok("查询部门成功！", list);
@@ -38,6 +39,7 @@ public class DepartmentService {
      * @return 返回操作结果集部门信息
      */
     @Transactional
+    @Override
     public ResultBean insertDepartment(Department department) {
         if (!StringUtils.isEmpty(department.getId())) {
             return ResultBean.error("添加部门异常！");
@@ -77,6 +79,7 @@ public class DepartmentService {
      * @param id id
      * @return 操作结果
      */
+    @Override
     public ResultBean deleteDepartment(Integer id) {
         if (id == null) {
             return ResultBean.error("操作异常！");

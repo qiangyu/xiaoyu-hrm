@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoyu.hrm.mapper.IDocumentMapper" >
+
+
+    <resultMap id="DocumentMap" type="com.xiaoyu.hrm.pojo.Document">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="remark" property="remark" />
+        <result column="file_name" property="fileName" />
+        <result column="file_path" property="filePath" />
+        <result column="file_type" property="fileType" />
+        <result column="file_size" property="fileSize" />
+        <result column="is_delete" property="isDelete" />
+        <result column="create_date" property="createDate" />
+        <result column="user_id" property="userId" />
+        <association property="user" javaType="com.xiaoyu.hrm.pojo.User">
+            <id column="uid" property="id" />
+            <result column="loginname" property="loginname" />
+        </association>
+    </resultMap>
+
+    <!--可根据条件进行查询-->
+    <select id="findAllDocument" parameterType="com.xiaoyu.hrm.pojo.Document" resultMap="DocumentMap">
+        select d.*, u.id as uid, u.loginname from document_inf d, user_inf u
+        <where>
+            <if test="document.title != null">
+                AND title like concat('%', #{document.title}, '%')
+            </if>
+            AND d.user_id = u.id
+        </where>
+        <if test="page != null and size != null">
+            limit #{page}, #{size}
+        </if>
+    </select>
+
+    <!--根据条件 document 查询符合条件的数目-->
+    <select id="getTotal" parameterType="com.xiaoyu.hrm.pojo.Document" resultType="long">
+        select count(*) from document_inf
+        <where>
+            <if test="document.fileName != null">
+                AND file_name = #{document.fileName}
+            </if>
+        </where>
+    </select>
+
+    <!--添加文档-->
+    <insert id="insertDocument" parameterType="com.xiaoyu.hrm.pojo.Document">
+        INSERT INTO document_inf ( title, remark, file_name, file_path, file_type, file_size, is_delete, create_date, user_id )
+         VALUES( #{title}, #{remark}, #{fileName}, #{filePath}, #{fileType}, #{fileSize}, #{isDelete}, #{createDate}, #{userId} )
+    </insert>
+
+</mapper>

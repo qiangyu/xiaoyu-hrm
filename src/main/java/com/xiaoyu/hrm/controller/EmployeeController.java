@@ -2,7 +2,8 @@ package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.Employee;
 import com.xiaoyu.hrm.pojo.ResultBean;
-import com.xiaoyu.hrm.service.EmployeeService;
+import com.xiaoyu.hrm.service.IEmployeeService;
+import com.xiaoyu.hrm.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     /**
      * 根据条件查询员工

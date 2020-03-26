@@ -1,7 +1,8 @@
 package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.ResultBean;
-import com.xiaoyu.hrm.service.MenuService;
+import com.xiaoyu.hrm.service.IMenuService;
+import com.xiaoyu.hrm.service.impl.MenuServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexMenuController {
 
     @Autowired
-    MenuService menuService;
+    private IMenuService menuService;
 
     /**
      * 获取菜单栏所有信息

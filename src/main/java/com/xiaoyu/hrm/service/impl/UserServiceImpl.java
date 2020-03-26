@@ -1,9 +1,10 @@
-package com.xiaoyu.hrm.service;
+package com.xiaoyu.hrm.service.impl;
 
 import com.xiaoyu.hrm.mapper.IUserMapper;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.ResultPageBean;
 import com.xiaoyu.hrm.pojo.User;
+import com.xiaoyu.hrm.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -19,7 +20,7 @@ import java.util.List;
  * @date 2020/3/19 15:41
  */
 @Service
-public class UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private IUserMapper userMapper;
@@ -32,6 +33,7 @@ public class UserService {
      * @param user 根据用户名以及用户状态查询用户信息
      * @return 返回用户信息
      */
+    @Override
     public ResultBean findUserByPage(Integer page, Integer size, User user) {
         if (page == null || size == null) {
             return ResultBean.error("查询用户错误！");
@@ -51,6 +53,7 @@ public class UserService {
      * @param user 用户信息
      * @return 返回注册结果
      */
+    @Override
     public ResultBean addUser(User user) {
         if (!StringUtils.isEmpty(user.getId())) {
             return ResultBean.error("添加用户异常！");
@@ -84,6 +87,7 @@ public class UserService {
      * @param id 用户id
      * @return 返回删除用户结果
      */
+    @Override
     public ResultBean deleteUser(Integer id) {
         if (StringUtils.isEmpty(id)) {
             return ResultBean.error("删除错误！");
@@ -102,6 +106,7 @@ public class UserService {
      * @param user 用户信息
      * @return 返回修改结果
      */
+    @Override
     public ResultBean updateUser(User user) {
         if (StringUtils.isEmpty(user.getId())) {
             return ResultBean.error("修改异常！");

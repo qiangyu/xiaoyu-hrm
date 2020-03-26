@@ -2,7 +2,8 @@ package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.User;
-import com.xiaoyu.hrm.service.UserService;
+import com.xiaoyu.hrm.service.IUserService;
+import com.xiaoyu.hrm.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     /**
      * 处理前端传递过来查询用户的请求

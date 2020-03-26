@@ -1,7 +1,8 @@
 package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.ResultBean;
-import com.xiaoyu.hrm.service.LoginService;
+import com.xiaoyu.hrm.service.ILoginService;
+import com.xiaoyu.hrm.service.impl.LoginServiceImpl;
 import com.xiaoyu.hrm.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class LoginController {
      * 调用登录服务层
      */
     @Autowired
-    private LoginService loginService;
+    private ILoginService loginService;
 
     @Autowired
     private JedisUtil jedisUtil;

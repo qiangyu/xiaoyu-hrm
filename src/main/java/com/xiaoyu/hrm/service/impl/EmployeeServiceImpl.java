@@ -1,9 +1,10 @@
-package com.xiaoyu.hrm.service;
+package com.xiaoyu.hrm.service.impl;
 
 import com.xiaoyu.hrm.mapper.IDepartmentMapper;
 import com.xiaoyu.hrm.mapper.IEmployeeMapper;
 import com.xiaoyu.hrm.mapper.IPositionMapper;
 import com.xiaoyu.hrm.pojo.*;
+import com.xiaoyu.hrm.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -19,7 +20,7 @@ import java.util.List;
  * @date 2020/3/24 13:02
  */
 @Service
-public class EmployeeService {
+public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
     private IEmployeeMapper employeeMapper;
@@ -37,6 +38,7 @@ public class EmployeeService {
      * @param employee 条件
      * @return 返回查询的结果
      */
+    @Override
     public ResultBean findAllEmployee(Integer page, Integer size, Employee employee,
                                       Integer positionId, Integer departmentId) {
         if (page == null || size == null) {
@@ -55,6 +57,7 @@ public class EmployeeService {
      * 获取民族
      * @return 返回56个民族
      */
+    @Override
     public ResultBean getAllNations() {
         List<Nation> list = employeeMapper.getAllNations();
         if (list == null || list.size() == 0) {
@@ -67,6 +70,7 @@ public class EmployeeService {
      * 获取政治面貌
      * @return 返回政治面貌
      */
+    @Override
     public ResultBean getAllPoliticsstatus() {
         List<Politicsstatus> list = employeeMapper.getAllPoliticsstatus();
         if (list == null || list.size() == 0) {
@@ -80,6 +84,7 @@ public class EmployeeService {
      * @param employee 信息
      * @return 返回操作结果
      */
+    @Override
     public ResultBean insertEmployee(Employee employee) {
         if (employee.getId() != null) {
             return ResultBean.error("添加操作异常！");
@@ -102,6 +107,7 @@ public class EmployeeService {
      * @param employee 信息
      * @return 返回操作结果
      */
+    @Override
     public ResultBean updateEmployee(Employee employee) {
         if (employee.getId() == null) {
             return ResultBean.error("修改操作异常！");
@@ -122,6 +128,7 @@ public class EmployeeService {
      * @param id 员工id
      * @return 返回操作结果
      */
+    @Override
     public ResultBean deleteEmployee(Integer id) {
         if (id == null) {
             return ResultBean.error("删除操作错误！");
@@ -133,6 +140,11 @@ public class EmployeeService {
         return ResultBean.ok("删除员工成功！");
     }
 
+    /**
+     * 检查数据
+     * @param employee 数据
+     * @return 返回校验结果
+     */
     private ResultBean checkData(Employee employee) {
         if (employee == null || employee.getDepartment().getId() == null || employee.getPosition().getId() == null) {
             return ResultBean.error("添加异常，部门及职位为空！");
@@ -183,6 +195,7 @@ public class EmployeeService {
      * @param ids id
      * @return 返回操作结果
      */
+    @Override
     public ResultBean deletesEmployee(List<Integer> ids) {
         if (ids == null || ids.size() == 0) {
             return ResultBean.ok("删除操作异常！");

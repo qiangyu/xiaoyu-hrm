@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 部门的pojo
- * 
+ *
  * @author xiaoyu
  * @date 2020/3/22 10:35
  */

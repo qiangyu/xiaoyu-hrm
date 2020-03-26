@@ -2,7 +2,7 @@ package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.Department;
 import com.xiaoyu.hrm.pojo.ResultBean;
-import com.xiaoyu.hrm.service.DepartmentService;
+import com.xiaoyu.hrm.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class DepartmentController {
 
     @Autowired
-    private DepartmentService departmentService;
+    private IDepartmentService departmentService;
 
     /**
      * 根据父id查询所有部门

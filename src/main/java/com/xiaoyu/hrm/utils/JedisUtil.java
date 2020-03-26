@@ -27,7 +27,13 @@ public class JedisUtil {
     private final static Logger logger = LoggerFactory.getLogger(PowerAspect.class);
 
     private Jedis getJedis() {
-        return jedisPool.getResource();
+        try {
+            return jedisPool.getResource();
+        } catch (Exception e) {
+            logger.error("获取redis连接池失败", e);
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

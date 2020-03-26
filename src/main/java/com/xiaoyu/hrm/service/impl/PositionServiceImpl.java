@@ -1,8 +1,9 @@
-package com.xiaoyu.hrm.service;
+package com.xiaoyu.hrm.service.impl;
 
 import com.xiaoyu.hrm.mapper.IPositionMapper;
 import com.xiaoyu.hrm.pojo.Position;
 import com.xiaoyu.hrm.pojo.ResultBean;
+import com.xiaoyu.hrm.service.IPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author xiaoyu
  * @date 2020/3/23 15:23
  */@Service
-public class PositionService {
+public class PositionServiceImpl implements IPositionService {
 
      @Autowired
      private IPositionMapper positionMapper;
@@ -26,6 +27,7 @@ public class PositionService {
      * @param position 条件
      * @return 返回操作结果和查询到的信息
      */
+     @Override
      public ResultBean findAllPosition(Position position) {
          List<Position> list = positionMapper.findAllPosition(position);
          if (list == null || list.size() == 0) {
@@ -39,6 +41,7 @@ public class PositionService {
      * @param position 职位信息
      * @return 返回操作结果
      */
+     @Override
      public ResultBean updatePosition(Position position) {
          if (StringUtils.isEmpty(position.getId())) {
              return ResultBean.error("此次修改操作错误！");
@@ -58,6 +61,7 @@ public class PositionService {
      * @param position 职位信息
      * @return 返回操作结果
      */
+     @Override
      public ResultBean insertPosition(Position position) {
          if (!StringUtils.isEmpty(position.getId())) {
              return ResultBean.error("添加操作异常！");
@@ -81,6 +85,7 @@ public class PositionService {
      * @param id id
      * @return 返回操作结果
      */
+     @Override
      public ResultBean deletePosition(Integer id) {
          if (id == null) {
              return ResultBean.ok("删除操作异常！");
@@ -97,6 +102,7 @@ public class PositionService {
      * @param ids id
      * @return 返回操作结果
      */
+    @Override
     public ResultBean deletesPosition(List<Integer> ids) {
         if (ids == null || ids.size() == 0) {
             return ResultBean.ok("删除操作异常！");
