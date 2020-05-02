@@ -3,7 +3,6 @@ package com.xiaoyu.hrm.controller;
 import com.xiaoyu.hrm.pojo.Position;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.service.IPositionService;
-import com.xiaoyu.hrm.service.impl.PositionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

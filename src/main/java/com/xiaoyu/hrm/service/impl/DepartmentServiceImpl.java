@@ -4,6 +4,8 @@ import com.xiaoyu.hrm.mapper.IDepartmentMapper;
 import com.xiaoyu.hrm.pojo.Department;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.service.IDepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,8 @@ public class DepartmentServiceImpl implements IDepartmentService {
     @Autowired
     private IDepartmentMapper departmentMapper;
 
+    private final static Logger logger = LoggerFactory.getLogger(DepartmentServiceImpl.class);
+
     /**
      * 根据父id查询所有部门
      * @return 查询到的所有部门
@@ -38,7 +42,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
      * @param department 新增的部门信息
      * @return 返回操作结果集部门信息
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultBean insertDepartment(Department department) {
         if (!StringUtils.isEmpty(department.getId())) {
@@ -71,6 +75,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
         }
         // 将新增节点的父节点的 isParent 字段设置为true
         departmentMapper.updateParentById(department.getParentId());
+        logger.info("部门：{} --> 添加成功：{}", department.getName(), department);
         return ResultBean.ok("添加部门成功！", department);
     }
 
@@ -84,10 +89,15 @@ public class DepartmentServiceImpl implements IDepartmentService {
         if (id == null) {
             return ResultBean.error("操作异常！");
         }
+        Department department = departmentMapper.findDepartmentById(id);
+        if (department == null) {
+            return ResultBean.error("删除异常！");
+        }
         int i = departmentMapper.deleteDepartmentById(id);
         if (i != 1) {
             return ResultBean.error("删除异常！");
         }
+        logger.info("部门：{} --> 删除成功：{}", department.getName(), department);
         return ResultBean.ok("删除成功！");
     }
 }

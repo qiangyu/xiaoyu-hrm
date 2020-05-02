@@ -17,6 +17,6 @@ public interface ILoginService {
      * @param loginname
      * @return
      */
-    ResultBean findUserByName(String loginname, String password);
+    ResultBean findUserByLoginNameAndPassword(String loginname, String password);
 
 }

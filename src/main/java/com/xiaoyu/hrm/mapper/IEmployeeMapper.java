@@ -34,6 +34,14 @@ public interface IEmployeeMapper {
                                    @Param("departmentId") Integer departmentId);
 
     /**
+     * 根据身份证号码查询信息
+     * @param cardId 身份证号码
+     * @return 返回查询信息
+     */
+    @Select("select * from employee_inf where card_id = #{cardId}")
+    List<Employee> findEmployeeByCardId(String cardId);
+
+    /**
      * 根据条件查询员工
      * @param employee 条件
      * @param positionId 职位id

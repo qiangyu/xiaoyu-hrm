@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -53,15 +53,14 @@ public class LoginServiceImpl implements ILoginService {
      * @return
      */
     @Override
-    public ResultBean findUserByName(String loginname, String password) {
+    public ResultBean findUserByLoginNameAndPassword(String loginname, String password) {
         if (loginname == null || password == null) {
             return ResultBean.error("用户名或者账号不能为空！");
         }
-        List<User> list = userMapper.findUserByName(loginname);
-        if (list == null || list.size() != 1) {
+        User user = userMapper.findUserByLoginName(loginname);
+        if (user == null) {
             return ResultBean.error("账号异常，请联系管理员！");
         }
-        User user = list.get(0);
         if (!user.getPassword().equals(password)) {
             return ResultBean.error("用户名或者账号错误！");
         }
@@ -77,6 +76,7 @@ public class LoginServiceImpl implements ILoginService {
             String set = jedisUtil.set(token, jsonUSer, 3600);
             if (!StringUtils.isEmpty(set)) {
                 user.setToken(token);
+                logger.info("用户：{} --> 登录于：{}", user.getLoginname(), new Date());
                 return ResultBean.ok("登录成功！", user);
             }
         } catch (Exception e) {

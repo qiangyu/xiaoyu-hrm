@@ -2,7 +2,6 @@ package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.service.ILoginService;
-import com.xiaoyu.hrm.service.impl.LoginServiceImpl;
 import com.xiaoyu.hrm.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,7 +47,7 @@ public class LoginController {
      */
     @PostMapping(value = "/doLogin")
     public ResultBean login(String loginname, String password) {
-        return loginService.findUserByName(loginname, password);
+        return loginService.findUserByLoginNameAndPassword(loginname, password);
     }
 
     /**
@@ -65,7 +64,7 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResultBean.ok("注销成功！");
+        return ResultBean.ok();
     }
 
     /**

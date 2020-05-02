@@ -24,6 +24,10 @@ public class ResultBean {
         return new ResultBean(200, msg, null);
     }
 
+    public static ResultBean ok(Object obj) {
+        return new ResultBean(200, null, obj);
+    }
+
     public static ResultBean ok(String msg, Object obj) {
         return new ResultBean(200, msg, obj);
     }

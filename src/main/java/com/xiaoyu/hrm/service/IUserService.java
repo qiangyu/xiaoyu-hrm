@@ -40,9 +40,10 @@ public interface IUserService {
     /**
      * 修改用户信息
      * @param user 用户信息
+     * @param token
      * @return 返回修改结果
      */
-    ResultBean updateUser(User user);
+    ResultBean updateUser(User user, String token);
 
 
 

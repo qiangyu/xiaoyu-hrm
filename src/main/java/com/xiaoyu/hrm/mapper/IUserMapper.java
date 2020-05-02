@@ -16,9 +16,9 @@ public interface IUserMapper {
     /**
      * 根据账号查询用户信息
      * @param loginname
-     * @return
+     * @return 返回用户信息
      */
-    List<User> findUserByName(String loginname);
+    User findUserByLoginName(String loginname);
 
     /**
      * 根据页数以及条件查询用户信息

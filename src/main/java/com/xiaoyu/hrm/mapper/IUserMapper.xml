@@ -4,15 +4,15 @@
 
     <resultMap id="user" type="com.xiaoyu.hrm.pojo.User" />
 
-    <!--根据账号查询用户信息-->
-    <select id="findUserByName" parameterType="string" resultMap="user">
-        select * from user_inf where loginname = #{loginname}
+    <!--根据账号查询用户信息, 不需要查询出密码-->
+    <select id="findUserByLoginName" parameterType="string" resultMap="user">
+        SELECT * FROM `user_inf` WHERE loginname = #{loginname}
     </select>
 
-    <!--根据页数以及条件查询用户信息-->
+    <!--根据页数以及条件查询用户信息, 不需要查询出密码-->
     <select id="findUserByPage" parameterType="com.xiaoyu.hrm.pojo.User"
             resultType="com.xiaoyu.hrm.pojo.User">
-        SELECT * FROM `user_inf`
+        SELECT `id`, `loginname`, `status`, `createdate`, `username` FROM `user_inf`
         <where>
             <if test="user != null">
                 <if test="user.username != null">
@@ -33,7 +33,7 @@
 
     <!--根据条件 user 查询符合条件的数目-->
     <select id="getTotal" parameterType="com.xiaoyu.hrm.pojo.User" resultType="long">
-        select count(*) from  user_inf
+        select count(*) from  `user_inf`
         <where>
             <if test="user != null">
                 <if test="user.username != null">
@@ -47,9 +47,24 @@
     </select>
 
     <update id="updateUser" parameterType="com.xiaoyu.hrm.pojo.User">
-        UPDATE user_inf
-         SET loginname = #{loginname}, password = #{password}, status = #{status}, createdate = #{createdate}, username = #{username}
-         where id = #{user.id}
+        UPDATE `user_inf`
+         SET
+         <if test="username != null">
+             username = #{username}
+         </if>
+         <if test="username != null and status != null">
+            ,
+         </if>
+         <if test="status != null">
+             status = #{status}
+         </if>
+         <if test="status != null and password != null">
+            ,
+         </if>
+         <if test="password != null">
+             password = #{password}
+         </if>
+         where id = #{id}
     </update>
 
 </mapper>

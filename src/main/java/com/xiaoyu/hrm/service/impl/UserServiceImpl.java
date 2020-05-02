@@ -1,12 +1,15 @@
 package com.xiaoyu.hrm.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.xiaoyu.hrm.mapper.IUserMapper;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.ResultPageBean;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.service.IUserService;
+import com.xiaoyu.hrm.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
@@ -24,6 +27,12 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private IUserMapper userMapper;
+
+    /**
+     * 操作redis
+     */
+    @Autowired
+    private JedisUtil jedisUtil;
 
     /**
      * 根据页数以及条件查询用户信息
@@ -44,7 +53,7 @@ public class UserServiceImpl implements IUserService {
             return ResultBean.error("查询不到用户信息！");
         }
         Long total = userMapper.getTotal(user);
-        return ResultBean.ok("查询用户成功！", new ResultPageBean(list, total));
+        return ResultBean.ok(new ResultPageBean(list, total));
     }
 
     /**
@@ -61,11 +70,10 @@ public class UserServiceImpl implements IUserService {
         if (StringUtils.isEmpty(user.getLoginname()) || StringUtils.isEmpty(user.getPassword())) {
             return ResultBean.error("用户名或密码为空！");
         }
-        List<User> list = userMapper.findUserByName(user.getLoginname());
-        if (list == null || list.size() > 0) {
+        User checkUser = userMapper.findUserByLoginName(user.getLoginname());
+        if (checkUser == null) {
             return ResultBean.error("用户名已被注册！");
         }
-
         // 校验成功，补全数据
         // 没指定注册的通通为普通用户
         if (user.getStatus() == null || user.getStatus() != 2) {
@@ -106,33 +114,30 @@ public class UserServiceImpl implements IUserService {
      * @param user 用户信息
      * @return 返回修改结果
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public ResultBean updateUser(User user) {
-        if (StringUtils.isEmpty(user.getId())) {
+    public ResultBean updateUser(User user, String token) {
+        if ("".equals(user.getUsername())) {
             return ResultBean.error("修改异常！");
         }
-        if (StringUtils.isEmpty(user.getUsername())) {
+        if ("".equals(user.getPassword())) {
             return ResultBean.error("修改异常！");
         }
-        if (StringUtils.isEmpty(user.getLoginname())) {
+        // 进行缓存同步，先删除缓存
+        jedisUtil.del(token);
+        // 更新数据库信息
+        int i = userMapper.updateUser(user);
+        if (i != 1) {
+            return ResultBean.ok("修改失败！");
+        }
+        // 查询该用户信息设置在redis中
+        user = userMapper.findUserByLoginName(user.getLoginname());
+        String jsonUser = JSON.toJSONString(user);
+        String set = jedisUtil.set(token, jsonUser, 30);
+        if (StringUtils.isEmpty(set)) {
             return ResultBean.error("修改异常！");
         }
-        if (StringUtils.isEmpty(user.getPassword())) {
-            return ResultBean.error("修改异常！");
-        }
-        if (StringUtils.isEmpty(user.getCreatedate())) {
-            return ResultBean.error("修改异常！");
-        }
-        if (StringUtils.isEmpty(user.getStatus())) {
-            return ResultBean.error("修改异常！");
-        }
-        // 先查询是否有该用户
-        List<User> list = userMapper.findUserByName(user.getLoginname());
-        if (list == null || list.size() != 1) {
-            return ResultBean.error("修改异常，没有该用户！");
-        }
-        userMapper.updateUser(user);
-        return ResultBean.ok("修改成功！");
+        return ResultBean.ok("修改个人信息成功！");
     }
 
 }

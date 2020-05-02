@@ -35,7 +35,7 @@ class XiaoyuHrmApplicationTests {
     public static final Object toJSON(Object javaObject); //将JavaBean转换为JSONObject或者JSONArray。*/
 
     /**
-     * 测试缓存
+     * 测试redis缓存
      */
     @Test
     void testRedis() {

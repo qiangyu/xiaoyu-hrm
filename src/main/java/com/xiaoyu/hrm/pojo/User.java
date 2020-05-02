@@ -17,20 +17,17 @@ public class User implements Serializable {
     private String username;
     private String loginname;
     private String password;
+
     private Integer status;
+    /**
+     * 将status 的 1 2 3 意思转为文本
+     */
+    private String textStatus;
 
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date createdate;
 
     private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public Integer getId() {
         return id;
@@ -72,12 +69,28 @@ public class User implements Serializable {
         this.status = status;
     }
 
+    public String getTextStatus() {
+        return textStatus;
+    }
+
+    public void setTextStatus(String textStatus) {
+        this.textStatus = textStatus;
+    }
+
     public Date getCreatedate() {
         return createdate;
     }
 
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
@@ -88,6 +101,7 @@ public class User implements Serializable {
                 ", loginname='" + loginname + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
+                ", textStatus='" + textStatus + '\'' +
                 ", createdate=" + createdate +
                 ", token='" + token + '\'' +
                 '}';

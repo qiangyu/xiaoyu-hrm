@@ -2,7 +2,6 @@ package com.xiaoyu.hrm.config;
 
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.User;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -52,8 +51,7 @@ public class PowerAspect {
                 return ResultBean.loginError("拦截到您没有权限操作！");
             }
             // 记录一下日志
-            String message = "用户：" +  user.getLoginname() + "--> 操作了：" + pjp.getSignature().getName();
-            logger.info(message, user);
+            logger.info("拦截到用户：{} --> 操作：{}", user.getLoginname(), pjp.getSignature().getName());
             // 有权限，放行
             return pjp.proceed();
         } catch (Throwable e) {

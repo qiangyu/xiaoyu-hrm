@@ -187,6 +187,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
         if (StringUtils.isEmpty(employee.getHobby()) || StringUtils.isEmpty(employee.getRemark())) {
             return ResultBean.error("请填写您的爱好或自我描述！");
         }
+        List<Employee> employeeByCardId = employeeMapper.findEmployeeByCardId(employee.getCardId());
+        if (employeeByCardId == null) {
+            return ResultBean.error("身份证异常！");
+        }
         return null;
     }
 

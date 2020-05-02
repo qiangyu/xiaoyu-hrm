@@ -3,9 +3,10 @@ package com.xiaoyu.hrm.controller;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.service.IUserService;
-import com.xiaoyu.hrm.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/3/19 16:04
  */
 @RestController
-@RequestMapping("/user/basic")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -29,7 +30,7 @@ public class UserController {
      * @param user 根据用户名以及用户状态查询用户信息
      * @return 返回用户信息
      */
-    @GetMapping("/")
+    @GetMapping("/basic")
     public ResultBean getAllUser(@RequestParam(defaultValue = "1") Integer page,
                                  @RequestParam(defaultValue = "10") Integer size,
                                  User user) {
@@ -41,7 +42,7 @@ public class UserController {
      * @param user 用户信息
      * @return 返回注册结果
      */
-    @PostMapping("/")
+    @PostMapping("/basic")
     public ResultBean powerAddUser(@RequestBody User user) {
         return userService.addUser(user);
     }
@@ -51,7 +52,7 @@ public class UserController {
      * @param id 用户id
      * @return 返回删除用户结果
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/basic/{id}")
     public ResultBean powerDeleteUser(@PathVariable("id") Integer id) {
         return userService.deleteUser(id);
     }
@@ -61,8 +62,22 @@ public class UserController {
      * @param user 用户信息
      * @return 返回修改结果
      */
-    @PutMapping("/")
-    public ResultBean powerUpdateUser(@RequestBody User user) {
-        return userService.updateUser(user);
+    @PutMapping("/basic")
+    public ResultBean powerUpdateUser(@RequestBody User user, HttpServletRequest request) {
+        // 从请求头获取 token
+        String token = request.getHeader("token");
+        return userService.updateUser(user, token);
+    }
+
+    /**
+     * 根据账号查询用户信息
+     * @param loginname 用户账号
+     * @param token token
+     * @return 返回用户信息
+     */
+    @GetMapping("/info")
+    public ResultBean powerShowUserInfo(HttpServletRequest request) {
+        // 从request获取用户信息
+        return ResultBean.ok(request.getAttribute("user"));
     }
 }
