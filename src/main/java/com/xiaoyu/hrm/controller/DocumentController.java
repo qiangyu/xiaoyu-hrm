@@ -57,6 +57,7 @@ public class DocumentController {
         User user = (User) request.getAttribute("user");
         document.setUser(user);
         document.setUserId(user.getId());
+        System.out.println(document + "文档");
         return documentService.insertDocument(document, uploadFile);
     }
 
@@ -72,7 +73,7 @@ public class DocumentController {
     }
 
     /**
-     * 更新id删除文档
+     * 根据id删除文档
      *
      * @param document document
      * @return 返回影响行数

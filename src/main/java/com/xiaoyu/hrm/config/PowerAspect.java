@@ -1,7 +1,6 @@
 package com.xiaoyu.hrm.config;
 
-import com.xiaoyu.hrm.pojo.ResultBean;
-import com.xiaoyu.hrm.pojo.User;
+import com.xiaoyu.hrm.pojo.*;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -47,12 +46,36 @@ public class PowerAspect {
             if (user == null) {
                 return ResultBean.loginError("登陆异常，请重新登陆！");
             }
-            if (user.getStatus() != 2) {
-                return ResultBean.loginError("拦截到您没有权限操作！");
+            // 如果时修改用户个人信息的方法 powerUpdateUser ，则先不拦截权限，后续再拦截
+            if (!"powerUpdateUser".equals(pjp.getSignature().getName())) {
+                if (user.getStatus() != 2 && user.getStatus() != 3) {
+                    return ResultBean.loginError("拦截到您没有权限操作！");
+                }
+            }
+            // 获取方法全部参数
+            Object[] args = pjp.getArgs();
+            Object loggerInfo = null;
+            // 遍历参数，不同参数处理不同业务
+            for (Object arg : args) {
+                if (arg instanceof User) {
+                    // 拦截修改用户信息权限
+                    if (((User) arg).getStatus() != null) {
+                        if (user.getStatus() == 2 && ((User) arg).getStatus() == 3) {
+                            return ResultBean.loginError("拦截到您没有权限操作！");
+                        }
+                        if (user.getStatus() == 2 && ((User) arg).getStatus().equals(user.getStatus())) {
+                            return ResultBean.loginError("拦截到您没有权限操作！");
+                        }
+                    }
+                    loggerInfo = arg;
+                }
+                if (arg instanceof Department || arg instanceof Position || arg instanceof Employee || arg instanceof Document) {
+                    loggerInfo = arg;
+                }
             }
             // 记录一下日志
-            logger.info("拦截到用户：{} --> 操作：{}", user.getLoginname(), pjp.getSignature().getName());
-            // 有权限，放行
+            logger.info("拦截到用户：{} --> 操作：{}，操作信息：{}", user.getLoginname(), pjp.getSignature().getName(), loggerInfo);
+            // 有权限验证完，放行
             return pjp.proceed();
         } catch (Throwable e) {
             logger.error(pjp.getSignature() + " 出现异常.", e);

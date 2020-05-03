@@ -53,22 +53,22 @@ public class PositionController {
 
     /**
      * 根据id删除职位
-     * @param id id
+     * @param position 职位信息
      * @return 返回操作结果
      */
-    @DeleteMapping("/{id}")
-    public ResultBean powerDeletePosition(@PathVariable Integer id) {
-        return positionService.deletePosition(id);
+    @DeleteMapping("/")
+    public ResultBean powerDeletePosition(@RequestBody Position position) {
+        return positionService.deletePosition(position);
     }
 
     /**
      * 根据id批量删除职位
-     * @param ids id数组
+     * @param poss position职位信息数组
      * @return 返回操作结果
      */
-    @DeleteMapping("/")
-    public ResultBean powerDeletesPosition(@RequestBody List<Integer> ids) {
-        return positionService.deletesPosition(ids);
+    @DeleteMapping("/ids")
+    public ResultBean powerDeletesPosition(@RequestBody List<Position> poss) {
+        return positionService.deletesPosition(poss);
     }
 
 }

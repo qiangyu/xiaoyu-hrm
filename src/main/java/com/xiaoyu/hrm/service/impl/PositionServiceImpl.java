@@ -6,6 +6,7 @@ import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.service.IPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -82,15 +83,15 @@ public class PositionServiceImpl implements IPositionService {
 
     /**
      * 根据id删除职位
-     * @param id id
+     * @param position 职位信息
      * @return 返回操作结果
      */
      @Override
-     public ResultBean deletePosition(Integer id) {
-         if (id == null) {
-             return ResultBean.ok("删除操作异常！");
+     public ResultBean deletePosition(Position position) {
+         if (position.getId() == null || StringUtils.isEmpty(position.getName())) {
+             return ResultBean.ok("删除错误，缺少参数！");
          }
-         int i = positionMapper.deletePositionById(id);
+         int i = positionMapper.deletePositionById(position.getId());
          if (i != 1) {
              return ResultBean.error("删除职位失败！");
          }
@@ -99,23 +100,24 @@ public class PositionServiceImpl implements IPositionService {
 
     /**
      * 根据id批量删除职位
-     * @param ids id
+     * @param poss 职位信息数组
      * @return 返回操作结果
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public ResultBean deletesPosition(List<Integer> ids) {
-        if (ids == null || ids.size() == 0) {
-            return ResultBean.ok("删除操作异常！");
+    public ResultBean deletesPosition(List<Position> poss) {
+        if (poss == null || poss.size() == 0) {
+            return ResultBean.ok("删除错误，缺少参数！");
         }
-        int num = 0, i = 0;
-        for (Integer id : ids) {
-            i = positionMapper.deletePositionById(id);
-            if (i == 1) {
-                ++num;
+        int i = 0;
+        for (Position pos : poss) {
+            if (pos.getId() == null || StringUtils.isEmpty(pos.getName())) {
+                return ResultBean.ok("删除错误，缺少参数！");
             }
-        }
-        if (num != ids.size()) {
-            return ResultBean.error("未能删除全部选中的职位！");
+            i = positionMapper.deletePositionById(pos.getId());
+            if (i != 1) {
+                throw new RuntimeException("删除异常");
+            }
         }
         return ResultBean.ok("删除职位成功！");
     }

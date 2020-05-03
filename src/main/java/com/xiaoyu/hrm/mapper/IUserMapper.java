@@ -58,6 +58,7 @@ public interface IUserMapper {
     /**
      * 修改用户信息
      * @param user 用户信息
+     * @param newPassword 新密码
      * @return 返回影响的行数
      */
     int updateUser(User user);

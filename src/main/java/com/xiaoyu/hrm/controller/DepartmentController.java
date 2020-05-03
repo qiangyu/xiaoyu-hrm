@@ -41,12 +41,12 @@ public class DepartmentController {
 
     /**
      * 根据id删除部门
-     * @param id id
+     * @param department 部门信息
      * @return 返回操作结果
      */
-    @DeleteMapping("/{id}")
-    public ResultBean powerDeleteDepartment(@PathVariable Integer id) {
-        return departmentService.deleteDepartment(id);
+    @DeleteMapping("/")
+    public ResultBean powerDeleteDepartment(@RequestBody Department department) {
+        return departmentService.deleteDepartment(department);
     }
 
 }

@@ -7,6 +7,7 @@ import com.xiaoyu.hrm.pojo.*;
 import com.xiaoyu.hrm.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -125,17 +126,43 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     /**
      * 根据员工 id 删除用户
-     * @param id 员工id
+     *
+     * @param employee 员工信息
      * @return 返回操作结果
      */
     @Override
-    public ResultBean deleteEmployee(Integer id) {
-        if (id == null) {
-            return ResultBean.error("删除操作错误！");
+    public ResultBean deleteEmployee(Employee employee) {
+        if (employee.getId() == null || StringUtils.isEmpty(employee.getName())) {
+            return ResultBean.error("删除错误，缺少参数！");
         }
-        int i = employeeMapper.deleteEmployee(id);
+        int i = employeeMapper.deleteEmployee(employee.getId());
         if (i != 1) {
             return ResultBean.error("删除员工错误！");
+        }
+        return ResultBean.ok("删除员工成功！");
+    }
+
+    /**
+     * 根据id批量删除职位
+     *
+     * @param emps 职位信息数组
+     * @return 返回操作结果
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ResultBean deletesEmployee(List<Employee> emps) {
+        if (emps == null || emps.size() == 0) {
+            return ResultBean.ok("删除错误，缺少参数！");
+        }
+        int i = 0;
+        for (Employee emp : emps) {
+            if (emp.getId() == null || StringUtils.isEmpty(emp.getName())) {
+                return ResultBean.ok("删除错误，缺少参数！");
+            }
+            i = employeeMapper.deleteEmployee(emp.getId());
+            if (i != 1) {
+                throw new RuntimeException("删除异常");
+            }
         }
         return ResultBean.ok("删除员工成功！");
     }
@@ -192,29 +219,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
             return ResultBean.error("身份证异常！");
         }
         return null;
-    }
-
-    /**
-     * 根据id批量删除职位
-     * @param ids id
-     * @return 返回操作结果
-     */
-    @Override
-    public ResultBean deletesEmployee(List<Integer> ids) {
-        if (ids == null || ids.size() == 0) {
-            return ResultBean.ok("删除操作异常！");
-        }
-        int num = 0, i = 0;
-        for (Integer id : ids) {
-            i = employeeMapper.deleteEmployee(id);
-            if (i == 1) {
-                ++num;
-            }
-        }
-        if (num != ids.size()) {
-            return ResultBean.error("未能删除全部选中的员工！");
-        }
-        return ResultBean.ok("删除员工成功！");
     }
 
 }

@@ -32,15 +32,15 @@ public interface IUserService {
     /**
      * 根据用户 id 删除用户
      *
-     * @param id 用户id
+     * @param user 用户信息
      * @return 返回删除用户结果
      */
-    ResultBean deleteUser(Integer id);
+    ResultBean deleteUser(User user);
 
     /**
      * 修改用户信息
      * @param user 用户信息
-     * @param token
+     * @param token token
      * @return 返回修改结果
      */
     ResultBean updateUser(User user, String token);

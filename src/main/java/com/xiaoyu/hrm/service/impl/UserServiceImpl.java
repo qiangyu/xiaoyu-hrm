@@ -71,7 +71,7 @@ public class UserServiceImpl implements IUserService {
             return ResultBean.error("用户名或密码为空！");
         }
         User checkUser = userMapper.findUserByLoginName(user.getLoginname());
-        if (checkUser == null) {
+        if (checkUser != null) {
             return ResultBean.error("用户名已被注册！");
         }
         // 校验成功，补全数据
@@ -81,8 +81,8 @@ public class UserServiceImpl implements IUserService {
         }
         user.setCreatedate(new Date());
         // 将密码加密
-        String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
-        user.setPassword(md5Password);
+//        String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+//        user.setPassword(md5Password);
         // 插入数据
         userMapper.insertUser(user);
         // 返回注册结果
@@ -92,16 +92,16 @@ public class UserServiceImpl implements IUserService {
     /**
      * 根据用户 id 删除用户
      *
-     * @param id 用户id
+     * @param user 用户信息
      * @return 返回删除用户结果
      */
     @Override
-    public ResultBean deleteUser(Integer id) {
-        if (StringUtils.isEmpty(id)) {
-            return ResultBean.error("删除错误！");
+    public ResultBean deleteUser(User user) {
+        if (user.getId() == null || StringUtils.isEmpty(user.getLoginname())) {
+            return ResultBean.error("删除错误，缺少参数！");
         }
         // 进行删除用户， 返回影响的行数
-        int i = userMapper.deleteUserById(id);
+        int i = userMapper.deleteUserById(user.getId());
         // 若影响的行数不等于 1 ，则是错误的请求
         if (i != 1) {
             return ResultBean.error("错误的请求，用户不存在！");
@@ -112,6 +112,7 @@ public class UserServiceImpl implements IUserService {
     /**
      * 修改用户信息
      * @param user 用户信息
+     * @param token token
      * @return 返回修改结果
      */
     @Transactional(rollbackFor = Exception.class)
@@ -123,19 +124,34 @@ public class UserServiceImpl implements IUserService {
         if ("".equals(user.getPassword())) {
             return ResultBean.error("修改异常！");
         }
-        // 进行缓存同步，先删除缓存
-        jedisUtil.del(token);
+        if ("".equals(user.getNewPassword())) {
+            return ResultBean.error("修改异常！");
+        }
+        if (StringUtils.isEmpty(user.getLoginname())) {
+            return ResultBean.error("修改异常！");
+        }
+        // 根据登陆名查询用户信息，对旧密码进行比较
+        User checkUser = userMapper.findUserByLoginName(user.getLoginname());
+        if (checkUser == null) {
+            return ResultBean.error("用户不存在！");
+        }
+        if (!StringUtils.isEmpty(user.getPassword()) && !StringUtils.isEmpty(user.getNewPassword())) {
+            if (!checkUser.getPassword().equals(user.getPassword())) {
+                return ResultBean.error("旧密码错误！");
+            }
+        }
         // 更新数据库信息
         int i = userMapper.updateUser(user);
         if (i != 1) {
             return ResultBean.ok("修改失败！");
         }
-        // 查询该用户信息设置在redis中
-        user = userMapper.findUserByLoginName(user.getLoginname());
-        String jsonUser = JSON.toJSONString(user);
-        String set = jedisUtil.set(token, jsonUser, 30);
-        if (StringUtils.isEmpty(set)) {
-            return ResultBean.error("修改异常！");
+        try {
+            // 进行缓存同步，查询该用户信息设置在redis中
+            user = userMapper.findUserByLoginName(user.getLoginname());
+            String jsonUser = JSON.toJSONString(user);
+            jedisUtil.set(token, jsonUser, 30);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return ResultBean.ok("修改个人信息成功！");
     }

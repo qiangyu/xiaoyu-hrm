@@ -57,18 +57,18 @@ public interface IEmployeeService {
     /**
      * 根据员工 id 删除用户
      *
-     * @param id 员工id
+     * @param employee 员工信息
      * @return 返回操作结果
      */
-    ResultBean deleteEmployee(Integer id);
+    ResultBean deleteEmployee(Employee employee);
 
     /**
      * 根据id批量删除职位
      *
-     * @param ids id
+     * @param emps 职位信息数组
      * @return 返回操作结果
      */
-    ResultBean deletesEmployee(List<Integer> ids);
+    ResultBean deletesEmployee(List<Employee> emps);
 
 
 }

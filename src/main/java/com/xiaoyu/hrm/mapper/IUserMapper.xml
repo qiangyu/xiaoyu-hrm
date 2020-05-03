@@ -61,10 +61,10 @@
          <if test="status != null and password != null">
             ,
          </if>
-         <if test="password != null">
-             password = #{password}
+         <if test="newPassword != null">
+             password = #{newPassword}
          </if>
-         where id = #{id}
+         where loginname = #{loginname}
     </update>
 
 </mapper>

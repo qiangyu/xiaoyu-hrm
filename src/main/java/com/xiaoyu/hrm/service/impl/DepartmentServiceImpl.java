@@ -81,19 +81,16 @@ public class DepartmentServiceImpl implements IDepartmentService {
 
     /**
      * 根据id删除部门
-     * @param id id
+     *
+     * @param department 部门信息
      * @return 操作结果
      */
     @Override
-    public ResultBean deleteDepartment(Integer id) {
-        if (id == null) {
-            return ResultBean.error("操作异常！");
+    public ResultBean deleteDepartment(Department department) {
+        if (department.getId() == null || StringUtils.isEmpty(department.getName())) {
+            return ResultBean.error("删除错误，缺少参数！");
         }
-        Department department = departmentMapper.findDepartmentById(id);
-        if (department == null) {
-            return ResultBean.error("删除异常！");
-        }
-        int i = departmentMapper.deleteDepartmentById(id);
+        int i = departmentMapper.deleteDepartmentById(department.getId());
         if (i != 1) {
             return ResultBean.error("删除异常！");
         }

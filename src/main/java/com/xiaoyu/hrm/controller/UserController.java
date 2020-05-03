@@ -38,6 +38,17 @@ public class UserController {
     }
 
     /**
+     * 根据账号查询用户信息
+     * @param request request
+     * @return 返回用户信息
+     */
+    @GetMapping("/info")
+    public ResultBean showUserInfo(HttpServletRequest request) {
+        // 从request获取用户信息
+        return ResultBean.ok(request.getAttribute("user"));
+    }
+
+    /**
      * 新增用户
      * @param user 用户信息
      * @return 返回注册结果
@@ -49,12 +60,12 @@ public class UserController {
 
     /**
      * 根据用户 id 删除用户
-     * @param id 用户id
+     * @param user 用户信息
      * @return 返回删除用户结果
      */
-    @DeleteMapping("/basic/{id}")
-    public ResultBean powerDeleteUser(@PathVariable("id") Integer id) {
-        return userService.deleteUser(id);
+    @DeleteMapping("/basic")
+    public ResultBean powerDeleteUser(@RequestBody User user) {
+        return userService.deleteUser(user);
     }
 
     /**
@@ -69,15 +80,4 @@ public class UserController {
         return userService.updateUser(user, token);
     }
 
-    /**
-     * 根据账号查询用户信息
-     * @param loginname 用户账号
-     * @param token token
-     * @return 返回用户信息
-     */
-    @GetMapping("/info")
-    public ResultBean powerShowUserInfo(HttpServletRequest request) {
-        // 从request获取用户信息
-        return ResultBean.ok(request.getAttribute("user"));
-    }
 }

@@ -36,17 +36,17 @@ public interface IPositionService {
 
     /**
      * 根据id删除职位
-     * @param id id
+     * @param position 职位信息
      * @return 返回操作结果
      */
-    ResultBean deletePosition(Integer id);
+    ResultBean deletePosition(Position position);
 
     /**
      * 根据id批量删除职位
-     * @param ids id
+     * @param poss 职位信息数组
      * @return 返回操作结果
      */
-    ResultBean deletesPosition(List<Integer> ids);
+    ResultBean deletesPosition(List<Position> poss);
 
 
 

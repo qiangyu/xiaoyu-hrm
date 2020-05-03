@@ -20,9 +20,9 @@ public class User implements Serializable {
 
     private Integer status;
     /**
-     * 将status 的 1 2 3 意思转为文本
+     * 修改密码时保存新密码
      */
-    private String textStatus;
+    private String newPassword;
 
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date createdate;
@@ -69,12 +69,12 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public String getTextStatus() {
-        return textStatus;
+    public String getNewPassword() {
+        return newPassword;
     }
 
-    public void setTextStatus(String textStatus) {
-        this.textStatus = textStatus;
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
     public Date getCreatedate() {
@@ -101,7 +101,7 @@ public class User implements Serializable {
                 ", loginname='" + loginname + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
-                ", textStatus='" + textStatus + '\'' +
+                ", newPassword='" + newPassword + '\'' +
                 ", createdate=" + createdate +
                 ", token='" + token + '\'' +
                 '}';

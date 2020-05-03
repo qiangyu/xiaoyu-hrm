@@ -29,9 +29,9 @@ public interface IDepartmentService {
     /**
      * 根据id删除部门
      *
-     * @param id id
+     * @param department 部门信息
      * @return 操作结果
      */
-    ResultBean deleteDepartment(Integer id);
+    ResultBean deleteDepartment(Department department);
 
 }
