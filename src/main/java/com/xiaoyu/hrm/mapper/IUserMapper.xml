@@ -58,7 +58,7 @@
          <if test="status != null">
              status = #{status}
          </if>
-         <if test="status != null and password != null">
+         <if test="status != null and newPassword != null">
             ,
          </if>
          <if test="newPassword != null">

@@ -8,7 +8,8 @@
         <result column="title" property="title" />
         <result column="remark" property="remark" />
         <result column="file_name" property="fileName" />
-        <result column="file_path" property="filePath" />
+<!--        优化，不需要查询出文件路径-->
+<!--        <result column="file_path" property="filePath" />-->
         <result column="file_type" property="fileType" />
         <result column="file_size" property="fileSize" />
         <result column="is_delete" property="isDelete" />

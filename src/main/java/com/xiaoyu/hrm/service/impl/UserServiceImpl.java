@@ -143,7 +143,7 @@ public class UserServiceImpl implements IUserService {
         // 更新数据库信息
         int i = userMapper.updateUser(user);
         if (i != 1) {
-            return ResultBean.ok("修改失败！");
+            return ResultBean.error("修改未成功，新密码与旧密码一致！");
         }
         try {
             // 进行缓存同步，查询该用户信息设置在redis中
