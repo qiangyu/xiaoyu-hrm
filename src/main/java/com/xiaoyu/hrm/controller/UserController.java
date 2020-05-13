@@ -74,10 +74,11 @@ public class UserController {
      * @return 返回修改结果
      */
     @PutMapping("/basic")
-    public ResultBean powerUpdateUser(@RequestBody User user, HttpServletRequest request) {
+    public ResultBean updateUser(@RequestBody User updateUserInfo, HttpServletRequest request) {
         // 从请求头获取 token
         String token = request.getHeader("token");
-        return userService.updateUser(user, token);
+        User loginUserInfo = (User) request.getAttribute("user");
+        return userService.updateUser(loginUserInfo, updateUserInfo, token);
     }
 
 }

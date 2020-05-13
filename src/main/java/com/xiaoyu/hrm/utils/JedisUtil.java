@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.Date;
+
 /**
  * 操作redis的客户端jedis（工具类）
  *
@@ -49,7 +51,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.set(key, value);
         } catch (Exception e) {
-            logger.error("set key:{} value:{} error", key, value, e);
+            logger.error("set key:{} value:{} error：{}", key, value, e);
             return null;
         } finally {
             close(jedis);
@@ -71,7 +73,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.setex(key, expireTime, value);
         } catch (Exception e) {
-            logger.error("set key:{} value:{} expireTime:{} error", key, value, expireTime, e);
+            logger.error("set key:{} value:{} expireTime:{} error：{} ~~~ 时间：{}", key, value, expireTime, e, new Date());
             return null;
         } finally {
             close(jedis);
@@ -91,7 +93,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.get(key);
         } catch (Exception e) {
-            logger.error("get key:{} error", key, e);
+            logger.error("get key:{} error：{} ~~~ 时间：{}", key, e, new Date());
             return null;
         } finally {
             close(jedis);
@@ -110,7 +112,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.del(key.getBytes());
         } catch (Exception e) {
-            logger.error("del key:{} error", key, e);
+            logger.error("del key:{} error：{} ~~~ 时间：{}", key, e, new Date());
             return null;
         } finally {
             close(jedis);
@@ -129,7 +131,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.exists(key.getBytes());
         } catch (Exception e) {
-            logger.error("exists key:{} error", key, e);
+            logger.error("exists key:{} error：{} ~~~ 时间：{}", key, e, new Date());
             return null;
         } finally {
             close(jedis);
@@ -149,7 +151,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.expire(key.getBytes(), expireTime);
         } catch (Exception e) {
-            logger.error("expire key:{} error", key, e);
+            logger.error("expire key:{} error：{} ~~~ 时间：{}", key, e, new Date());
             return null;
         } finally {
             close(jedis);
@@ -167,7 +169,7 @@ public class JedisUtil {
             jedis = getJedis();
             return jedis.ttl(key);
         } catch (Exception e) {
-            logger.error("ttl key:{} error", key, e);
+            logger.error("ttl key:{} error：{} ~~~ 时间：{}", key, e, new Date());
             return null;
         } finally {
             close(jedis);

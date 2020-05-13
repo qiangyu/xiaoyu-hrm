@@ -1,12 +1,15 @@
 package com.xiaoyu.hrm.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.xiaoyu.hrm.config.PowerAspect;
 import com.xiaoyu.hrm.mapper.IUserMapper;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.ResultPageBean;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.service.IUserService;
 import com.xiaoyu.hrm.utils.JedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +36,11 @@ public class UserServiceImpl implements IUserService {
      */
     @Autowired
     private JedisUtil jedisUtil;
+
+    /**
+     * slf4j
+     */
+    private final static Logger logger = LoggerFactory.getLogger(PowerAspect.class);
 
     /**
      * 根据页数以及条件查询用户信息
@@ -110,50 +118,67 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 修改用户信息
-     * @param user 用户信息
-     * @param token token
+     * 修改用户信息，需要区分修改个人信息还是用户信息
+     *
+     * @param loginUserInfo  登陆用户信息
+     * @param updateUserInfo 修改用户信息
+     * @param token          token令牌
      * @return 返回修改结果
      */
-    @Transactional(rollbackFor = Exception.class)
     @Override
-    public ResultBean updateUser(User user, String token) {
-        if ("".equals(user.getUsername())) {
+    public ResultBean updateUser(User loginUserInfo, User updateUserInfo, String token) {
+        if (StringUtils.isEmpty(updateUserInfo.getLoginname())) {
             return ResultBean.error("修改异常！");
         }
-        if ("".equals(user.getPassword())) {
+        if ("".equals(updateUserInfo.getUsername())) {
             return ResultBean.error("修改异常！");
         }
-        if ("".equals(user.getNewPassword())) {
+        if ("".equals(updateUserInfo.getPassword())) {
             return ResultBean.error("修改异常！");
         }
-        if (StringUtils.isEmpty(user.getLoginname())) {
+        if ("".equals(updateUserInfo.getNewPassword())) {
             return ResultBean.error("修改异常！");
         }
-        // 根据登陆名查询用户信息，对旧密码进行比较
-        User checkUser = userMapper.findUserByLoginName(user.getLoginname());
-        if (checkUser == null) {
-            return ResultBean.error("用户不存在！");
+        /**
+         * 判断权限：用户登陆名相同，表示是修改个人信息，取反放行
+         *         操作作用户的权限为管理员（2），被修改用户权限不高于管理员，表示可以修改权限比自己低的用户，取反放行
+         *         操作用户的权限为（3），开发者权限，不做拦截，取反放行
+         */
+        if (!(loginUserInfo.getStatus() == 2 && loginUserInfo.getStatus() > updateUserInfo.getStatus())) {
+            if (!loginUserInfo.getLoginname().equals(updateUserInfo.getLoginname()) && loginUserInfo.getStatus() != 3) {
+                return ResultBean.loginError("拦截到您没有权限操作！");
+            }
         }
-        if (!StringUtils.isEmpty(user.getPassword()) && !StringUtils.isEmpty(user.getNewPassword())) {
-            if (!checkUser.getPassword().equals(user.getPassword())) {
+        // 当 password 与 newPassword 不为空时，该操作为修改密码
+        if (!StringUtils.isEmpty(updateUserInfo.getPassword()) && !StringUtils.isEmpty(updateUserInfo.getNewPassword())) {
+            // 根据登陆名查询用户信息，对旧密码进行比较
+            User checkUser = userMapper.findUserByLoginName(updateUserInfo.getLoginname());
+            if (checkUser == null) {
+                return ResultBean.error("用户不存在！");
+            }
+            if (!checkUser.getPassword().equals(updateUserInfo.getPassword())) {
                 return ResultBean.error("旧密码错误！");
             }
         }
         // 更新数据库信息
-        int i = userMapper.updateUser(user);
+        int i = userMapper.updateUser(updateUserInfo);
         if (i != 1) {
-            return ResultBean.error("修改未成功，新密码与旧密码一致！");
+            return ResultBean.ok("信息未修改！");
         }
-        try {
-            // 进行缓存同步，查询该用户信息设置在redis中
-            user = userMapper.findUserByLoginName(user.getLoginname());
-            String jsonUser = JSON.toJSONString(user);
-            jedisUtil.set(token, jsonUser, 30);
-        } catch (Exception e) {
-            e.printStackTrace();
+        // 如果是修改个人信息，则需要同步登陆缓存信息
+        if (loginUserInfo.getLoginname().equals(updateUserInfo.getLoginname())) {
+            try {
+                // 进行缓存同步，查询该用户信息设置在redis中
+                updateUserInfo = userMapper.findUserByLoginName(updateUserInfo.getLoginname());
+                String jsonUser = JSON.toJSONString(updateUserInfo);
+                jedisUtil.set(token, jsonUser, 30);
+            } catch (Exception e) {
+                e.printStackTrace();
+                logger.info("拦截到用户：{} --> 操作：updateUser，操作信息：{} ~~~ 但是同步缓存失败：{} ~~~ 时间：{}", loginUserInfo.getLoginname(), updateUserInfo, e.getMessage(), new Date());
+                return ResultBean.error("未知原因导致个人信息不同步，请重新登陆！");
+            }
         }
-        return ResultBean.ok("修改个人信息成功！");
+        logger.info("拦截到用户：{} --> 操作：updateUser，操作信息：{} ~~~ 时间：{}", loginUserInfo.getLoginname(), updateUserInfo, new Date());
+        return ResultBean.ok("修改信息成功！");
     }
-
 }
