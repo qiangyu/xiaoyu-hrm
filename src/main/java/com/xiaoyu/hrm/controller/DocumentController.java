@@ -4,8 +4,10 @@ import com.xiaoyu.hrm.pojo.Document;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.service.IDocumentService;
+import com.xiaoyu.hrm.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +31,12 @@ public class DocumentController {
 
     @Value("${FILE_PATH}")
     private String FILE_PATH;
+
+    /**
+     * 操作redis
+     */
+    @Autowired
+    private JedisUtil jedisUtil;
 
     /**
      * 根据条件查询文档，条件可有可无
@@ -84,14 +92,44 @@ public class DocumentController {
     }
 
     /**
+     * 文件不存在
+     * @return
+     */
+    @RequestMapping("/error")
+    public ResultBean errorDownload() {
+        return ResultBean.error("文件不存在！");
+    }
+
+    /**
      * 下载文件
      *
+     * @param token    令牌
      * @param fileName 文件名
      * @param response response
      */
     @GetMapping("/download")
-    public void downloadDocument(String fileName,
+    public void downloadDocument(String token,
+                                 String fileName,
+                                 HttpServletRequest request,
                                  HttpServletResponse response) {
+        try {
+            // 如 token 为空，则没登录
+            if (StringUtils.isEmpty(token)) {
+                request.getRequestDispatcher("/user/error").forward(request, response);
+                return;
+            }
+            // token 为key，在redis中查询
+            String jsonUSer = jedisUtil.get(token);
+            // 如果不存在则用户没登录
+            if (StringUtils.isEmpty(jsonUSer)) {
+                // 将请求转发到 /user/error
+                request.getRequestDispatcher("/user/error").forward(request, response);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
         // 如果文件名不为空，则进行下载
         if (fileName != null) {
             String path = FILE_PATH + fileName;
@@ -135,8 +173,13 @@ public class DocumentController {
                         }
                     }
                 }
+            }else {
+                try {
+                    request.getRequestDispatcher("/document/basic/error").forward(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
-
 }
