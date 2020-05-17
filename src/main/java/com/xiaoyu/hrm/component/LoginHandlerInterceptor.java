@@ -67,7 +67,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
                 return false;
             }
             User user = JSON.parseObject(jsonUSer, User.class);
-            // 将用户信息设置到请求域
+            // 将用户信息设置到请求域，先将用户密码设置为null
+            user.setPassword(null);
             request.setAttribute("user", user);
             // 重新设置过期时间 半小时
             String set = jedisUtil.set(token, jsonUSer, 3600);

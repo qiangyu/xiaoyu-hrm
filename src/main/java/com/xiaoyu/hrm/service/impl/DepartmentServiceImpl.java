@@ -34,7 +34,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
     @Override
     public ResultBean findAllDepartment() {
         List<Department> list = departmentMapper.findAllDepartmentByParentId(-1);
-        return ResultBean.ok("查询部门成功！", list);
+        return ResultBean.ok(list);
     }
 
     /**

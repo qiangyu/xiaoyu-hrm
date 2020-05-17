@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
             return ResultBean.error("查询不到员工信息！");
         }
         Long total = employeeMapper.getTotal(employee, positionId, departmentId);
-        return ResultBean.ok("查询员工信息成功！", new ResultPageBean(list, total));
+        return ResultBean.ok(new ResultPageBean(list, total));
     }
 
     /**
@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         if (list == null || list.size() == 0) {
             return ResultBean.error("获取民族失败！");
         }
-        return ResultBean.ok(null, list);
+        return ResultBean.ok(list);
     }
 
     /**
@@ -77,7 +77,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         if (list == null || list.size() == 0) {
             return ResultBean.error("获取政治面貌失败！");
         }
-        return ResultBean.ok(null, list);
+        return ResultBean.ok(list);
     }
 
     /**
@@ -119,7 +119,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         }
         int i = employeeMapper.updateEmployee(employee);
         if (i != 1) {
-            return ResultBean.error("修改员工错误！");
+            return ResultBean.ok("信息未修改！");
         }
         return ResultBean.ok("修改员工信息成功！");
     }

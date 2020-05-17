@@ -127,7 +127,7 @@ public class DocumentServiceImpl implements IDocumentService {
             return ResultBean.error("查询不到文件信息！");
         }
         Long total = documentMapper.getTotal(document);
-        return ResultBean.ok("查询文件成功！", new ResultPageBean(list, total));
+        return ResultBean.ok(new ResultPageBean(list, total));
     }
 
     /**
@@ -146,7 +146,7 @@ public class DocumentServiceImpl implements IDocumentService {
         }
         int i = documentMapper.updateDocument(document);
         if (i != 1) {
-            return ResultBean.error("文件修改失败！");
+            return ResultBean.ok("信息未修改！");
         }
         logger.info("用户：" + document.getUser().getLoginname() + "-->修改文件：" + document.getFileName(), document);
         return ResultBean.ok("文件信息修改成功！");

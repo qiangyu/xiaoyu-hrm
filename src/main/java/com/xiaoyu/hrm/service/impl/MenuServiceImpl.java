@@ -28,7 +28,7 @@ public class MenuServiceImpl implements IMenuService {
     @Override
     public ResultBean getAllMenus() {
         List<Menu> list = menuMapper.getAllMenus();
-        return ResultBean.ok(null, list);
+        return ResultBean.ok(list);
     }
 
 }

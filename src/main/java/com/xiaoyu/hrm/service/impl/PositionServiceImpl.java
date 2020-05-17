@@ -34,7 +34,7 @@ public class PositionServiceImpl implements IPositionService {
          if (list == null || list.size() == 0) {
              return ResultBean.error("查询不到职位信息！");
          }
-         return ResultBean.ok("查询职位成功！", list);
+         return ResultBean.ok(list);
      }
 
     /**
@@ -52,7 +52,7 @@ public class PositionServiceImpl implements IPositionService {
          }
          int i = positionMapper.updatePosition(position);
          if (i != 1) {
-             return ResultBean.error("修改失败，可能是您未修改任何信息！");
+             return ResultBean.ok("信息未修改！");
          }
          return ResultBean.ok("修改职位信息成功！");
      }

@@ -12,8 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -165,8 +163,10 @@ public class UserServiceImpl implements IUserService {
         if (i != 1) {
             return ResultBean.ok("信息未修改！");
         }
-        // 如果是修改个人信息，则需要同步登陆缓存信息
-        if (loginUserInfo.getLoginname().equals(updateUserInfo.getLoginname())) {
+        // 记录日志
+        logger.info("拦截到用户：{} --> 操作：updateUser，操作信息：{} ~~~ 时间：{}", loginUserInfo.getLoginname(), updateUserInfo, new Date());
+        // 如果是修改个人信息，之前想法是进行同步登陆缓存信息，现在直接让用户重新登陆(修改密码重新登陆)
+        if (loginUserInfo.getLoginname().equals(updateUserInfo.getLoginname()) && StringUtils.isEmpty(updateUserInfo.getNewPassword())) {
             try {
                 // 进行缓存同步，查询该用户信息设置在redis中
                 updateUserInfo = userMapper.findUserByLoginName(updateUserInfo.getLoginname());
@@ -175,10 +175,12 @@ public class UserServiceImpl implements IUserService {
             } catch (Exception e) {
                 e.printStackTrace();
                 logger.info("拦截到用户：{} --> 操作：updateUser，操作信息：{} ~~~ 但是同步缓存失败：{} ~~~ 时间：{}", loginUserInfo.getLoginname(), updateUserInfo, e.getMessage(), new Date());
-                return ResultBean.error("未知原因导致个人信息不同步，请重新登陆！");
+                return ResultBean.loginError("未知原因导致个人信息不同步，请重新登陆！");
             }
+        } else {
+            // 表示修改密码，信息过期，重新登陆
+            return ResultBean.loginError("信息过期，请重新登陆！");
         }
-        logger.info("拦截到用户：{} --> 操作：updateUser，操作信息：{} ~~~ 时间：{}", loginUserInfo.getLoginname(), updateUserInfo, new Date());
         return ResultBean.ok("修改信息成功！");
     }
 }

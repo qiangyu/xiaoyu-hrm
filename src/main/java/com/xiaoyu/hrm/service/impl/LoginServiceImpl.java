@@ -53,11 +53,11 @@ public class LoginServiceImpl implements ILoginService {
      * @return
      */
     @Override
-    public ResultBean findUserByLoginNameAndPassword(String loginname, String password) {
-        if (loginname == null || password == null) {
+    public ResultBean findUserByLoginNameAndPassword(String loginName, String password) {
+        if (loginName == null || password == null) {
             return ResultBean.error("用户名或者账号不能为空！");
         }
-        User user = userMapper.findUserByLoginName(loginname);
+        User user = userMapper.findUserByLoginName(loginName);
         if (user == null) {
             return ResultBean.error("账号异常，请联系管理员！");
         }
