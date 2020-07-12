@@ -59,19 +59,19 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 
         try {
             // token 为key，在redis中查询
-            String jsonUser = jedisUtil.get(token);
+            String jsonUSer = jedisUtil.get(token);
             // 如果不存在则用户没登录
-            if (StringUtils.isEmpty(jsonUser)) {
+            if (StringUtils.isEmpty(jsonUSer)) {
                 // 将请求转发到 /user/error
                 request.getRequestDispatcher("/user/error").forward(request, response);
                 return false;
             }
-            User user = JSON.parseObject(jsonUser, User.class);
+            User user = JSON.parseObject(jsonUSer, User.class);
             // 将用户信息设置到请求域，先将用户密码设置为null
             user.setPassword(null);
             request.setAttribute("user", user);
             // 重新设置过期时间 半小时
-            String set = jedisUtil.set(token, jsonUser, 3600);
+            String set = jedisUtil.set(token, jsonUSer, 3600);
             if (StringUtils.isEmpty(set)) {
                 // 将请求转发到 /user/error
                 request.getRequestDispatcher("/user/error").forward(request, response);

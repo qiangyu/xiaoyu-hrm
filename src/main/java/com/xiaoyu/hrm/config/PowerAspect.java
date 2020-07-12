@@ -63,7 +63,7 @@ public class PowerAspect {
             // 记录一下日志
             logger.info("拦截到用户：{} --> 操作：{}，操作信息：{} ~~~ 时间：{}", user.getLoginname(), pjp.getSignature().getName(), loggerInfo, new Date());
             // 有权限验证完毕，放行
-            return pjp.proceed(args);
+            return pjp.proceed();
         } catch (Throwable e) {
             e.printStackTrace();
             logger.error("操作：{} ~~~ 出现异常：{} ~~~ 时间：{}", pjp.getSignature(), e.getMessage(), new Date());

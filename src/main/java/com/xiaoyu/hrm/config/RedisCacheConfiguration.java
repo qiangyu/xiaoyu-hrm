@@ -1,5 +1,7 @@
 package com.xiaoyu.hrm.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -17,6 +19,7 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 @EnableCaching
 public class RedisCacheConfiguration extends CachingConfigurerSupport {
+    Logger logger = LoggerFactory.getLogger(RedisCacheConfiguration.class);
 
     @Value("${spring.redis.host}")
     private String host;
