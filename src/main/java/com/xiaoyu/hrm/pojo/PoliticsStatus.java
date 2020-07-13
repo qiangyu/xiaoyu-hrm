@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author xiaoyu
  * @date 2020/3/24 17:15
  */
-public class Politicsstatus implements Serializable {
+public class PoliticsStatus implements Serializable {
 
     private Integer id;
     private String name;

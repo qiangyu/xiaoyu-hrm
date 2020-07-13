@@ -11,7 +11,7 @@ import java.util.Date;
  * @author xiaoyu
  * @date 2020/3/18 16:59
  */
-public class User implements Serializable {
+public class User implements Serializable, IPojo {
 
     private Integer id;
     private String username;

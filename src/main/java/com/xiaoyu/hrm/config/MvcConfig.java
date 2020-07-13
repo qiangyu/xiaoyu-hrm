@@ -1,6 +1,5 @@
 package com.xiaoyu.hrm.config;
 
-import com.xiaoyu.hrm.component.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

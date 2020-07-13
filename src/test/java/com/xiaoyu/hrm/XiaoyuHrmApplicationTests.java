@@ -39,11 +39,13 @@ class XiaoyuHrmApplicationTests {
      */
     @Test
     void testRedis() {
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        User user = new User();
-        user.setUsername("xiaoyu");
-        String s = JSON.toJSONString(user);
-        jedisUtil.set("xiaoyu:" +uuid, s);
+//        String uuid = UUID.randomUUID().toString().replace("-", "");
+//        User user = new User();
+//        user.setUsername("xiaoyu");
+//        String s = JSON.toJSONString(user);
+//        jedisUtil.set("xiaoyu:" +uuid, s);
+        String s = jedisUtil.get("user_inf:b507315c-5cba-4eab-bf19-5f5aea853030");
+        System.out.println(s);
     }
 
     /**

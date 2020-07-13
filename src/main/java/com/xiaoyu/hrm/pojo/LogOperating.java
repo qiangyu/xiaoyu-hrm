@@ -8,20 +8,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 记录登陆日志的pojo
+ * 记录操作日志的pojo
  * 
  * @author xiaoyu
- * @date 2020/7/12 17:44
+ * @date 2020/7/13 9:53
  */
 @Component
 @Scope("prototype")
-public class LogLogin extends Log implements Serializable  {
+public class LogOperating extends Log implements Serializable {
 
     private Integer id;
     private String user;
     private String operating;
+    private String operatingData;
     private String ip;
-
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Shanghai")
     private Date date;
 
@@ -49,6 +49,14 @@ public class LogLogin extends Log implements Serializable  {
         this.operating = operating;
     }
 
+    public String getOperatingData() {
+        return operatingData;
+    }
+
+    public void setOperatingData(String operatingData) {
+        this.operatingData = operatingData;
+    }
+
     public String getIp() {
         return ip;
     }
@@ -67,10 +75,11 @@ public class LogLogin extends Log implements Serializable  {
 
     @Override
     public String toString() {
-        return "LogLogin{" +
+        return "LogOperating{" +
                 "id=" + id +
                 ", user='" + user + '\'' +
                 ", operating='" + operating + '\'' +
+                ", operatingData='" + operatingData + '\'' +
                 ", ip='" + ip + '\'' +
                 ", date=" + date +
                 '}';

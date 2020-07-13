@@ -36,7 +36,7 @@ public interface IEmployeeService {
      *
      * @return 返回政治面貌
      */
-    ResultBean getAllPoliticsstatus();
+    ResultBean getAllPoliticsStatus();
 
     /**
      * 添加员工

@@ -1,13 +1,17 @@
 package com.xiaoyu.hrm.pojo;
 
 
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
 /**
  * 业务处理完返回处理结果到前端的工具类
  *
  * @author xiaoyu
  * @date 2020/3/18 18:21
  */
-public class ResultBean {
+public class ResultBean implements Serializable {
     private Integer status;
     private String msg;
     private Object obj;

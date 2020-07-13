@@ -3,7 +3,7 @@ package com.xiaoyu.hrm.mapper;
 
 import com.xiaoyu.hrm.pojo.Employee;
 import com.xiaoyu.hrm.pojo.Nation;
-import com.xiaoyu.hrm.pojo.Politicsstatus;
+import com.xiaoyu.hrm.pojo.PoliticsStatus;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -63,8 +63,8 @@ public interface IEmployeeMapper {
      * 获取政治面貌
      * @return 返回政治面貌信息
      */
-    @Select("select * from politicsstatus ")
-    List<Politicsstatus> getAllPoliticsstatus();
+    @Select("select * from politics_status ")
+    List<PoliticsStatus> getAllPoliticsStatus();
 
     /**
      * 添加员工

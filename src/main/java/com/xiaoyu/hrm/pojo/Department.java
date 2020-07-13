@@ -10,7 +10,7 @@ import java.util.List;
  * @author xiaoyu
  * @date 2020/3/22 10:35
  */
-public class Department implements Serializable {
+public class Department implements Serializable, IPojo {
 
     private Integer id;
     private String name;

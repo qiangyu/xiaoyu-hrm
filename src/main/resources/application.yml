@@ -36,6 +36,8 @@ logging:
 
 ---
 
+
+
 # 生产环境
 spring:
   datasource:
@@ -46,7 +48,7 @@ spring:
     # useAffectedRows=true ：参数设为 true，表示操作数据库时返回的为影响的行数，否则mybatis返回的是匹配的行数
     url: jdbc:mysql://localhost/hrm_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useAffectedRows=true
   redis:
-    host: localhost
+    host: 47.106.99.53
     port: 6379
     password: xiaoyu
     timeout: 3000
@@ -62,17 +64,24 @@ spring:
 server:
   port: 8081
 
-# 配置 开启驼峰命名的方法
+# 配置
 mybatis:
+  # config-location 与 configuration 不同同时配置，负责mybatis不知道以哪个为准
   config-location: classpath:mybatis/mybatis-config.xml
+  # spring boot集成mybatis的方式打印sql
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启驼峰命名的方法
+#    map-underscore-to-camel-case: true
 
 # 存储在redis中的用户信息 key 前缀
 XIAOYU_USER: user_inf
 # 文件上传路径
 FILE_PATH: /home/hrm/uploads/
 
-
 # 指定日志的路径
 logging:
   file:
     path: /home/hrm/logs
+  level:
+    com.xiaoyu.hrm.mapper: debug

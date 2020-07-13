@@ -1,6 +1,6 @@
 package com.xiaoyu.hrm.utils;
 
-import com.xiaoyu.hrm.config.PowerAspect;
+import com.xiaoyu.hrm.component.PowerAspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

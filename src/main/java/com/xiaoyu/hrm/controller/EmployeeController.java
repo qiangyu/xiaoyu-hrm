@@ -52,9 +52,9 @@ public class EmployeeController {
      * 获取政治面貌
      * @return 返回政治面貌
      */
-    @GetMapping("/politicsstatus")
-    public ResultBean getAllPoliticsstatus() {
-        return employeeService.getAllPoliticsstatus();
+    @GetMapping("/politicsStatus")
+    public ResultBean getAllPoliticsStatus() {
+        return employeeService.getAllPoliticsStatus();
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.xiaoyu.hrm.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.xiaoyu.hrm.config.PowerAspect;
+import com.xiaoyu.hrm.component.PowerAspect;
 import com.xiaoyu.hrm.mapper.IUserMapper;
 import com.xiaoyu.hrm.pojo.ResultBean;
 import com.xiaoyu.hrm.pojo.ResultPageBean;
@@ -69,7 +69,7 @@ public class UserServiceImpl implements IUserService {
      * @return 返回注册结果
      */
     @Override
-    public ResultBean addUser(User user) {
+    public ResultBean insertUser(User user) {
         if (!StringUtils.isEmpty(user.getId())) {
             return ResultBean.error("添加用户异常！");
         }

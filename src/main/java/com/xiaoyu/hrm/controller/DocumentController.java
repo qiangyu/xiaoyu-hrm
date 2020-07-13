@@ -59,7 +59,7 @@ public class DocumentController {
      * @return 返回操作结果
      */
     @PostMapping("/")
-    public ResultBean addDocument(HttpServletRequest request,
+    public ResultBean otherInsertDocument(HttpServletRequest request,
                                   Document document,
                                   @RequestParam("file") MultipartFile uploadFile) {
         User user = (User) request.getAttribute("user");
@@ -108,7 +108,7 @@ public class DocumentController {
      * @param response response
      */
     @GetMapping("/download")
-    public void downloadDocument(String token,
+    public void otherDownloadDocument(String token,
                                  String fileName,
                                  HttpServletRequest request,
                                  HttpServletResponse response) {

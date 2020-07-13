@@ -27,7 +27,7 @@ public interface IUserService {
      * @param user 用户信息
      * @return 返回注册结果
      */
-    ResultBean addUser(User user);
+    ResultBean insertUser(User user);
 
     /**
      * 根据用户 id 删除用户

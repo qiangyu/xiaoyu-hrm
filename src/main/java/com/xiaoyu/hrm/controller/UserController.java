@@ -31,7 +31,7 @@ public class UserController {
      * @return 返回用户信息
      */
     @GetMapping("/basic")
-    public ResultBean getAllUser(@RequestParam(defaultValue = "1") Integer page,
+    public ResultBean findAllUser(@RequestParam(defaultValue = "1") Integer page,
                                  @RequestParam(defaultValue = "10") Integer size,
                                  User user) {
         return userService.findUserByPage(page, size, user);
@@ -54,8 +54,8 @@ public class UserController {
      * @return 返回注册结果
      */
     @PostMapping("/basic")
-    public ResultBean powerAddUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public ResultBean powerInsertUser(@RequestBody User user) {
+        return userService.insertUser(user);
     }
 
     /**
@@ -74,7 +74,7 @@ public class UserController {
      * @return 返回修改结果
      */
     @PutMapping("/basic")
-    public ResultBean updateUser(@RequestBody User updateUserInfo, HttpServletRequest request) {
+    public ResultBean otherUpdateUser(@RequestBody User updateUserInfo, HttpServletRequest request) {
         // 从请求头获取 token
         String token = request.getHeader("token");
         User loginUserInfo = (User) request.getAttribute("user");

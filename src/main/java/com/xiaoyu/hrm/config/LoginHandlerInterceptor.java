@@ -1,4 +1,4 @@
-package com.xiaoyu.hrm.component;
+package com.xiaoyu.hrm.config;
 
 import com.alibaba.fastjson.JSON;
 import com.xiaoyu.hrm.pojo.User;

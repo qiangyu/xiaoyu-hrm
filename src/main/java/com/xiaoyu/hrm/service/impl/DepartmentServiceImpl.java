@@ -25,7 +25,6 @@ public class DepartmentServiceImpl implements IDepartmentService {
     @Autowired
     private IDepartmentMapper departmentMapper;
 
-    private final static Logger logger = LoggerFactory.getLogger(DepartmentServiceImpl.class);
 
     /**
      * 根据父id查询所有部门
@@ -75,7 +74,6 @@ public class DepartmentServiceImpl implements IDepartmentService {
         }
         // 将新增节点的父节点的 isParent 字段设置为true
         departmentMapper.updateParentById(department.getParentId());
-        logger.info("部门：{} --> 添加成功：{}", department.getName(), department);
         return ResultBean.ok("添加部门成功！", department);
     }
 
@@ -94,7 +92,6 @@ public class DepartmentServiceImpl implements IDepartmentService {
         if (i != 1) {
             return ResultBean.error("删除异常！");
         }
-        logger.info("部门：{} --> 删除成功：{}", department.getName(), department);
         return ResultBean.ok("删除成功！");
     }
 }

@@ -72,8 +72,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
      * @return 返回政治面貌
      */
     @Override
-    public ResultBean getAllPoliticsstatus() {
-        List<Politicsstatus> list = employeeMapper.getAllPoliticsstatus();
+    public ResultBean getAllPoliticsStatus() {
+        List<PoliticsStatus> list = employeeMapper.getAllPoliticsStatus();
         if (list == null || list.size() == 0) {
             return ResultBean.error("获取政治面貌失败！");
         }
