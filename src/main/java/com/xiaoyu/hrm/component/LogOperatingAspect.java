@@ -1,5 +1,6 @@
 package com.xiaoyu.hrm.component;
 
+import com.alibaba.fastjson.JSON;
 import com.xiaoyu.hrm.mapper.ILogMapper;
 import com.xiaoyu.hrm.pojo.IPojo;
 import com.xiaoyu.hrm.pojo.LogOperating;
@@ -99,7 +100,7 @@ public class LogOperatingAspect {
                 for (Object arg : args) {
                     // 如果参数是：用户信息、部门信息、职位信息、员工信息、文件信息，则记录日志
                     if (arg instanceof IPojo) {
-                        logOperating.setOperatingData(arg.toString());
+                        logOperating.setOperatingData(JSON.toJSONString(arg));
                         break;
                     }
                 }

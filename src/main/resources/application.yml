@@ -13,7 +13,7 @@ spring:
     timeout: 3000
   # 指定生产环境
   profiles:
-    active: prod
+#    active: prod
 server:
   port: 8081
 # 配置 开启驼峰命名的方法
@@ -33,10 +33,10 @@ FILE_PATH: C:/Users/Yuqiang/IdeaProjects/xiaoyu-hrm/uploads/
 logging:
   file:
     path: logs
+#  level:
+#    com.xiaoyu.hrm.mapper: debug
 
 ---
-
-
 
 # 生产环境
 spring:
@@ -48,7 +48,7 @@ spring:
     # useAffectedRows=true ：参数设为 true，表示操作数据库时返回的为影响的行数，否则mybatis返回的是匹配的行数
     url: jdbc:mysql://localhost/hrm_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useAffectedRows=true
   redis:
-    host: 47.106.99.53
+    host: localhost
     port: 6379
     password: xiaoyu
     timeout: 3000
@@ -83,5 +83,4 @@ FILE_PATH: /home/hrm/uploads/
 logging:
   file:
     path: /home/hrm/logs
-  level:
-    com.xiaoyu.hrm.mapper: debug
+

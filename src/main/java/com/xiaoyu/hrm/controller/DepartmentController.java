@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/3/22 10:34
  */
 @RestController
-@RequestMapping("/department/basic")
+@RequestMapping("/hrm/department/basic")
 public class DepartmentController {
 
     @Autowired

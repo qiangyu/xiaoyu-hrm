@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/3/19 16:04
  */
 @RestController
-@RequestMapping("/log")
+@RequestMapping("/hrm/log")
 public class LogController {
 
     @Autowired

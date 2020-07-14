@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2020/3/23 15:30
  */
 @RestController
-@RequestMapping("/position/basic")
+@RequestMapping("/hrm/position/basic")
 public class PositionController {
 
     @Autowired

@@ -18,7 +18,7 @@ import java.io.IOException;
  * @date 2020/3/17 23:17
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/hrm/user")
 public class LoginController {
 
     /**

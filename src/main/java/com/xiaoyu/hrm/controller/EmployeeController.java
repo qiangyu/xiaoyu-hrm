@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2020/3/24 13:14
  */
 @RestController
-@RequestMapping("/employee/basic")
+@RequestMapping("/hrm/employee/basic")
 public class EmployeeController {
 
     @Autowired
