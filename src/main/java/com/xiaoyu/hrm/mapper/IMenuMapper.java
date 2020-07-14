@@ -14,8 +14,9 @@ public interface IMenuMapper {
 
     /**
      * 获取所有菜单栏信息
+     * @param isPower 是否有权限：1（true，有权限）、0（false，无权限）
      * @return
      */
-    List<Menu> getAllMenus();
+    List<Menu> getAllMenus(boolean isPower);
 
 }

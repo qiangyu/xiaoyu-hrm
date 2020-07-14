@@ -80,6 +80,10 @@
         m1.`id` = m2.`parentId`
         AND m2.`id` = m3.`parentId`
         AND m3.`enabled` = TRUE
+        <if test="is_power == false">
+            AND m2.`is_power` = FALSE
+            AND m3.`is_power` = FALSE
+        </if>
     ORDER BY
         m1.`id`,
         m2.`id`,

@@ -30,7 +30,7 @@ public class LogController {
      * @return 返回 登陆 日志信息
      */
     @GetMapping("/login")
-    public ResultBean findAllLogLogin(@RequestParam(defaultValue = "1") Integer page,
+    public ResultBean powerFindAllLogLogin(@RequestParam(defaultValue = "1") Integer page,
                                  @RequestParam(defaultValue = "10") Integer size,
                                  LogLogin log) {
         return logService.findLogByPage(page, size, log);
@@ -46,7 +46,7 @@ public class LogController {
      * @return 返回 操作 日志信息
      */
     @GetMapping("/operating")
-    public ResultBean findAllLogOperating(@RequestParam(defaultValue = "1") Integer page,
+    public ResultBean powerFindAllLogOperating(@RequestParam(defaultValue = "1") Integer page,
                                  @RequestParam(defaultValue = "10") Integer size,
                                  LogOperating log) {
         return logService.findLogByPage(page, size, log);

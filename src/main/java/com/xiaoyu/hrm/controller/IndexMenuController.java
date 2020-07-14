@@ -1,10 +1,13 @@
 package com.xiaoyu.hrm.controller;
 
 import com.xiaoyu.hrm.pojo.ResultBean;
+import com.xiaoyu.hrm.pojo.User;
 import com.xiaoyu.hrm.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -23,8 +26,9 @@ public class IndexMenuController {
      * @return
      */
     @GetMapping("/system/config/menu")
-    public ResultBean getMenu() {
-        return menuService.getAllMenus();
+    public ResultBean getMenu(HttpServletRequest request) {
+        User user = (User) request.getAttribute("user");
+        return menuService.getAllMenus(user);
     }
 
 }
