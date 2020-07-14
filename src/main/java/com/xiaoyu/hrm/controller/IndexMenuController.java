@@ -22,7 +22,7 @@ public class IndexMenuController {
      * 获取菜单栏所有信息
      * @return
      */
-    @GetMapping("/hrm/system/config/menu")
+    @GetMapping("/system/config/menu")
     public ResultBean getMenu() {
         return menuService.getAllMenus();
     }

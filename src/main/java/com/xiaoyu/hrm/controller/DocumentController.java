@@ -23,7 +23,7 @@ import java.net.URLEncoder;
  * @date 2020/3/26 10:39
  */
 @RestController
-@RequestMapping("/hrm/document/basic")
+@RequestMapping("/document/basic")
 public class DocumentController {
 
     @Autowired

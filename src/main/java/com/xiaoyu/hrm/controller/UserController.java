@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2020/3/19 16:04
  */
 @RestController
-@RequestMapping("/hrm/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
