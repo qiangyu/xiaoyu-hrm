@@ -23,13 +23,21 @@ public class PowerAspect {
      * 配置切入点，切入以power开头的方法
      */
     @Pointcut("execution(public * com.xiaoyu.hrm.controller.*.power*(..))")
-    private void powerPointcut() {
-    }
+    private void powerPointcut() {}
 
     /**
+     * 切入 标有 @PowerAnnotation 注解的方法或者类
+     */
+    @Pointcut("@annotation(com.xiaoyu.hrm.annotation.PowerAnnotation)")
+    private void powerAnnotationPointcut() {}
+
+    @Pointcut("powerPointcut() || powerAnnotationPointcut()")
+    private void power() {}
+
+  /**
      * 环绕通知
      */
-    @Around(value = "powerPointcut()")
+    @Around(value = "power()")
     public Object around(ProceedingJoinPoint pjp) {
         try {
             // 获取 request 域

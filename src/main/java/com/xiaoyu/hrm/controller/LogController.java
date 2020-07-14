@@ -1,5 +1,6 @@
 package com.xiaoyu.hrm.controller;
 
+import com.xiaoyu.hrm.annotation.PowerAnnotation;
 import com.xiaoyu.hrm.pojo.LogLogin;
 import com.xiaoyu.hrm.pojo.LogOperating;
 import com.xiaoyu.hrm.pojo.ResultBean;
@@ -30,7 +31,8 @@ public class LogController {
      * @return 返回 登陆 日志信息
      */
     @GetMapping("/login")
-    public ResultBean powerFindAllLogLogin(@RequestParam(defaultValue = "1") Integer page,
+    @PowerAnnotation
+    public ResultBean findAllLogLogin(@RequestParam(defaultValue = "1") Integer page,
                                  @RequestParam(defaultValue = "10") Integer size,
                                  LogLogin log) {
         return logService.findLogByPage(page, size, log);
@@ -46,7 +48,8 @@ public class LogController {
      * @return 返回 操作 日志信息
      */
     @GetMapping("/operating")
-    public ResultBean powerFindAllLogOperating(@RequestParam(defaultValue = "1") Integer page,
+    @PowerAnnotation
+    public ResultBean findAllLogOperating(@RequestParam(defaultValue = "1") Integer page,
                                  @RequestParam(defaultValue = "10") Integer size,
                                  LogOperating log) {
         return logService.findLogByPage(page, size, log);
