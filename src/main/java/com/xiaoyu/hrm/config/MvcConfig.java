@@ -24,8 +24,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // 浏览器发送 /index.html 请求跳转到到login页面等
-//        registry.addViewController("/").setViewName("login");
-//        registry.addViewController("/index.html").setViewName("login");
+       // registry.addViewController("/").setViewName("index");
+       // registry.addViewController("/index.html").setViewName("index");
     }
 
     /**
@@ -45,7 +45,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginHandlerInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/", "/index.html", "/user/doLogin", "/user/error", "/user/logout", "/document/basic/download/", "/document/basic/error");
+                .excludePathPatterns("/", "/index.html", "/static/**", "/user/doLogin", "/user/error", "/user/logout", "/document/basic/download/", "/document/basic/error");
     }
 
     /**
@@ -54,7 +54,7 @@ public class MvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/**")
-//                .addResourceLocations("classpath:/static/");
+       // registry.addResourceHandler("/**")
+       //         .addResourceLocations("classpath:/static/");
     }
 }
