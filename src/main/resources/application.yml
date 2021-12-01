@@ -13,7 +13,7 @@ spring:
     timeout: 3000
   # 指定生产环境
   profiles:
-#    active: prod
+    active: prod
 server:
   port: 8080
 # 配置 开启驼峰命名的方法
@@ -33,8 +33,8 @@ FILE_PATH: C:/Users/Yuqiang/IdeaProjects/xiaoyu-hrm/uploads/
 logging:
   file:
     path: logs
-#  level:
-#    com.xiaoyu.hrm.mapper: debug
+  level:
+    com.xiaoyu.hrm.mapper: debug
 
 ---
 
@@ -83,4 +83,6 @@ FILE_PATH: /home/hrm/uploads/
 logging:
   file:
     path: /home/hrm/logs
+  level:
+    com.xiaoyu.hrm.mapper: debug
 

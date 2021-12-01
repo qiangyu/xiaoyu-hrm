@@ -23,13 +23,17 @@
 
     <!--可根据条件进行查询-->
     <select id="findAllDocument" parameterType="com.xiaoyu.hrm.pojo.Document" resultMap="DocumentMap">
-        select d.*, u.id as uid, u.loginname from document_inf d, user_inf u
+        select
+            d.*, u.id as uid, u.loginname
+        from
+            document_inf d, user_inf u
         <where>
             <if test="document.title != null">
                 AND title like concat('%', #{document.title}, '%')
             </if>
             AND d.user_id = u.id
         </where>
+        ORDER BY d.create_date DESC
         <if test="page != null and size != null">
             limit #{page}, #{size}
         </if>
