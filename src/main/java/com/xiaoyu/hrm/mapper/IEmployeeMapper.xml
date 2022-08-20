@@ -64,6 +64,7 @@
         <if test="positionId != null ">
             AND e.job_id = #{positionId}
         </if>
+        ORDER BY e.create_date DESC
         <if test="page !=null and size!=null">
             limit #{page},#{size}
         </if>

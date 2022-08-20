@@ -26,6 +26,7 @@
                 </if>
             </if>
         </where>
+        ORDER BY createdate DESC
         <if test="page != null and size != null">
             limit #{page}, #{size}
         </if>

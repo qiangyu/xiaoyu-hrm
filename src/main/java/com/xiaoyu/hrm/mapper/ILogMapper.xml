@@ -28,6 +28,7 @@
                 </if>
             </if>
         </where>
+        ORDER BY `date` DESC
         <if test="page != null and size != null">
             limit #{page}, #{size}
         </if>
@@ -62,6 +63,7 @@
                 </if>
             </if>
         </where>
+        ORDER BY `date` DESC
         <if test="page != null and size != null">
             limit #{page}, #{size}
         </if>

@@ -10,6 +10,7 @@
                 AND name like concat('%', #{name}, '%')
             </if>
         </where>
+        ORDER BY create_date DESC
     </select>
     
     <!--更新职位信息-->
