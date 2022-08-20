@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 26/12/2021 15:55:23
+ Date: 20/08/2022 19:09:35
 */
 
 SET NAMES utf8mb4;
@@ -30,19 +30,18 @@ CREATE TABLE `dept_inf`  (
   `enabled` tinyint(1) NULL DEFAULT 1,
   `isParent` tinyint(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 144 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 149 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of dept_inf
 -- ----------------------------
 INSERT INTO `dept_inf` VALUES (1, '总公办', '这是总公办噢', -1, '.1', 1, 1);
 INSERT INTO `dept_inf` VALUES (2, '技术部', '这是技术部噢', 1, '.1.4', 1, 1);
-INSERT INTO `dept_inf` VALUES (3, '运营部', '这是运营部噢', 1, '.1.4', 1, 0);
+INSERT INTO `dept_inf` VALUES (3, '运营部', '这是运营部噢', 1, '.1.4', 1, 1);
 INSERT INTO `dept_inf` VALUES (5, '市场部', '这是市场部噢', 1, '.1.4', 1, 1);
 INSERT INTO `dept_inf` VALUES (6, '教学部', '这是教学部噢', 1, '.1.4', 1, 0);
 INSERT INTO `dept_inf` VALUES (134, '测定', '测试', 1, '.1.134', 1, 0);
-INSERT INTO `dept_inf` VALUES (139, 'd d f', 'ddd', 5, '.1.4.139', 1, 0);
-INSERT INTO `dept_inf` VALUES (143, 'ty', 'ry', 2, '.1.4.143', 1, 0);
+INSERT INTO `dept_inf` VALUES (145, 'test', 'tes1', 2, '.1.4.145', 1, 0);
 
 -- ----------------------------
 -- Table structure for document_inf
@@ -62,7 +61,7 @@ CREATE TABLE `document_inf`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_DOCUMENT_USER`(`user_id`) USING BTREE,
   CONSTRAINT `FK_DOCUMENT_USER` FOREIGN KEY (`user_id`) REFERENCES `user_inf` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 82 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of document_inf
@@ -111,6 +110,23 @@ INSERT INTO `document_inf` VALUES (78, '《面向对象程序设计》大作业'
 INSERT INTO `document_inf` VALUES (79, '计科6班钟乐27', '计科6班钟乐27', '1640219709179_计科6班钟乐27.zip', '/home/xiaoyu/hrm/uploads/', 'application/zip', 5348722, 0, '2021-12-23 08:35:09', 1);
 INSERT INTO `document_inf` VALUES (80, '2021.12.23 《面向对象程序设计》课程设计', '2021.12.23 《面向对象程序设计》课程设计', '1640230186400_《面向对象程序设计》课程设计.docx', '/home/xiaoyu/hrm/uploads/', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 24616, 0, '2021-12-23 11:29:46', 1);
 INSERT INTO `document_inf` VALUES (81, '12', '12', '1640413476294_聚合.txt', '/home/xiaoyu/hrm/uploads/', 'text/plain', 1032, 0, '2021-12-25 14:24:36', 1);
+INSERT INTO `document_inf` VALUES (82, '789', '98', '1640505761045_聚合.txt', '/home/xiaoyu/hrm/uploads/', 'text/plain', 1032, 0, '2021-12-26 16:02:41', 1);
+INSERT INTO `document_inf` VALUES (83, '2022 2 25 HTML', '2022 2 25 HTML', '1645761726510_xiaoyu_2_25.rar', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 124140, 0, '2022-02-25 12:02:07', 1);
+INSERT INTO `document_inf` VALUES (84, 'system.py', '学生管理系统 初步 ', '1646884444146_system.py', '/home/xiaoyu/hrm/uploads/', 'text/plain', 1544, 0, '2022-03-10 11:54:04', 1);
+INSERT INTO `document_inf` VALUES (85, '2022-3-11 HTML', '2022-3-11 HTML', '1646968132327_33.rar', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 165693, 0, '2022-03-11 11:08:52', 1);
+INSERT INTO `document_inf` VALUES (86, '123', '123', '1654743700553_草稿.py', '/home/xiaoyu/hrm/uploads/', 'text/plain', 5749, 0, '2022-06-09 11:01:41', 1);
+INSERT INTO `document_inf` VALUES (87, '1', '1', '1654744952494_可视化.py', '/home/xiaoyu/hrm/uploads/', 'text/plain', 904, 0, '2022-06-09 11:22:32', 1);
+INSERT INTO `document_inf` VALUES (88, 'wada', 'adad', '1654747617774_untitled.rar', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 1218, 0, '2022-06-09 12:06:58', 1);
+INSERT INTO `document_inf` VALUES (89, 'rp', 'monday', '1655697250271_26张嘉城注册登陆页.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 53646, 0, '2022-06-20 11:54:10', 1);
+INSERT INTO `document_inf` VALUES (90, 'dsad', 'sfdad', '1655697793001_201908324627钟乐.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 67864, 0, '2022-06-20 12:03:13', 1);
+INSERT INTO `document_inf` VALUES (91, '33 app', '33 app', '1655697930042_app.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 63242, 0, '2022-06-20 12:05:30', 1);
+INSERT INTO `document_inf` VALUES (92, '2222', '2222', '1655711413960_201908324627钟乐.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 98284, 0, '2022-06-20 15:50:14', 1);
+INSERT INTO `document_inf` VALUES (94, '33 原型首页', '33 原型首页', '1655711716914_app.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 96858, 0, '2022-06-20 15:55:17', 1);
+INSERT INTO `document_inf` VALUES (95, 'day2-1', 'dddd', '1655783676538_201908324627钟乐.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 124510, 0, '2022-06-21 11:54:37', 1);
+INSERT INTO `document_inf` VALUES (96, '22-6-21 33 原型', '22-6-21 33 原型', '1655784092190_app.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 165593, 0, '2022-06-21 12:01:32', 1);
+INSERT INTO `document_inf` VALUES (97, 'web实训大作业', '2022-6-23\r\n包含圆形图及标注图', '1655970967880_pinxixi.zip', '/home/xiaoyu/hrm/uploads/', 'application/x-zip-compressed', 4165335, 0, '2022-06-23 15:56:08', 1);
+INSERT INTO `document_inf` VALUES (98, 'pxixi效果图', '2022-6-23', '1655995184023_pinxixi.rp', '/home/xiaoyu/hrm/uploads/', 'application/octet-stream', 638257, 0, '2022-06-23 22:39:44', 1);
+INSERT INTO `document_inf` VALUES (99, '1321', '12312', '1655996231341_pinxixi.zip', '/home/xiaoyu/hrm/uploads/', 'application/x-zip-compressed', 928286, 0, '2022-06-23 22:57:11', 1);
 
 -- ----------------------------
 -- Table structure for employee_inf
@@ -147,12 +163,8 @@ CREATE TABLE `employee_inf`  (
 -- ----------------------------
 -- Records of employee_inf
 -- ----------------------------
-INSERT INTO `employee_inf` VALUES (3, 1, 2, 'bb', '432801197711251038', '广州', '510000', '020-99999999', '13907351532', '36750064', '36750064@qq.com', 1, '中共党员', '2021-12-24 00:00:00', '汉族', '本科', '计算机', '爬山', '无', '2016-07-14 00:00:00');
 INSERT INTO `employee_inf` VALUES (1000, 2, 3, '123', '123123244565146', '1242541', '123431', '123531412254', '13543535223', '13141241', '211123@qq.com', 1, '共青团员', '2020-03-05 00:00:00', '汉族', '硕士', '123', '12312', '123123', '2020-03-25 00:00:00');
 INSERT INTO `employee_inf` VALUES (1001, 3, 3, '123', '123123244565146', '1242541', '123431', '123531412254', '13543535223', '13141241', '211123@qq.com', 1, '共青团员', '2020-03-05 00:00:00', '汉族', '硕士', '123', '12312', '123123', '2020-03-25 00:00:00');
-INSERT INTO `employee_inf` VALUES (1002, 2, 3, '123', '123123244565146', '1242541', '123431', '123531412254', '13543535223', '13141241', '211123@qq.com', 1, '共青团员', '2020-03-05 00:00:00', '汉族', '硕士', '123', '12312', '123123', '2020-03-25 00:00:00');
-INSERT INTO `employee_inf` VALUES (1003, 6, 3, '123', '123123244565146', '1242541', '123431', '123531412254', '13543535223', '13141241', '211123@qq.com', 1, '共青团员', '2020-03-05 00:00:00', '汉族', '硕士', '123', '12312', '123123', '2020-03-25 00:00:00');
-INSERT INTO `employee_inf` VALUES (1004, 134, 1, '四个字的', '42312432131412', '2131423534', '12312421', '241412411', '13213432221', '123114', '123321@qq.com', 0, '中共党员', '2020-03-02 00:00:00', '汉族', '高中', '信息管理与信息系统', '123', '2313', '2020-03-25 00:00:00');
 
 -- ----------------------------
 -- Table structure for job_inf
@@ -162,25 +174,17 @@ CREATE TABLE `job_inf`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `remark` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `createDate` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP,
   `enabled` tinyint(1) NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of job_inf
 -- ----------------------------
-INSERT INTO `job_inf` VALUES (1, '职员', '职员', '2018-01-11 00:00:00', 1);
-INSERT INTO `job_inf` VALUES (2, 'Java开发工程师', 'Java开发工程师', '2018-01-11 00:00:00', 1);
-INSERT INTO `job_inf` VALUES (3, 'Java中级开发工程师', 'Java中级开发工程师', '2018-01-11 00:00:00', 1);
-INSERT INTO `job_inf` VALUES (4, 'Java高级开发工程师', 'Java高级开发工程师', '2018-01-11 00:00:00', 1);
-INSERT INTO `job_inf` VALUES (6, '架构师', '架构师', '2018-01-11 00:00:00', 1);
-INSERT INTO `job_inf` VALUES (7, '主管', '主管', '2018-01-11 00:00:00', 1);
-INSERT INTO `job_inf` VALUES (8, '经理', '经理', '2018-01-11 00:00:00', 1);
-INSERT INTO `job_inf` VALUES (30, '电工', '电工', '2020-08-25 12:21:39', 1);
-INSERT INTO `job_inf` VALUES (31, '无敌开发岗', '给钱无敌多', '2020-11-03 17:54:43', 1);
-INSERT INTO `job_inf` VALUES (32, 'wqw', 'qwqw', '2021-04-17 16:43:54', 1);
-INSERT INTO `job_inf` VALUES (33, '1212', '211212', '2021-04-17 16:44:20', 1);
+INSERT INTO `job_inf` VALUES (2, 'g', 'g', '2018-01-11 00:00:00', 1);
+INSERT INTO `job_inf` VALUES (3, 'S', 'Java中级开发工程师', '2018-01-11 00:00:00', 1);
+INSERT INTO `job_inf` VALUES (41, 'yuanyuan', '1111', '2022-05-31 13:19:53', 1);
 
 -- ----------------------------
 -- Table structure for log_login
@@ -193,7 +197,7 @@ CREATE TABLE `log_login`  (
   `ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登陆ip',
   `date` datetime(0) NOT NULL COMMENT '登陆时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 271 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 415 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of log_login
@@ -356,6 +360,150 @@ INSERT INTO `log_login` VALUES (267, 'admin', 'logout', '183.6.40.242', '2021-12
 INSERT INTO `log_login` VALUES (268, 'admin', 'login', '183.6.40.242', '2021-12-26 00:11:59');
 INSERT INTO `log_login` VALUES (269, 'admin', 'login', '116.199.50.213', '2021-12-26 13:49:19');
 INSERT INTO `log_login` VALUES (270, 'admin', 'login', '127.0.0.1', '2021-12-26 15:41:42');
+INSERT INTO `log_login` VALUES (271, 'admin', 'logout', '127.0.0.1', '2021-12-26 15:58:52');
+INSERT INTO `log_login` VALUES (272, 'admin', 'login', '127.0.0.1', '2021-12-26 15:58:53');
+INSERT INTO `log_login` VALUES (273, 'admin', 'login', '223.104.67.90', '2021-12-26 17:09:02');
+INSERT INTO `log_login` VALUES (274, 'admin', 'login', '116.23.163.80', '2021-12-27 11:44:54');
+INSERT INTO `log_login` VALUES (275, 'admin', 'login', '183.36.181.106', '2021-12-27 13:17:49');
+INSERT INTO `log_login` VALUES (276, 'admin', 'login', '183.36.181.106', '2021-12-27 13:18:05');
+INSERT INTO `log_login` VALUES (277, 'admin', 'login', '120.238.29.51', '2021-12-27 14:23:03');
+INSERT INTO `log_login` VALUES (278, 'admin', 'login', '183.6.118.224', '2021-12-27 14:52:12');
+INSERT INTO `log_login` VALUES (279, 'admin', 'logout', '183.6.118.224', '2021-12-27 14:52:18');
+INSERT INTO `log_login` VALUES (280, 'admin', 'login', '183.6.118.224', '2021-12-27 14:52:21');
+INSERT INTO `log_login` VALUES (281, 'admin', 'login', '183.6.95.70', '2021-12-27 15:53:41');
+INSERT INTO `log_login` VALUES (282, 'admin', 'logout', '183.6.95.70', '2021-12-27 15:53:47');
+INSERT INTO `log_login` VALUES (283, 'admin', 'login', '183.6.95.70', '2021-12-27 15:54:33');
+INSERT INTO `log_login` VALUES (284, 'admin', 'logout', '183.6.95.70', '2021-12-27 15:54:39');
+INSERT INTO `log_login` VALUES (285, 'admin', 'login', '183.6.95.70', '2021-12-27 15:54:40');
+INSERT INTO `log_login` VALUES (286, 'admin', 'logout', '183.6.95.70', '2021-12-27 15:54:44');
+INSERT INTO `log_login` VALUES (287, 'admin', 'login', '183.6.95.70', '2021-12-27 15:54:48');
+INSERT INTO `log_login` VALUES (288, 'admin', 'logout', '183.6.95.70', '2021-12-27 16:00:32');
+INSERT INTO `log_login` VALUES (289, 'admin', 'login', '183.6.95.70', '2021-12-27 16:19:50');
+INSERT INTO `log_login` VALUES (290, 'admin', 'login', '183.6.118.224', '2021-12-27 16:33:34');
+INSERT INTO `log_login` VALUES (291, 'admin', 'logout', '183.6.118.224', '2021-12-27 16:38:17');
+INSERT INTO `log_login` VALUES (292, 'admin', 'login', '183.6.118.224', '2021-12-27 16:38:19');
+INSERT INTO `log_login` VALUES (293, 'admin', 'logout', '183.6.118.224', '2021-12-27 16:41:05');
+INSERT INTO `log_login` VALUES (294, 'admin', 'login', '183.6.118.224', '2021-12-27 16:41:34');
+INSERT INTO `log_login` VALUES (295, 'admin', 'logout', '183.6.118.224', '2021-12-27 16:41:47');
+INSERT INTO `log_login` VALUES (296, 'admin', 'login', '183.6.118.224', '2021-12-27 16:42:13');
+INSERT INTO `log_login` VALUES (297, 'admin', 'logout', '183.6.118.224', '2021-12-27 16:43:12');
+INSERT INTO `log_login` VALUES (298, 'admin', 'login', '183.6.118.224', '2021-12-27 16:43:20');
+INSERT INTO `log_login` VALUES (299, '1231231', 'logout', '183.6.118.224', '2021-12-27 16:46:52');
+INSERT INTO `log_login` VALUES (300, '1231231', 'login', '183.6.118.224', '2021-12-27 16:46:52');
+INSERT INTO `log_login` VALUES (301, 'admin', 'logout', '183.6.118.194', '2021-12-27 17:18:04');
+INSERT INTO `log_login` VALUES (302, 'admin', 'login', '183.6.118.194', '2021-12-27 17:18:05');
+INSERT INTO `log_login` VALUES (303, 'admin', 'logout', '183.6.118.194', '2021-12-27 17:18:16');
+INSERT INTO `log_login` VALUES (304, 'admin', 'login', '183.6.118.194', '2021-12-27 17:18:19');
+INSERT INTO `log_login` VALUES (305, 'admin', 'logout', '183.6.118.194', '2021-12-27 17:18:30');
+INSERT INTO `log_login` VALUES (306, 'admin', 'login', '183.6.118.194', '2021-12-27 17:18:33');
+INSERT INTO `log_login` VALUES (307, 'admin', 'logout', '183.6.118.194', '2021-12-27 17:18:46');
+INSERT INTO `log_login` VALUES (308, 'admin', 'login', '183.6.118.194', '2021-12-27 17:18:46');
+INSERT INTO `log_login` VALUES (309, 'admin', 'logout', '183.6.118.194', '2021-12-27 17:19:39');
+INSERT INTO `log_login` VALUES (310, 'admin', 'login', '183.6.118.194', '2021-12-27 17:19:48');
+INSERT INTO `log_login` VALUES (311, '1231231', 'logout', '183.6.118.194', '2021-12-27 17:36:07');
+INSERT INTO `log_login` VALUES (312, '1231231', 'login', '183.6.118.194', '2021-12-27 17:36:08');
+INSERT INTO `log_login` VALUES (313, '1231231', 'login', '183.6.95.70', '2021-12-27 17:51:16');
+INSERT INTO `log_login` VALUES (314, 'admin', 'logout', '183.6.95.70', '2021-12-27 17:55:04');
+INSERT INTO `log_login` VALUES (315, 'admin', 'login', '183.6.95.70', '2021-12-27 17:55:05');
+INSERT INTO `log_login` VALUES (316, 'admin', 'logout', '183.6.95.70', '2021-12-27 17:55:11');
+INSERT INTO `log_login` VALUES (317, 'admin', 'login', '183.6.95.70', '2021-12-27 17:55:13');
+INSERT INTO `log_login` VALUES (318, 'admin', 'login', '183.6.95.70', '2021-12-27 18:08:38');
+INSERT INTO `log_login` VALUES (319, 'admin', 'logout', '183.6.95.70', '2021-12-27 18:12:27');
+INSERT INTO `log_login` VALUES (320, 'admin', 'login', '183.6.95.70', '2021-12-27 18:12:37');
+INSERT INTO `log_login` VALUES (321, '1231231', 'logout', '183.6.95.70', '2021-12-27 18:13:45');
+INSERT INTO `log_login` VALUES (322, '1231231', 'login', '183.6.95.70', '2021-12-27 18:13:46');
+INSERT INTO `log_login` VALUES (323, '1231231', 'login', '183.6.41.12', '2021-12-27 23:32:51');
+INSERT INTO `log_login` VALUES (324, '1231231', 'login', '116.52.34.55', '2021-12-28 14:42:55');
+INSERT INTO `log_login` VALUES (325, '1231231', 'login', '222.244.158.206', '2022-01-01 15:18:57');
+INSERT INTO `log_login` VALUES (326, '1231231', 'login', '220.174.242.5', '2022-01-11 10:08:57');
+INSERT INTO `log_login` VALUES (327, '1231231', 'login', '144.52.175.241', '2022-01-12 13:42:42');
+INSERT INTO `log_login` VALUES (328, '1231231', 'login', '117.36.118.216', '2022-01-24 13:53:59');
+INSERT INTO `log_login` VALUES (329, '1231231', 'login', '222.243.158.253', '2022-02-12 13:14:41');
+INSERT INTO `log_login` VALUES (330, '1231231', 'login', '182.149.167.139', '2022-02-22 20:50:53');
+INSERT INTO `log_login` VALUES (331, 'admin', 'logout', '182.149.167.139', '2022-02-22 20:51:23');
+INSERT INTO `log_login` VALUES (332, 'admin', 'login', '125.93.83.250', '2022-02-25 12:01:38');
+INSERT INTO `log_login` VALUES (333, 'admin', 'login', '23.142.224.22', '2022-02-26 13:26:49');
+INSERT INTO `log_login` VALUES (334, 'admin', 'login', '115.216.3.166', '2022-03-10 11:37:57');
+INSERT INTO `log_login` VALUES (335, 'admin', 'login', '125.93.83.233', '2022-03-10 11:52:24');
+INSERT INTO `log_login` VALUES (336, 'admin', 'login', '125.93.83.239', '2022-03-11 11:08:20');
+INSERT INTO `log_login` VALUES (337, 'admin', 'login', '81.28.13.41', '2022-03-11 14:34:12');
+INSERT INTO `log_login` VALUES (338, 'admin', 'logout', '81.28.13.41', '2022-03-11 14:36:03');
+INSERT INTO `log_login` VALUES (339, 'admin', 'login', '81.28.13.41', '2022-03-11 14:37:28');
+INSERT INTO `log_login` VALUES (340, 'admin', 'logout', '81.28.13.41', '2022-03-11 14:38:31');
+INSERT INTO `log_login` VALUES (341, 'admin', 'login', '20.187.75.197', '2022-03-11 14:45:30');
+INSERT INTO `log_login` VALUES (342, 'admin', 'login', '119.141.85.227', '2022-05-07 22:11:11');
+INSERT INTO `log_login` VALUES (343, 'admin', 'login', '119.141.85.99', '2022-05-09 09:36:10');
+INSERT INTO `log_login` VALUES (344, 'admin', 'login', '218.24.162.13', '2022-05-09 09:40:22');
+INSERT INTO `log_login` VALUES (345, 'admin', 'login', '119.141.85.99', '2022-05-11 15:07:19');
+INSERT INTO `log_login` VALUES (346, 'admin', 'login', '183.6.73.139', '2022-05-12 16:53:36');
+INSERT INTO `log_login` VALUES (347, 'admin', 'login', '223.104.67.88', '2022-05-12 16:55:17');
+INSERT INTO `log_login` VALUES (348, 'admin', 'logout', '223.104.67.88', '2022-05-12 16:55:24');
+INSERT INTO `log_login` VALUES (349, 'admin', 'login', '1.62.202.28', '2022-05-17 14:02:00');
+INSERT INTO `log_login` VALUES (350, 'admin', 'login', '112.6.193.19', '2022-05-20 01:02:01');
+INSERT INTO `log_login` VALUES (351, 'admin', 'login', '74.207.246.138', '2022-05-27 21:16:38');
+INSERT INTO `log_login` VALUES (352, 'admin', 'login', '74.207.246.138', '2022-05-27 21:17:57');
+INSERT INTO `log_login` VALUES (353, 'admin', 'login', '59.57.153.132', '2022-05-28 14:34:04');
+INSERT INTO `log_login` VALUES (354, 'admin', 'login', '110.53.129.39', '2022-05-31 13:18:21');
+INSERT INTO `log_login` VALUES (355, 'admin', 'logout', '110.53.129.39', '2022-05-31 13:26:25');
+INSERT INTO `log_login` VALUES (356, 'admin', 'login', '110.53.129.39', '2022-05-31 13:26:29');
+INSERT INTO `log_login` VALUES (357, 'admin', 'login', '223.107.38.0', '2022-05-31 20:38:22');
+INSERT INTO `log_login` VALUES (358, 'admin', 'login', '182.91.186.25', '2022-06-03 20:53:12');
+INSERT INTO `log_login` VALUES (359, 'admin', 'login', '119.141.85.242', '2022-06-09 11:01:01');
+INSERT INTO `log_login` VALUES (360, 'admin', 'login', '125.93.83.250', '2022-06-09 11:01:43');
+INSERT INTO `log_login` VALUES (361, 'admin', 'login', '125.93.83.250', '2022-06-09 11:27:31');
+INSERT INTO `log_login` VALUES (362, 'admin', 'login', '223.104.63.254', '2022-06-09 22:00:37');
+INSERT INTO `log_login` VALUES (363, 'admin', 'login', '180.165.119.10', '2022-06-10 22:08:57');
+INSERT INTO `log_login` VALUES (364, 'admin', 'login', '180.165.119.10', '2022-06-10 22:13:57');
+INSERT INTO `log_login` VALUES (365, 'admin', 'logout', '180.165.119.10', '2022-06-11 10:01:46');
+INSERT INTO `log_login` VALUES (366, 'admin', 'login', '180.165.119.10', '2022-06-11 10:01:59');
+INSERT INTO `log_login` VALUES (367, 'admin', 'logout', '180.165.119.10', '2022-06-11 10:14:32');
+INSERT INTO `log_login` VALUES (368, 'admin', 'login', '180.165.119.10', '2022-06-11 10:14:59');
+INSERT INTO `log_login` VALUES (369, 'admin', 'logout', '180.165.119.10', '2022-06-11 10:15:03');
+INSERT INTO `log_login` VALUES (370, 'admin', 'login', '180.165.119.10', '2022-06-11 10:23:57');
+INSERT INTO `log_login` VALUES (371, 'admin', 'login', '180.165.119.10', '2022-06-11 10:49:52');
+INSERT INTO `log_login` VALUES (372, 'admin', 'login', '36.161.112.104', '2022-06-14 10:35:24');
+INSERT INTO `log_login` VALUES (373, 'admin', 'logout', '36.161.112.104', '2022-06-14 10:39:37');
+INSERT INTO `log_login` VALUES (374, 'admin', 'login', '36.161.112.104', '2022-06-14 10:39:39');
+INSERT INTO `log_login` VALUES (375, 'admin', 'login', '101.82.120.63', '2022-06-14 14:12:31');
+INSERT INTO `log_login` VALUES (376, 'admin', 'login', '36.161.112.104', '2022-06-14 23:42:03');
+INSERT INTO `log_login` VALUES (377, 'admin', 'login', '222.242.252.110', '2022-06-17 15:19:19');
+INSERT INTO `log_login` VALUES (378, 'admin', 'login', '125.93.83.242', '2022-06-20 11:53:16');
+INSERT INTO `log_login` VALUES (379, 'admin', 'login', '125.93.83.242', '2022-06-20 11:59:33');
+INSERT INTO `log_login` VALUES (380, 'admin', 'login', '125.93.83.238', '2022-06-20 12:02:43');
+INSERT INTO `log_login` VALUES (381, 'admin', 'login', '125.93.83.235', '2022-06-20 12:05:15');
+INSERT INTO `log_login` VALUES (382, 'admin', 'login', '125.93.83.235', '2022-06-20 14:36:45');
+INSERT INTO `log_login` VALUES (383, 'admin', 'login', '125.93.83.238', '2022-06-20 14:41:33');
+INSERT INTO `log_login` VALUES (384, 'admin', 'login', '125.93.83.238', '2022-06-20 15:48:54');
+INSERT INTO `log_login` VALUES (385, 'admin', 'logout', '125.93.83.235', '2022-06-20 15:54:14');
+INSERT INTO `log_login` VALUES (386, 'admin', 'login', '125.93.83.235', '2022-06-20 15:54:15');
+INSERT INTO `log_login` VALUES (387, 'admin', 'login', '125.90.50.207', '2022-06-20 16:21:03');
+INSERT INTO `log_login` VALUES (388, 'admin', 'login', '125.93.83.238', '2022-06-21 08:24:40');
+INSERT INTO `log_login` VALUES (389, 'admin', 'login', '125.93.83.238', '2022-06-21 08:39:08');
+INSERT INTO `log_login` VALUES (390, 'admin', 'login', '125.93.83.238', '2022-06-21 11:27:59');
+INSERT INTO `log_login` VALUES (391, 'admin', 'login', '125.93.83.235', '2022-06-21 12:00:52');
+INSERT INTO `log_login` VALUES (392, 'admin', 'login', '112.48.62.103', '2022-06-21 22:57:33');
+INSERT INTO `log_login` VALUES (393, 'admin', 'login', '119.141.85.0', '2022-06-22 10:03:15');
+INSERT INTO `log_login` VALUES (394, 'admin', 'login', '125.93.83.238', '2022-06-23 10:04:51');
+INSERT INTO `log_login` VALUES (395, 'admin', 'login', '125.93.83.235', '2022-06-23 15:54:30');
+INSERT INTO `log_login` VALUES (396, 'admin', 'login', '119.141.85.0', '2022-06-23 22:39:12');
+INSERT INTO `log_login` VALUES (397, 'admin', 'login', '119.141.85.200', '2022-06-23 22:40:36');
+INSERT INTO `log_login` VALUES (398, 'admin', 'login', '125.90.50.142', '2022-06-28 09:57:09');
+INSERT INTO `log_login` VALUES (399, 'admin', 'login', '127.0.0.1', '2022-07-20 21:52:09');
+INSERT INTO `log_login` VALUES (400, 'admin', 'login', '46.8.199.33', '2022-08-12 09:34:16');
+INSERT INTO `log_login` VALUES (401, 'admin', 'login', '124.65.127.78', '2022-08-16 10:27:28');
+INSERT INTO `log_login` VALUES (402, 'admin', 'login', '223.104.65.239', '2022-08-18 17:23:22');
+INSERT INTO `log_login` VALUES (403, 'admin', 'login', '223.73.168.244', '2022-08-20 11:03:01');
+INSERT INTO `log_login` VALUES (404, 'admin', 'logout', '14.113.143.8', '2022-08-20 17:34:22');
+INSERT INTO `log_login` VALUES (405, 'admin', 'login', '14.113.143.8', '2022-08-20 17:35:12');
+INSERT INTO `log_login` VALUES (406, 'admin', 'login', '0:0:0:0:0:0:0:1', '2022-08-20 17:41:07');
+INSERT INTO `log_login` VALUES (407, 'admin', 'login', '127.0.0.1', '2022-08-20 18:56:52');
+INSERT INTO `log_login` VALUES (408, 'admin', 'logout', '0:0:0:0:0:0:0:1', '2022-08-20 18:57:25');
+INSERT INTO `log_login` VALUES (409, 'admin', 'login', '127.0.0.1', '2022-08-20 18:57:31');
+INSERT INTO `log_login` VALUES (410, 'admin', 'login', '0:0:0:0:0:0:0:1', '2022-08-20 19:01:00');
+INSERT INTO `log_login` VALUES (411, 'admin', 'login', '0:0:0:0:0:0:0:1', '2022-08-20 19:01:16');
+INSERT INTO `log_login` VALUES (412, 'admin', 'logout', '0:0:0:0:0:0:0:1', '2022-08-20 19:01:46');
+INSERT INTO `log_login` VALUES (413, 'admin', 'login', '0:0:0:0:0:0:0:1', '2022-08-20 19:04:35');
+INSERT INTO `log_login` VALUES (414, 'admin', 'login', '117.136.79.206', '2022-08-20 19:04:35');
 
 -- ----------------------------
 -- Table structure for log_operating
@@ -369,7 +517,7 @@ CREATE TABLE `log_operating`  (
   `ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ip',
   `date` datetime(0) NOT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 146 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of log_operating
@@ -427,6 +575,88 @@ INSERT INTO `log_operating` VALUES (60, 'admin', 'otherUpdateUser', '{\"createda
 INSERT INTO `log_operating` VALUES (61, 'admin', 'powerInsertDepartment', '{\"children\":[],\"depPath\":\".1.4\",\"enabled\":true,\"id\":143,\"name\":\"ty\",\"parentId\":2,\"remark\":\"ry\"}', '127.0.0.1', '2021-12-26 15:50:22');
 INSERT INTO `log_operating` VALUES (62, 'admin', 'powerUpdateEmployee', '{\"address\":\"广州\",\"birthday\":1640275200000,\"cardId\":\"432801197711251038\",\"createDate\":1468425600000,\"department\":{\"children\":[],\"id\":1,\"name\":\"总公办\"},\"education\":\"本科\",\"email\":\"36750064@qq.com\",\"hobby\":\"爬山\",\"id\":3,\"name\":\"bb\",\"party\":\"党员\",\"phone\":\"13907351532\",\"position\":{\"id\":2,\"name\":\"Java开发工程师\"},\"postCode\":\"510000\",\"qqNum\":\"36750064\",\"race\":\"汉族\",\"remark\":\"无\",\"sex\":1,\"speciality\":\"计算机\",\"tel\":\"020-99999999\"}', '127.0.0.1', '2021-12-26 15:51:31');
 INSERT INTO `log_operating` VALUES (63, 'admin', 'powerUpdateEmployee', '{\"address\":\"广州\",\"birthday\":1640275200000,\"cardId\":\"432801197711251038\",\"createDate\":1468425600000,\"department\":{\"children\":[],\"id\":1,\"name\":\"总公办\"},\"education\":\"本科\",\"email\":\"36750064@qq.com\",\"hobby\":\"爬山\",\"id\":3,\"name\":\"bb\",\"party\":\"中共党员\",\"phone\":\"13907351532\",\"position\":{\"id\":2,\"name\":\"Java开发工程师\"},\"postCode\":\"510000\",\"qqNum\":\"36750064\",\"race\":\"汉族\",\"remark\":\"无\",\"sex\":1,\"speciality\":\"计算机\",\"tel\":\"020-99999999\"}', '127.0.0.1', '2021-12-26 15:52:03');
+INSERT INTO `log_operating` VALUES (64, 'admin', 'powerDeleteDocument', '{\"createDate\":1640361600000,\"delete\":false,\"fileName\":\"1640413476294_聚合.txt\",\"fileSize\":1032,\"fileType\":\"text/plain\",\"id\":81,\"remark\":\"12\",\"title\":\"12\",\"user\":{\"id\":1,\"loginname\":\"admin\"},\"userId\":1}', '127.0.0.1', '2021-12-26 15:57:58');
+INSERT INTO `log_operating` VALUES (65, 'admin', 'powerDeleteDocument', '{\"createDate\":1640361600000,\"delete\":false,\"fileName\":\"1640413476294_聚合.txt\",\"fileSize\":1032,\"fileType\":\"text/plain\",\"id\":81,\"remark\":\"12\",\"title\":\"12\",\"user\":{\"id\":1,\"loginname\":\"admin\"},\"userId\":1}', '127.0.0.1', '2021-12-26 15:58:03');
+INSERT INTO `log_operating` VALUES (66, 'admin', 'powerDeleteDocument', '{\"createDate\":1640361600000,\"delete\":false,\"fileName\":\"1640413476294_聚合.txt\",\"fileSize\":1032,\"fileType\":\"text/plain\",\"id\":81,\"remark\":\"12\",\"title\":\"12\",\"user\":{\"id\":1,\"loginname\":\"admin\"},\"userId\":1}', '127.0.0.1', '2021-12-26 15:58:14');
+INSERT INTO `log_operating` VALUES (67, 'admin', 'powerDeleteDocument', '{\"createDate\":1640361600000,\"delete\":false,\"fileName\":\"1640413476294_聚合.txt\",\"fileSize\":1032,\"fileType\":\"text/plain\",\"id\":81,\"remark\":\"12\",\"title\":\"12\",\"user\":{\"id\":1,\"loginname\":\"admin\"},\"userId\":1}', '127.0.0.1', '2021-12-26 15:58:57');
+INSERT INTO `log_operating` VALUES (68, 'admin', 'powerDeleteDocument', '{\"createDate\":1640361600000,\"delete\":false,\"fileName\":\"1640413476294_聚合.txt\",\"fileSize\":1032,\"fileType\":\"text/plain\",\"id\":81,\"remark\":\"12\",\"title\":\"12\",\"user\":{\"id\":1,\"loginname\":\"admin\"},\"userId\":1}', '127.0.0.1', '2021-12-26 15:59:04');
+INSERT INTO `log_operating` VALUES (69, 'admin', 'powerDeleteEmployee', '{\"address\":\"2131423534\",\"birthday\":1583078400000,\"cardId\":\"42312432131412\",\"createDate\":1585065600000,\"department\":{\"children\":[],\"id\":134,\"name\":\"测定\"},\"education\":\"高中\",\"email\":\"123321@qq.com\",\"hobby\":\"123\",\"id\":1004,\"name\":\"四个字的\",\"party\":\"中共党员\",\"phone\":\"13213432221\",\"position\":{\"id\":1,\"name\":\"职员\"},\"postCode\":\"12312421\",\"qqNum\":\"123114\",\"race\":\"汉族\",\"remark\":\"2313\",\"sex\":0,\"speciality\":\"信息管理与信息系统\",\"tel\":\"241412411\"}', '127.0.0.1', '2021-12-26 16:00:10');
+INSERT INTO `log_operating` VALUES (70, 'admin', 'otherInsertDocument', '{\"createDate\":1640505761045,\"delete\":false,\"fileName\":\"1640505761045_聚合.txt\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":1032,\"fileType\":\"text/plain\",\"remark\":\"98\",\"title\":\"789\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理员\"},\"userId\":1}', '127.0.0.1', '2021-12-26 16:02:41');
+INSERT INTO `log_operating` VALUES (71, 'admin', 'powerDeleteDocument', '{\"createDate\":1640448000000,\"delete\":false,\"fileName\":\"1640505761045_聚合.txt\",\"fileSize\":1032,\"fileType\":\"text/plain\",\"id\":82,\"remark\":\"98\",\"title\":\"789\",\"user\":{\"id\":1,\"loginname\":\"admin\"},\"userId\":1}', '127.0.0.1', '2021-12-26 16:02:52');
+INSERT INTO `log_operating` VALUES (72, 'admin', 'powerInsertUser', '{\"createdate\":1640583741421,\"id\":131,\"loginname\":\"1231321\",\"newPassword\":\"\",\"password\":\"a123456\",\"status\":1,\"username\":\"123123\"}', '183.36.181.106', '2021-12-27 13:42:21');
+INSERT INTO `log_operating` VALUES (73, 'admin', 'powerInsertDepartment', '{\"children\":[],\"depPath\":\".1.4\",\"enabled\":true,\"id\":144,\"name\":\"nnljjl\",\"parentId\":3,\"remark\":\"bkkh\"}', '120.238.29.51', '2021-12-27 14:23:19');
+INSERT INTO `log_operating` VALUES (74, 'admin', 'powerDeletePosition', '{\"createDate\":1598284800000,\"enabled\":true,\"id\":30,\"name\":\"电工\",\"remark\":\"电工\"}', '120.238.29.51', '2021-12-27 14:23:57');
+INSERT INTO `log_operating` VALUES (75, 'admin', 'powerInsertDepartment', '{\"children\":[],\"depPath\":\".1.4\",\"enabled\":true,\"id\":145,\"name\":\"test\",\"parentId\":2,\"remark\":\"tes1\"}', '120.238.29.51', '2021-12-27 14:25:37');
+INSERT INTO `log_operating` VALUES (76, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":83,\"loginname\":\"test041\",\"status\":1,\"username\":\"自动生成账号\"}', '183.6.118.224', '2021-12-27 15:05:46');
+INSERT INTO `log_operating` VALUES (77, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":82,\"loginname\":\"test025\",\"status\":1,\"username\":\"自动生成账号\"}', '183.6.118.224', '2021-12-27 15:05:56');
+INSERT INTO `log_operating` VALUES (78, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":false,\"id\":1,\"name\":\"职员\",\"remark\":\"职员\"}', '183.6.95.70', '2021-12-27 15:55:11');
+INSERT INTO `log_operating` VALUES (79, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":1,\"name\":\"职员\",\"remark\":\"职员\"}', '183.6.95.70', '2021-12-27 15:55:14');
+INSERT INTO `log_operating` VALUES (80, 'admin', 'powerInsertDepartment', '{\"children\":[],\"depPath\":\".1\",\"enabled\":true,\"id\":146,\"name\":\"3-=h\",\"parentId\":1,\"remark\":\"6\"}', '183.6.95.70', '2021-12-27 16:20:12');
+INSERT INTO `log_operating` VALUES (81, 'admin', 'powerInsertDepartment', '{\"children\":[],\"depPath\":\".1\",\"enabled\":true,\"id\":147,\"name\":\"[0 KK OP\",\"parentId\":1,\"remark\":\"243\"}', '183.6.95.70', '2021-12-27 16:20:27');
+INSERT INTO `log_operating` VALUES (82, 'admin', 'powerDeleteDepartment', '{\"children\":[],\"depPath\":\".1\",\"enabled\":true,\"id\":146,\"name\":\"3-=h\",\"parentId\":1,\"remark\":\"6\"}', '183.6.95.70', '2021-12-27 16:20:33');
+INSERT INTO `log_operating` VALUES (83, 'admin', 'powerDeleteDepartment', '{\"children\":[],\"depPath\":\".1\",\"enabled\":true,\"id\":147,\"name\":\"[0 KK OP\",\"parentId\":1,\"remark\":\"243\"}', '183.6.95.70', '2021-12-27 16:20:34');
+INSERT INTO `log_operating` VALUES (84, 'admin', 'powerInsertDepartment', '{\"children\":[],\"depPath\":\".1\",\"enabled\":true,\"id\":148,\"name\":\"ki\",\"parentId\":1,\"remark\":\"j\"}', '183.6.95.70', '2021-12-27 16:21:33');
+INSERT INTO `log_operating` VALUES (85, 'admin', 'powerDeletePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":1,\"name\":\"职员\",\"remark\":\"职员\"}', '183.6.118.224', '2021-12-27 16:35:39');
+INSERT INTO `log_operating` VALUES (86, 'admin', 'powerDeletesPosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":1,\"name\":\"职员\",\"remark\":\"职员\"}', '183.6.118.224', '2021-12-27 16:36:11');
+INSERT INTO `log_operating` VALUES (87, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":false,\"id\":2,\"name\":\"Java开发工程师\",\"remark\":\"Java开发工程师\"}', '183.6.118.224', '2021-12-27 16:39:06');
+INSERT INTO `log_operating` VALUES (88, 'admin', 'powerDeletePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":6,\"name\":\"架构师\",\"remark\":\"架构师\"}', '183.6.118.224', '2021-12-27 16:39:14');
+INSERT INTO `log_operating` VALUES (89, 'admin', 'powerDeletePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":8,\"name\":\"经理\",\"remark\":\"经理\"}', '183.6.118.224', '2021-12-27 16:39:19');
+INSERT INTO `log_operating` VALUES (90, 'admin', 'powerDeletePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":7,\"name\":\"主管\",\"remark\":\"主管\"}', '183.6.118.224', '2021-12-27 16:39:22');
+INSERT INTO `log_operating` VALUES (91, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":2,\"name\":\"Java开发工程师\",\"remark\":\"Java开发工程师\"}', '183.6.118.224', '2021-12-27 16:39:33');
+INSERT INTO `log_operating` VALUES (92, 'admin', 'powerDeletePosition', '{\"createDate\":1618588800000,\"enabled\":true,\"id\":32,\"name\":\"wqw\",\"remark\":\"qwqw\"}', '183.6.118.224', '2021-12-27 16:39:37');
+INSERT INTO `log_operating` VALUES (93, 'admin', 'powerInsertPosition', '{\"createDate\":1640594394449,\"enabled\":true,\"name\":\"444\",\"remark\":\"444\"}', '183.6.118.224', '2021-12-27 16:39:54');
+INSERT INTO `log_operating` VALUES (94, 'admin', 'powerInsertPosition', '{\"createDate\":1640594397463,\"enabled\":true,\"name\":\"897\",\"remark\":\"798\"}', '183.6.118.224', '2021-12-27 16:39:57');
+INSERT INTO `log_operating` VALUES (95, 'admin', 'powerDeletesEmployee', '{\"createDate\":1640594397463,\"enabled\":true,\"name\":\"897\",\"remark\":\"798\"}', '183.6.118.224', '2021-12-27 16:40:28');
+INSERT INTO `log_operating` VALUES (96, 'admin', 'powerDeletesPosition', '{\"createDate\":1640594397463,\"enabled\":true,\"name\":\"897\",\"remark\":\"798\"}', '183.6.118.224', '2021-12-27 16:40:35');
+INSERT INTO `log_operating` VALUES (97, 'admin', 'powerInsertUser', '{\"createdate\":1640594582746,\"id\":132,\"loginname\":\"1231231\",\"newPassword\":\"\",\"password\":\"z123456\",\"status\":1,\"username\":\"1231231\"}', '183.6.118.224', '2021-12-27 16:43:03');
+INSERT INTO `log_operating` VALUES (98, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":84,\"loginname\":\"test031\",\"status\":1,\"username\":\"自动生成账号\"}', '183.6.95.70', '2021-12-27 17:02:02');
+INSERT INTO `log_operating` VALUES (99, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":86,\"loginname\":\"test042\",\"status\":1,\"username\":\"自动生成账号\"}', '183.6.95.70', '2021-12-27 17:02:12');
+INSERT INTO `log_operating` VALUES (100, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":85,\"loginname\":\"test026\",\"status\":1,\"username\":\"自动生成账号\"}', '183.6.118.194', '2021-12-27 17:14:21');
+INSERT INTO `log_operating` VALUES (101, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":87,\"loginname\":\"test032\",\"status\":1,\"username\":\"自动生成账号\"}', '183.6.118.194', '2021-12-27 17:14:33');
+INSERT INTO `log_operating` VALUES (102, 'admin', 'powerDeletePosition', '{\"createDate\":1604332800000,\"enabled\":true,\"id\":31,\"name\":\"无敌开发岗\",\"remark\":\"给钱无敌多\"}', '183.6.118.194', '2021-12-27 17:15:16');
+INSERT INTO `log_operating` VALUES (103, 'admin', 'powerDeleteDepartment', '{\"children\":[],\"depPath\":\".1.148\",\"enabled\":true,\"id\":148,\"name\":\"ki\",\"parent\":false,\"parentId\":1,\"remark\":\"j\"}', '183.6.118.194', '2021-12-27 17:18:02');
+INSERT INTO `log_operating` VALUES (104, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":2,\"name\":\"Java开发工程师\",\"remark\":\"g\"}', '183.6.118.194', '2021-12-27 17:36:37');
+INSERT INTO `log_operating` VALUES (105, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":2,\"name\":\"g\",\"remark\":\"g\"}', '183.6.118.194', '2021-12-27 17:36:39');
+INSERT INTO `log_operating` VALUES (106, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":2,\"name\":\"g\",\"remark\":\"g\"}', '183.6.118.194', '2021-12-27 17:38:43');
+INSERT INTO `log_operating` VALUES (107, 'admin', 'powerDeletePosition', '{\"createDate\":1618588800000,\"enabled\":true,\"id\":33,\"name\":\"1212\",\"remark\":\"211212\"}', '183.6.118.194', '2021-12-27 17:39:52');
+INSERT INTO `log_operating` VALUES (108, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":88,\"loginname\":\"test027\",\"status\":1,\"username\":\"自动生成账号1\"}', '183.6.95.70', '2021-12-27 17:55:28');
+INSERT INTO `log_operating` VALUES (109, 'admin', 'powerInsertPosition', '{\"createDate\":1640599762055,\"enabled\":true,\"name\":\"45\",\"remark\":\"45\"}', '183.6.95.70', '2021-12-27 18:09:22');
+INSERT INTO `log_operating` VALUES (110, 'admin', 'powerInsertPosition', '{\"createDate\":1640599764254,\"enabled\":true,\"name\":\"78\",\"remark\":\"7887\"}', '183.6.95.70', '2021-12-27 18:09:24');
+INSERT INTO `log_operating` VALUES (111, 'admin', 'powerInsertPosition', '{\"createDate\":1640599766190,\"enabled\":true,\"name\":\"788\",\"remark\":\"78\"}', '183.6.95.70', '2021-12-27 18:09:26');
+INSERT INTO `log_operating` VALUES (112, 'admin', 'powerDeletePosition', '{\"createDate\":1640534400000,\"enabled\":true,\"id\":39,\"name\":\"78\",\"remark\":\"7887\"}', '183.6.95.70', '2021-12-27 18:09:31');
+INSERT INTO `log_operating` VALUES (113, 'admin', 'powerDeletesPosition', '{\"createDate\":1640534400000,\"enabled\":true,\"id\":39,\"name\":\"78\",\"remark\":\"7887\"}', '183.6.95.70', '2021-12-27 18:09:35');
+INSERT INTO `log_operating` VALUES (114, 'admin', 'powerUpdateEmployee', '{\"address\":\"广州\",\"birthday\":1640275200000,\"cardId\":\"432801197711251038\",\"createDate\":1468425600000,\"department\":{\"children\":[],\"id\":1,\"name\":\"总公办\"},\"education\":\"本科\",\"email\":\"36750064@qq.com\",\"hobby\":\"爬山\",\"id\":3,\"name\":\"bb\",\"party\":\"中共党员\",\"phone\":\"13907351532\",\"position\":{\"id\":2,\"name\":\"g\"},\"postCode\":\"510000\",\"qqNum\":\"36750064\",\"race\":\"汉族\",\"remark\":\"无\",\"sex\":0,\"speciality\":\"计算机\",\"tel\":\"020-99999999\"}', '183.6.95.70', '2021-12-27 18:10:35');
+INSERT INTO `log_operating` VALUES (115, 'admin', 'powerUpdateEmployee', '{\"address\":\"QQQ\",\"birthday\":1640275200000,\"cardId\":\"432801197711251038\",\"createDate\":1468425600000,\"department\":{\"children\":[],\"id\":1,\"name\":\"总公办\"},\"education\":\"本科\",\"email\":\"36750064@qq.com\",\"hobby\":\"爬山\",\"id\":3,\"name\":\"bb\",\"party\":\"中共党员\",\"phone\":\"13907351532\",\"position\":{\"id\":2,\"name\":\"g\"},\"postCode\":\"510000\",\"qqNum\":\"36750064\",\"race\":\"汉族\",\"remark\":\"无\",\"sex\":0,\"speciality\":\"计算机\",\"tel\":\"020-99999999\"}', '183.6.95.70', '2021-12-27 18:10:56');
+INSERT INTO `log_operating` VALUES (116, 'admin', 'powerUpdateEmployee', '{\"address\":\"广州\",\"birthday\":1640275200000,\"cardId\":\"432801197711251038\",\"createDate\":1468425600000,\"department\":{\"children\":[],\"id\":1,\"name\":\"总公办\"},\"education\":\"本科\",\"email\":\"36750064@qq.com\",\"hobby\":\"爬山\",\"id\":3,\"name\":\"bb\",\"party\":\"中共党员\",\"phone\":\"13907351532\",\"position\":{\"id\":2,\"name\":\"g\"},\"postCode\":\"510000\",\"qqNum\":\"36750064\",\"race\":\"汉族\",\"remark\":\"无\",\"sex\":0,\"speciality\":\"计算机\",\"tel\":\"020-99999999\"}', '183.6.95.70', '2021-12-27 18:11:01');
+INSERT INTO `log_operating` VALUES (117, 'admin', 'powerUpdatePosition', '{\"createDate\":1515600000000,\"enabled\":true,\"id\":3,\"name\":\"S\",\"remark\":\"Java中级开发工程师\"}', '183.6.95.70', '2021-12-27 18:11:13');
+INSERT INTO `log_operating` VALUES (118, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":89,\"loginname\":\"test043\",\"status\":1,\"username\":\"自动生成账号\"}', '183.6.95.70', '2021-12-27 18:14:21');
+INSERT INTO `log_operating` VALUES (119, 'admin', 'powerDeleteDepartment', '{\"children\":[],\"depPath\":\".1.4.143\",\"enabled\":true,\"id\":143,\"name\":\"ty\",\"parent\":false,\"parentId\":2,\"remark\":\"ry\"}', '183.6.95.70', '2021-12-27 18:14:47');
+INSERT INTO `log_operating` VALUES (120, 'admin', 'otherInsertDocument', '{\"createDate\":1645761726510,\"delete\":false,\"fileName\":\"1645761726510_xiaoyu_2_25.rar\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":124140,\"fileType\":\"application/octet-stream\",\"remark\":\"2022 2 25 HTML\",\"title\":\"2022 2 25 HTML\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理员\"},\"userId\":1}', '125.93.83.250', '2022-02-25 12:02:07');
+INSERT INTO `log_operating` VALUES (121, 'admin', 'otherInsertDocument', '{\"createDate\":1646884444146,\"delete\":false,\"fileName\":\"1646884444146_system.py\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":1544,\"fileType\":\"text/plain\",\"remark\":\"学生管理系统 初步 \",\"title\":\"system.py\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理员\"},\"userId\":1}', '125.93.83.233', '2022-03-10 11:54:04');
+INSERT INTO `log_operating` VALUES (122, 'admin', 'otherInsertDocument', '{\"createDate\":1646968132327,\"delete\":false,\"fileName\":\"1646968132327_33.rar\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":165693,\"fileType\":\"application/octet-stream\",\"remark\":\"2022-3-11 HTML\",\"title\":\"2022-3-11 HTML\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理员\"},\"userId\":1}', '125.93.83.239', '2022-03-11 11:08:52');
+INSERT INTO `log_operating` VALUES (123, 'admin', 'otherUpdateUser', '{\"createdate\":1583942400000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"}', '110.53.129.39', '2022-05-31 13:18:33');
+INSERT INTO `log_operating` VALUES (124, 'admin', 'otherUpdateUser', '{\"createdate\":1590508800000,\"id\":90,\"loginname\":\"test033\",\"status\":1,\"username\":\"自动生成账号\"}', '110.53.129.39', '2022-05-31 13:18:44');
+INSERT INTO `log_operating` VALUES (125, 'admin', 'powerDeleteUser', '{\"createdate\":1590508800000,\"id\":90,\"loginname\":\"test033\",\"status\":1,\"username\":\"自动生成账号\"}', '110.53.129.39', '2022-05-31 13:19:23');
+INSERT INTO `log_operating` VALUES (126, 'admin', 'powerInsertPosition', '{\"createDate\":1653974392869,\"enabled\":true,\"name\":\"yuanyuan\",\"remark\":\"1111\"}', '110.53.129.39', '2022-05-31 13:19:53');
+INSERT INTO `log_operating` VALUES (127, 'admin', 'powerInsertUser', '{\"createdate\":1653974432421,\"id\":133,\"loginname\":\"11111\",\"newPassword\":\"\",\"password\":\"111111x\",\"status\":1,\"username\":\"12345\"}', '110.53.129.39', '2022-05-31 13:20:32');
+INSERT INTO `log_operating` VALUES (128, 'admin', 'otherInsertDocument', '{\"createDate\":1654743700553,\"delete\":false,\"fileName\":\"1654743700553_草稿.py\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":5749,\"fileType\":\"text/plain\",\"remark\":\"123\",\"title\":\"123\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '119.141.85.242', '2022-06-09 11:01:41');
+INSERT INTO `log_operating` VALUES (129, 'admin', 'otherInsertDocument', '{\"createDate\":1654744952494,\"delete\":false,\"fileName\":\"1654744952494_可视化.py\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":904,\"fileType\":\"text/plain\",\"remark\":\"1\",\"title\":\"1\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '119.141.85.242', '2022-06-09 11:22:33');
+INSERT INTO `log_operating` VALUES (130, 'admin', 'otherInsertDocument', '{\"createDate\":1654747617774,\"delete\":false,\"fileName\":\"1654747617774_untitled.rar\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":1218,\"fileType\":\"application/octet-stream\",\"remark\":\"adad\",\"title\":\"wada\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.250', '2022-06-09 12:06:58');
+INSERT INTO `log_operating` VALUES (131, 'admin', 'otherInsertDocument', '{\"createDate\":1655697250271,\"delete\":false,\"fileName\":\"1655697250271_26张嘉城注册登陆页.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":53646,\"fileType\":\"application/octet-stream\",\"remark\":\"monday\",\"title\":\"rp\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.242', '2022-06-20 11:54:10');
+INSERT INTO `log_operating` VALUES (132, 'admin', 'otherInsertDocument', '{\"createDate\":1655697793001,\"delete\":false,\"fileName\":\"1655697793001_201908324627钟乐.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":67864,\"fileType\":\"application/octet-stream\",\"remark\":\"sfdad\",\"title\":\"dsad\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.238', '2022-06-20 12:03:13');
+INSERT INTO `log_operating` VALUES (133, 'admin', 'otherInsertDocument', '{\"createDate\":1655697930042,\"delete\":false,\"fileName\":\"1655697930042_app.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":63242,\"fileType\":\"application/octet-stream\",\"remark\":\"33 app\",\"title\":\"33 app\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.235', '2022-06-20 12:05:30');
+INSERT INTO `log_operating` VALUES (134, 'admin', 'otherInsertDocument', '{\"createDate\":1655711413960,\"delete\":false,\"fileName\":\"1655711413960_201908324627钟乐.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":98284,\"fileType\":\"application/octet-stream\",\"remark\":\"2222\",\"title\":\"2222\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.238', '2022-06-20 15:50:14');
+INSERT INTO `log_operating` VALUES (135, 'admin', 'otherInsertDocument', '{\"createDate\":1655711662492,\"delete\":false,\"fileName\":\"1655711662492_app.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":96862,\"fileType\":\"application/octet-stream\",\"remark\":\"33 原型首页\",\"title\":\"33 原型首页\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.235', '2022-06-20 15:54:23');
+INSERT INTO `log_operating` VALUES (136, 'admin', 'powerDeleteDocument', '{\"createDate\":1655654400000,\"delete\":false,\"fileName\":\"1655711662492_app.rp\",\"fileSize\":96862,\"fileType\":\"application/octet-stream\",\"id\":93,\"remark\":\"33 原型首页\",\"title\":\"33 原型首页\",\"user\":{\"id\":1,\"loginname\":\"admin\"},\"userId\":1}', '125.93.83.235', '2022-06-20 15:55:05');
+INSERT INTO `log_operating` VALUES (137, 'admin', 'otherInsertDocument', '{\"createDate\":1655711716914,\"delete\":false,\"fileName\":\"1655711716914_app.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":96858,\"fileType\":\"application/octet-stream\",\"remark\":\"33 原型首页\",\"title\":\"33 原型首页\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.235', '2022-06-20 15:55:17');
+INSERT INTO `log_operating` VALUES (138, 'admin', 'otherInsertDocument', '{\"createDate\":1655783676538,\"delete\":false,\"fileName\":\"1655783676538_201908324627钟乐.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":124510,\"fileType\":\"application/octet-stream\",\"remark\":\"dddd\",\"title\":\"day2-1\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.238', '2022-06-21 11:54:37');
+INSERT INTO `log_operating` VALUES (139, 'admin', 'otherInsertDocument', '{\"createDate\":1655784092190,\"delete\":false,\"fileName\":\"1655784092190_app.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":165593,\"fileType\":\"application/octet-stream\",\"remark\":\"22-6-21 33 原型\",\"title\":\"22-6-21 33 原型\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.235', '2022-06-21 12:01:32');
+INSERT INTO `log_operating` VALUES (140, 'admin', 'otherInsertDocument', '{\"createDate\":1655970967880,\"delete\":false,\"fileName\":\"1655970967880_pinxixi.zip\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":4165335,\"fileType\":\"application/x-zip-compressed\",\"remark\":\"2022-6-23\\r\\n包含圆形图及标注图\",\"title\":\"web实训大作业\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '125.93.83.235', '2022-06-23 15:56:08');
+INSERT INTO `log_operating` VALUES (141, 'admin', 'otherInsertDocument', '{\"createDate\":1655995184023,\"delete\":false,\"fileName\":\"1655995184023_pinxixi.rp\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":638257,\"fileType\":\"application/octet-stream\",\"remark\":\"2022-6-23\",\"title\":\"pxixi效果图\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '119.141.85.0', '2022-06-23 22:39:44');
+INSERT INTO `log_operating` VALUES (142, 'admin', 'otherInsertDocument', '{\"createDate\":1655996231341,\"delete\":false,\"fileName\":\"1655996231341_pinxixi.zip\",\"filePath\":\"/home/xiaoyu/hrm/uploads/\",\"fileSize\":928286,\"fileType\":\"application/x-zip-compressed\",\"remark\":\"12312\",\"title\":\"1321\",\"user\":{\"createdate\":1583976868000,\"id\":1,\"loginname\":\"admin\",\"status\":2,\"username\":\"管理\"},\"userId\":1}', '119.141.85.200', '2022-06-23 22:57:11');
+INSERT INTO `log_operating` VALUES (143, 'admin', 'powerDeleteEmployee', '{\"address\":\"广州\",\"birthday\":1640275200000,\"cardId\":\"432801197711251038\",\"createDate\":1468425600000,\"department\":{\"children\":[],\"id\":1,\"name\":\"总公办\"},\"education\":\"本科\",\"email\":\"36750064@qq.com\",\"hobby\":\"爬山\",\"id\":3,\"name\":\"bb\",\"party\":\"中共党员\",\"phone\":\"13907351532\",\"position\":{\"id\":2,\"name\":\"g\"},\"postCode\":\"510000\",\"qqNum\":\"36750064\",\"race\":\"汉族\",\"remark\":\"无\",\"sex\":0,\"speciality\":\"计算机\",\"tel\":\"020-99999999\"}', '0:0:0:0:0:0:0:1', '2022-08-20 17:58:20');
+INSERT INTO `log_operating` VALUES (144, 'admin', 'powerDeleteDepartment', '{\"children\":[],\"depPath\":\".1.4.144\",\"enabled\":true,\"id\":144,\"name\":\"nnljjl\",\"parent\":false,\"parentId\":3,\"remark\":\"bkkh\"}', '0:0:0:0:0:0:0:1', '2022-08-20 18:03:37');
+INSERT INTO `log_operating` VALUES (145, 'admin', 'powerDeleteDepartment', '{\"children\":[],\"depPath\":\".1.4.139\",\"enabled\":true,\"id\":139,\"name\":\"d d f\",\"parent\":false,\"parentId\":5,\"remark\":\"ddd\"}', '0:0:0:0:0:0:0:1', '2022-08-20 18:03:40');
 
 -- ----------------------------
 -- Table structure for menu
@@ -459,7 +689,7 @@ INSERT INTO `menu` VALUES (6, '/', '/home', 'Home', '下载管理', 'fa fa-windo
 INSERT INTO `menu` VALUES (7, '/user/basic/**', '/user/basic', 'UserBasic', '用户查询', NULL, NULL, 1, 2, 1, 0);
 INSERT INTO `menu` VALUES (8, '/user/add/**', '/user/insert', 'UserAdd', '添加用户', NULL, NULL, 1, 2, 1, 1);
 INSERT INTO `menu` VALUES (9, '/department/basic/**', '/dep/basic', 'DepBasic', '部门查询', NULL, NULL, 1, 3, 1, 0);
-INSERT INTO `menu` VALUES (10, '/department/add/**', '/dep/insert', 'DepAdd', '添加部门', NULL, NULL, 1, 3, 1, 1);
+INSERT INTO `menu` VALUES (10, '/department/add/**', '/dep/insert', 'DepAdd', '添加部门', NULL, NULL, 1, 3, 0, 1);
 INSERT INTO `menu` VALUES (14, '/position/basic/**', '/pos/basic', 'PosBasic', '职位查询', NULL, NULL, 1, 4, 1, 0);
 INSERT INTO `menu` VALUES (15, '/position/add/**', '/pos/insert', 'PosAdd', '添加职位', NULL, NULL, 1, 4, 1, 1);
 INSERT INTO `menu` VALUES (19, '/employee/basic/**', '/emp/basic', 'EmpBasic', '员工查询', NULL, NULL, 1, 5, 1, 0);
@@ -579,23 +809,14 @@ CREATE TABLE `user_inf`  (
   `createdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 131 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 134 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of user_inf
 -- ----------------------------
-INSERT INTO `user_inf` VALUES (1, 'admin', 'z123456', 2, '2020-03-12 09:34:28', '管理员');
+INSERT INTO `user_inf` VALUES (1, 'admin', 'z123456', 2, '2020-03-12 09:34:28', '管理');
 INSERT INTO `user_inf` VALUES (20, 'xiaoyu', 'z123456', 3, '2020-03-19 17:23:30', '开发者测试账号');
 INSERT INTO `user_inf` VALUES (45, 'xiaoyu2', 'z123456', 2, '2020-05-12 10:33:33', '小鱼2号..');
-INSERT INTO `user_inf` VALUES (82, 'test025', 'z123456', 1, '2020-05-27 11:58:13', '自动生成账号');
-INSERT INTO `user_inf` VALUES (83, 'test041', 'z123456', 1, '2020-05-27 11:58:14', '自动生成账号');
-INSERT INTO `user_inf` VALUES (84, 'test031', 'z123456', 1, '2020-05-27 11:58:14', '自动生成账号');
-INSERT INTO `user_inf` VALUES (85, 'test026', 'z123456', 1, '2020-05-27 11:58:19', '自动生成账号');
-INSERT INTO `user_inf` VALUES (86, 'test042', 'z123456', 1, '2020-05-27 11:58:19', '自动生成账号');
-INSERT INTO `user_inf` VALUES (87, 'test032', 'z123456', 1, '2020-05-27 11:58:19', '自动生成账号');
-INSERT INTO `user_inf` VALUES (88, 'test027', 'z123456', 1, '2020-05-27 11:58:24', '自动生成账号');
-INSERT INTO `user_inf` VALUES (89, 'test043', 'z123456', 1, '2020-05-27 11:58:25', '自动生成账号');
-INSERT INTO `user_inf` VALUES (90, 'test033', 'z123456', 1, '2020-05-27 11:58:25', '自动生成账号');
 INSERT INTO `user_inf` VALUES (91, 'test011', 'z123456', 1, '2020-05-27 11:58:25', '自动生成账号');
 INSERT INTO `user_inf` VALUES (92, 'test028', 'z123456', 1, '2020-05-27 11:58:30', '自动生成账号');
 INSERT INTO `user_inf` VALUES (93, 'test034', 'z123456', 1, '2020-05-27 11:58:30', '自动生成账号');
@@ -633,5 +854,8 @@ INSERT INTO `user_inf` VALUES (125, 'test020', 'z123456', 1, '2020-05-27 11:59:1
 INSERT INTO `user_inf` VALUES (126, 'test009', 'z123456', 1, '2020-05-27 11:59:16', '自动生成账号');
 INSERT INTO `user_inf` VALUES (127, 'test010', 'z123456', 1, '2020-05-27 11:59:21', '自动生成账号');
 INSERT INTO `user_inf` VALUES (130, '909090', 'a123456', 1, '2021-12-26 15:42:38', '909090');
+INSERT INTO `user_inf` VALUES (131, '1231321', 'a123456', 1, '2021-12-27 13:42:21', '123123');
+INSERT INTO `user_inf` VALUES (132, '1231231', 'z123456', 1, '2021-12-27 16:43:03', '1231231');
+INSERT INTO `user_inf` VALUES (133, '11111', '111111x', 1, '2022-05-31 13:20:32', '12345');
 
 SET FOREIGN_KEY_CHECKS = 1;
