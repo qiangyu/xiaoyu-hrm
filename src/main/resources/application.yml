@@ -13,7 +13,7 @@ spring:
     timeout: 3000
   # 指定生产环境
   profiles:
-    active: prod
+#    active: prod
 server:
   port: 8080
 # 配置 开启驼峰命名的方法
